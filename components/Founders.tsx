@@ -16,7 +16,7 @@ const founders = [
     }
   },
   {
-    name: "Partner Name", 
+    name: "Nipun Nirmal", 
     role: "Co-Founder & AI Engineer",
     image: null,
     bio: "Expert in Large Language Models (LLMs) and RAG Architectures. Focused on turning raw business data into conversational intelligence.",
