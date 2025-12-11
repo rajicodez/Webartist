@@ -68,10 +68,10 @@ export default function Footer() {
           <div className="flex justify-center order-1 md:order-2">
             <div className="flex gap-6">
               {[
-                { icon: <Linkedin className="w-5 h-5" />, href: "#" },
+                { icon: <Linkedin className="w-5 h-5" />, href: "https://www.linkedin.com/company/webartistlk/" },
+                { icon: <Instagram className="w-5 h-5" />, href: "https://www.instagram.com/webartistlk/" },
+                { icon: <Mail className="w-5 h-5" />, href: "mailto:webartist65@gmail.com" },
                 { icon: <Github className="w-5 h-5" />, href: "#" },
-                { icon: <Instagram className="w-5 h-5" />, href: "#" },
-                { icon: <Mail className="w-5 h-5" />, href: "mailto:hello@webartist.lk" },
               ].map((social, index) => (
                 <a
                   key={index}
