@@ -33,7 +33,7 @@ export default function Work() {
   const y = useTransform(scrollYProgress, [0, 1], [100, -100]);
 
   return (
-    <section ref={containerRef} id="work" className="py-32 bg-black relative overflow-hidden">
+    <section ref={containerRef} id="work" className="py-12 md:py-32 bg-black relative overflow-hidden">
        {/* Background Decor */}
        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-blue-900/20 rounded-full blur-[128px] opacity-50 pointer-events-none" />
 

@@ -17,7 +17,7 @@ const technologies = [
 
 export default function TechStack() {
   return (
-    <section className="py-20 bg-black overflow-hidden border-y border-white/5">
+    <section className="py-10 md:py-20 bg-black overflow-hidden border-y border-white/5">
       
       <div className="text-center mb-10">
         <p className="text-sm font-mono text-gray-500 uppercase tracking-widest">

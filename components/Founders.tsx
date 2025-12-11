@@ -8,7 +8,7 @@ const founders = [
   {
     name: "Rajindra Ratnayake", 
     role: "Co-Founder & Lead Data Scientist",
-    image: null, 
+    image: null, // Add "/rajindra.jpg" to public folder later
     bio: "Specializing in Predictive Analytics and Computer Vision. I build the AI engines that power our intelligent platforms.",
     socials: {
       linkedin: "#", 
@@ -18,7 +18,7 @@ const founders = [
   {
     name: "Nipun Nirmal", 
     role: "Co-Founder & AI Engineer",
-    image: null,
+    image: null, // Add "/nipun.jpg" to public folder later
     bio: "Expert in Large Language Models (LLMs) and RAG Architectures. Focused on turning raw business data into conversational intelligence.",
     socials: {
       linkedin: "#", 
@@ -29,7 +29,8 @@ const founders = [
 
 export default function Founders() {
   return (
-    <section className="py-32 bg-black relative">
+    // FIX 1: Added 'overflow-hidden' back to prevent horizontal scrolling
+    <section className="py-32 bg-black relative overflow-hidden">
       
       {/* Background Decor */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full max-w-7xl opacity-30 pointer-events-none">
@@ -49,7 +50,6 @@ export default function Founders() {
           <h2 className="text-4xl md:text-6xl font-bold text-white mb-6">
             Meet the <span className="text-blue-500">Engineers.</span>
           </h2>
-          {/* UPDATED TEXT HERE 👇 */}
           <p className="text-xl text-gray-400 max-w-2xl mx-auto">
             A specialized R&D team building the next generation of web intelligence. We combine deep technical expertise with commercial strategy to drive real business growth.
           </p>
@@ -59,8 +59,10 @@ export default function Founders() {
           {founders.map((founder, index) => (
             <motion.div
               key={index}
-              initial={{ opacity: 0, x: index === 0 ? -50 : 50 }}
-              animate={{ opacity: 1, x: 0 }} 
+              // FIX 2: Changed animation from X (Horizontal) to Y (Vertical)
+              // This prevents the card from starting "off-screen" to the side
+              initial={{ opacity: 0, y: 50 }} 
+              animate={{ opacity: 1, y: 0 }} 
               transition={{ duration: 0.6, delay: index * 0.2 }}
               className="group relative"
             >

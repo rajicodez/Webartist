@@ -35,7 +35,7 @@ const services = [
 
 export default function Services() {
   return (
-    <section id="intelligence" className="relative py-24 bg-black overflow-hidden">
+    <section id="intelligence" className="relative py-12 md:py-24 bg-black overflow-hidden">
       
       {/* Background Noise Texture */}
       <div className="absolute inset-0 opacity-20 bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />

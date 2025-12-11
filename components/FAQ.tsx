@@ -31,7 +31,7 @@ export default function FAQ() {
 
   return (
     // ADDED id="faq" HERE 👇
-    <section id="faq" className="py-32 bg-black relative overflow-hidden">
+    <section id="faq" className="py-12 md:py-32 bg-black relative overflow-hidden">
       <div className="max-w-4xl mx-auto px-6 relative z-10">
         
         {/* Header */}

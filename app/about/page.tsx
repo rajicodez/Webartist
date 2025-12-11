@@ -6,13 +6,13 @@ import { motion } from "framer-motion";
 
 export default function AboutPage() {
   return (
-    <main className="min-h-screen bg-black text-white selection:bg-blue-500/30">
-      {/* Navbar is in layout, but added here if needed for spacing context */}
+    // FIX 1: Added 'overflow-x-hidden' to prevent side-scrolling
+    <main className="min-h-screen bg-black text-white selection:bg-blue-500/30 overflow-x-hidden">
       
       <div className="pt-32 pb-20 px-6">
         
         {/* HERO SECTION */}
-        <div className="max-w-4xl mx-auto text-center mb-32">
+        <div className="max-w-4xl mx-auto text-center mb-24">
           <motion.h1 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -27,12 +27,12 @@ export default function AboutPage() {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="text-xl text-gray-400 max-w-2xl mx-auto leading-relaxed"
           >
-            To democratize Artificial Intelligence. We believe data intelligence shouldn't be a luxury for the Fortune 500, it should be the standard for everyone.
+            To democratize Artificial Intelligence. We believe data intelligence shouldn't be a luxury for the Fortune 500—it should be the standard for everyone.
           </motion.p>
         </div>
 
-        {/* THE 3 PILLARS (Keep this, it's good content) */}
-        <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 mb-40">
+        {/* THE 3 PILLARS */}
+        <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 mb-32 md:mb-40">
           {[
             { icon: <Target className="w-6 h-6 text-blue-400" />, title: "The Purpose", text: "Replacing 'gut feeling' with data-driven certainty for founders.", color: "blue" },
             { icon: <Lightbulb className="w-6 h-6 text-purple-400" />, title: "The Innovation", text: "We don't just use AI; we engineer it. R&D is in our DNA.", color: "purple" },
@@ -55,7 +55,7 @@ export default function AboutPage() {
           ))}
         </div>
 
-        {/* THE NEW "WOW" STORY SECTION */}
+        {/* STORY SECTION */}
         <div className="max-w-5xl mx-auto relative">
           
           <motion.div 
@@ -70,7 +70,6 @@ export default function AboutPage() {
           {/* The Timeline Grid */}
           <div className="space-y-8">
             
-            {/* CHAPTER 1: THE ORIGIN */}
             <StoryCard 
               number="01"
               title="The Frustration"
@@ -85,7 +84,6 @@ export default function AboutPage() {
               </p>
             </StoryCard>
 
-            {/* CHAPTER 2: THE SHIFT */}
             <StoryCard 
               number="02"
               title="The Shift"
@@ -101,7 +99,6 @@ export default function AboutPage() {
               </p>
             </StoryCard>
 
-            {/* CHAPTER 3: THE PRESENT */}
             <StoryCard 
               number="03"
               title="The Reality"
@@ -111,7 +108,7 @@ export default function AboutPage() {
               <p>
                 Today, WebArtist is a specialized <strong>R&D Engineering Unit</strong>. We are no longer just students with an idea; we are partners to forward-thinking companies.
               </p>
-              <p>
+              <p className="mt-4 text-white font-medium">
                 We bridge the gap between your vision and the mathematical precision needed to make it profitable. We build the future.
               </p>
             </StoryCard>
@@ -126,7 +123,7 @@ export default function AboutPage() {
   );
 }
 
-// REUSABLE STORY CARD COMPONENT
+// REUSABLE STORY CARD
 function StoryCard({ number, title, icon, children, gradient, align = "left" }: any) {
   return (
     <motion.div 
@@ -136,11 +133,13 @@ function StoryCard({ number, title, icon, children, gradient, align = "left" }: 
       transition={{ duration: 0.8 }}
       className={`relative flex ${align === "right" ? "justify-end" : "justify-start"}`}
     >
+      {/* Width logic: Full width on mobile, 3/4 width on desktop */}
       <div className="relative w-full md:w-3/4 p-1 rounded-3xl bg-gradient-to-br from-white/10 to-transparent">
         <div className={`relative overflow-hidden rounded-[22px] bg-[#0A0A0A] p-8 md:p-12 border border-white/5 group hover:border-white/10 transition-colors`}>
           
-          {/* Glowing Background Number */}
-          <div className="absolute -right-4 -bottom-12 text-[150px] font-bold text-white/5 select-none pointer-events-none group-hover:text-white/10 transition-colors duration-700">
+          {/* Glowing Background Number - RESIZED FOR MOBILE */}
+          {/* FIX 2: text-[80px] on mobile, text-[150px] on desktop */}
+          <div className="absolute -right-4 -bottom-8 md:-bottom-12 text-[80px] md:text-[150px] font-bold text-white/5 select-none pointer-events-none group-hover:text-white/10 transition-colors duration-700 leading-none">
             {number}
           </div>
 
@@ -153,10 +152,10 @@ function StoryCard({ number, title, icon, children, gradient, align = "left" }: 
               <div className="p-3 rounded-full bg-white/10 border border-white/10 backdrop-blur-md">
                 {icon}
               </div>
-              <h3 className="text-3xl font-bold text-white">{title}</h3>
+              <h3 className="text-2xl md:text-3xl font-bold text-white">{title}</h3>
             </div>
             
-            <div className="text-gray-400 text-lg leading-relaxed">
+            <div className="text-gray-400 text-base md:text-lg leading-relaxed">
               {children}
             </div>
           </div>

@@ -6,7 +6,7 @@ import { ArrowRight } from "lucide-react";
 
 export default function TeamTeaser() {
   return (
-    <section className="py-24 bg-black border-y border-white/5 relative overflow-hidden">
+    <section className="py-12 md:py-24 bg-black border-y border-white/5 relative overflow-hidden">
       
       <div className="max-w-7xl mx-auto px-6 relative z-10 flex flex-col md:flex-row items-center justify-between gap-12">
         
