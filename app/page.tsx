@@ -4,7 +4,7 @@ import Services from "../components/Services";
 import Process from "../components/Process";
 import TechStack from "../components/TechStack";
 import Work from "../components/Work";
-import FAQ from "../components/FAQ"; // <--- Import
+import FAQ from "../components/FAQ";
 import TeamTeaser from "../components/TeamTeaser";
 import Footer from "../components/Footer";
 
@@ -16,7 +16,7 @@ export default function Home() {
       <Process />
       <TechStack />
       <Work />
-      <FAQ /> {/* <--- Add Here */}
+      <FAQ />
       <TeamTeaser />
       <Footer />
     </main>
