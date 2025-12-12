@@ -4,6 +4,7 @@ import "./globals.css";
 import Navbar from "../components/Navbar";
 import { Analytics } from '@vercel/analytics/next';
 import ChatWidget from "../components/ChatWidget";
+import { GoogleTagManager } from '@next/third-parties/google'
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -18,8 +19,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="scroll-smooth">
-      <body className={inter.className}>
+    <html lang="en" className="scroll-smooth" suppressHydrationWarning>
+      <GoogleTagManager gtmId="GTM-NFBHX3DG" />
+      <body className={inter.className} suppressHydrationWarning>
         <Navbar />
         {children}
         <ChatWidget />
