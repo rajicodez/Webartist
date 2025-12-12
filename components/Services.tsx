@@ -35,10 +35,13 @@ const services = [
 
 export default function Services() {
   return (
-    <section id="intelligence" className="relative py-12 md:py-24 bg-black overflow-hidden">
+    <section id="intelligence" className="relative py-12 md:py-32 bg-black overflow-hidden scroll-mt-14 md:scroll-mt-0">
       
-      {/* Background Noise Texture */}
-      <div className="absolute inset-0 opacity-20 bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
+      {/* PERFORMANCE FIX 1: 
+          - Added 'pointer-events-none' so scroll doesn't get stuck on the div.
+          - Added 'translate-z-0' to force GPU hardware acceleration.
+      */}
+      <div className="absolute inset-0 opacity-20 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] pointer-events-none translate-z-0" />
 
       <div className="relative max-w-7xl mx-auto px-6">
         
@@ -46,6 +49,7 @@ export default function Services() {
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }} // Ensures it doesn't re-animate constantly
           transition={{ duration: 0.6 }}
           className="mb-16"
         >
@@ -66,13 +70,17 @@ export default function Services() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
               viewport={{ once: true }}
-              className={`${service.size} group relative p-8 rounded-3xl bg-white/5 border border-white/10 hover:border-white/20 transition-all duration-300 overflow-hidden`}
+              // PERFORMANCE FIX 2: Added 'will-change-transform' to hint the browser
+              className={`${service.size} group relative p-8 rounded-3xl bg-white/5 border border-white/10 hover:border-white/20 transition-colors duration-300 overflow-hidden will-change-transform`}
             >
               {/* Hover Gradient Glow */}
               <div className={`absolute inset-0 bg-gradient-to-br ${service.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
               
               <div className="relative z-10 flex flex-col h-full justify-between">
-                <div className="mb-4 p-3 bg-white/5 rounded-2xl w-fit backdrop-blur-sm border border-white/10">
+                {/* PERFORMANCE FIX 3: Removed 'backdrop-blur-sm' 
+                    This filter kills mobile framerates. The box is small enough that you don't need it.
+                */}
+                <div className="mb-4 p-3 bg-white/5 rounded-2xl w-fit border border-white/10">
                   {service.icon}
                 </div>
                 <div>

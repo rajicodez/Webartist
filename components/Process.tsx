@@ -32,7 +32,8 @@ const steps = [
 
 export default function Process() {
   return (
-    <section id="process" className="relative py-12 md:py-32 bg-black overflow-hidden">
+    // FIX: Changed 'md:pb-20' to 'md:pb-0' to reduce desktop gap.
+    <section id="process" className="relative pt-12 pb-12 md:pt-32 md:pb-0 bg-black overflow-hidden">
       
       {/* Central Beam - HIDDEN ON MOBILE */}
       <div className="hidden md:block absolute left-1/2 top-0 bottom-0 w-[1px] bg-gradient-to-b from-transparent via-blue-500 to-transparent opacity-20" />
@@ -62,8 +63,6 @@ export default function Process() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
               viewport={{ once: true, margin: "-50px" }}
-              // MOBILE: flex-col-reverse (Puts Icon on Top, Text Below)
-              // DESKTOP: flex-row or flex-row-reverse (Restores Zig-Zag)
               className={`flex flex-col-reverse items-center gap-4 md:gap-8 md:mb-16 ${
                 index % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"
               }`}

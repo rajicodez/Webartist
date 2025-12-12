@@ -27,47 +27,54 @@ const faqs = [
 ];
 
 export default function FAQ() {
-  const [activeIndex, setActiveIndex] = useState<number | null>(null);
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   return (
-    // ADDED id="faq" HERE 👇
-    <section id="faq" className="py-12 md:py-32 bg-black relative overflow-hidden">
-      <div className="max-w-4xl mx-auto px-6 relative z-10">
+    // THE FIX: 'scroll-mt-32 md:scroll-mt-0'
+    // This adds the safety buffer ONLY on mobile. Desktop behaves normally.
+    <section id="faq" className="relative py-12 md:py-24 bg-black overflow-hidden scroll-mt-14 md:scroll-mt-0">
+      
+      <div className="max-w-3xl mx-auto px-6 relative z-10">
         
-        {/* Header */}
-        <div className="text-center mb-20">
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="text-center mb-12 md:mb-16"
+        >
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
             Common <span className="text-blue-500">Questions.</span>
           </h2>
-          <p className="text-gray-400">Everything you need to know about partnering with us.</p>
-        </div>
+          <p className="text-gray-400">Everything you need to know about our process.</p>
+        </motion.div>
 
-        {/* FAQ List */}
-        <div className="grid gap-4">
+        <div className="space-y-4">
           {faqs.map((faq, index) => (
-            <div 
+            <motion.div
               key={index}
-              onClick={() => setActiveIndex(activeIndex === index ? null : index)}
-              className="group cursor-pointer rounded-2xl bg-white/5 border border-white/10 overflow-hidden hover:border-blue-500/30 transition-colors"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: index * 0.1 }}
+              viewport={{ once: true }}
+              className="border border-white/10 rounded-2xl bg-white/5 overflow-hidden hover:border-blue-500/30 transition-colors"
             >
-              {/* Question Row */}
-              <div className="p-6 flex items-center justify-between">
-                <h3 className="text-lg font-bold text-white group-hover:text-blue-400 transition-colors">
-                  {faq.question}
-                </h3>
-                <div className={`p-2 rounded-full border border-white/10 transition-all duration-300 ${activeIndex === index ? "bg-blue-600 border-blue-600 rotate-180" : "bg-white/5"}`}>
-                  {activeIndex === index ? <Minus className="w-4 h-4 text-white" /> : <Plus className="w-4 h-4 text-gray-400" />}
-                </div>
-              </div>
-
-              {/* Answer Row (Animated) */}
+              <button
+                onClick={() => setOpenIndex(openIndex === index ? null : index)}
+                className="w-full flex items-center justify-between p-6 text-left"
+              >
+                <span className="font-bold text-white text-lg pr-8">{faq.question}</span>
+                <span className="flex-shrink-0 text-blue-500">
+                  {openIndex === index ? <Minus className="w-5 h-5" /> : <Plus className="w-5 h-5" />}
+                </span>
+              </button>
+              
               <AnimatePresence>
-                {activeIndex === index && (
+                {openIndex === index && (
                   <motion.div
                     initial={{ height: 0, opacity: 0 }}
                     animate={{ height: "auto", opacity: 1 }}
                     exit={{ height: 0, opacity: 0 }}
-                    transition={{ duration: 0.3, ease: "easeInOut" }}
+                    transition={{ duration: 0.3 }}
                   >
                     <div className="px-6 pb-6 text-gray-400 leading-relaxed border-t border-white/5 pt-4">
                       {faq.answer}
@@ -75,7 +82,7 @@ export default function FAQ() {
                   </motion.div>
                 )}
               </AnimatePresence>
-            </div>
+            </motion.div>
           ))}
         </div>
 

@@ -33,7 +33,7 @@ export default function Work() {
   const y = useTransform(scrollYProgress, [0, 1], [100, -100]);
 
   return (
-    <section ref={containerRef} id="work" className="py-12 md:py-32 bg-black relative overflow-hidden">
+    <section ref={containerRef} id="work" className="relative py-12 md:py-24 bg-black overflow-hidden scroll-mt-14 md:scroll-mt-0">
        {/* Background Decor */}
        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-blue-900/20 rounded-full blur-[128px] opacity-50 pointer-events-none" />
 
@@ -41,15 +41,6 @@ export default function Work() {
         
         {/* Header */}
         <motion.div style={{ y }} className="mb-24">
-           <motion.p 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-            className="text-blue-500 font-mono text-sm tracking-widest uppercase mb-4"
-          >
-            Case Studies
-          </motion.p>
           <motion.h2 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}

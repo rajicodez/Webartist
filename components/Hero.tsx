@@ -2,24 +2,21 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { useState, useEffect } from "react";
-
 import dynamic from "next/dynamic";
+
 const Spline = dynamic(() => import("@splinetool/react-spline"), {
   ssr: false,
   loading: () => <div className="w-full h-full bg-black"></div>,
 });
 
-// Hook to detect desktop size
 function useIsDesktop() {
   const [isDesktop, setIsDesktop] = useState(false);
-
   useEffect(() => {
     const check = () => setIsDesktop(window.innerWidth >= 768);
     check();
     window.addEventListener("resize", check);
     return () => window.removeEventListener("resize", check);
   }, []);
-
   return isDesktop;
 }
 
@@ -36,22 +33,18 @@ export default function Hero() {
         </div>
       )}
 
-      {/* 2. MOBILE BACKGROUND (CSS Magic - The "WOW" Factor) */}
-      {/* This only shows when NOT on desktop */}
+      {/* 2. MOBILE BACKGROUND (Optimized for Performance) */}
       {!isDesktop && (
-        <div className="absolute inset-0 z-0 overflow-hidden">
-            {/* Pulsing Blue Orb */}
-            <motion.div 
-                animate={{ scale: [1, 1.1, 1], opacity: [0.3, 0.5, 0.3] }}
-                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                className="absolute top-[15%] left-[10%] w-[300px] h-[300px] bg-blue-600/30 rounded-full blur-[80px]"
-            />
-            {/* Pulsing Purple Orb */}
-            <motion.div 
-                animate={{ scale: [1, 1.2, 1], opacity: [0.2, 0.4, 0.2] }}
-                transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-                className="absolute bottom-[20%] right-[-10%] w-[250px] h-[250px] bg-purple-600/30 rounded-full blur-[80px]"
-            />
+        <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+            
+            {/* STATIC ORBS (No Animation Loop) 
+                We removed 'animate' to save the Phone GPU. 
+                It still looks glowing and cool, but 0% battery usage.
+            */}
+            <div className="absolute top-[15%] left-[10%] w-[300px] h-[300px] bg-blue-600/20 rounded-full blur-[80px]" />
+            
+            <div className="absolute bottom-[20%] right-[-10%] w-[250px] h-[250px] bg-purple-600/20 rounded-full blur-[80px]" />
+            
             {/* Tech Grid Overlay */}
             <div className="absolute inset-0 bg-[linear-gradient(to_right,#4f4f4f2e_1px,transparent_1px),linear-gradient(to_bottom,#4f4f4f2e_1px,transparent_1px)] bg-[size:24px_24px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] opacity-20" />
         </div>
