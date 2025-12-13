@@ -30,7 +30,7 @@ const founders = [
 export default function Founders() {
   return (
     // FIX 1: Added 'overflow-hidden' back to prevent horizontal scrolling
-    <section className="py-32 bg-black relative overflow-hidden">
+    <section className="py-12 bg-black relative overflow-hidden">
       
       {/* Background Decor */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full max-w-7xl opacity-30 pointer-events-none">

@@ -4,6 +4,7 @@ import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 import { TrendingUp, Users, Globe, Layers, Shuffle, Heart } from "lucide-react";
 import { motion } from "framer-motion";
+import Link from "next/link";
 
 export default function CareersPage() {
   
@@ -123,8 +124,11 @@ export default function CareersPage() {
           
           <div className="grid gap-6">
             
-            {/* Job Card 1 */}
-            <div className="p-8 rounded-3xl bg-white/5 border border-white/10 hover:border-blue-500/50 transition-colors group cursor-pointer">
+            {/* Job Card 1 - NOW CLICKABLE */}
+            <Link
+              href="/apply?role=AI Engineer Intern"
+              className="block p-8 rounded-3xl bg-white/5 border border-white/10 hover:border-blue-500/50 transition-colors group cursor-pointer"
+            >
               <div className="flex justify-between items-start mb-4">
                 <div>
                   <h3 className="text-2xl font-bold text-white group-hover:text-blue-400 transition-colors">AI Engineer Intern</h3>
@@ -135,7 +139,7 @@ export default function CareersPage() {
               <p className="text-gray-400">
                 Work with LLMs, RAG pipelines, and Python to build intelligent chatbot agents for our clients.
               </p>
-            </div>
+            </Link>
 
             {/* Job Card 2 */}
             <div className="p-8 rounded-3xl bg-white/5 border border-white/10 hover:border-blue-500/50 transition-colors group cursor-pointer opacity-75">

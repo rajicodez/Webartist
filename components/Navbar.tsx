@@ -18,7 +18,7 @@ export default function Navbar() {
   useEffect(() => {
     setIsMobileMenuOpen(false);
     
-    if (pathname === "/team" || pathname === "/careers" || pathname === "/about" || pathname === "/contact") {
+    if (pathname === "/team" || pathname === "/careers" || pathname === "/about" || pathname === "/contact" || pathname === "/apply") {
       setActiveTab("Company");
       setIsDropdownOpen(false);
     } else if (pathname === "/") {
