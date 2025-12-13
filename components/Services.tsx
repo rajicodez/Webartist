@@ -1,20 +1,20 @@
 "use client";
 import { motion } from "framer-motion";
-import { Database, Bot, TrendingUp, Zap, Globe, Lock } from "lucide-react";
+import { Database, Bot, TrendingUp, Zap } from "lucide-react";
 
 const services = [
   {
     title: "Data Science Core",
     description: "We don't guess. We analyze. Custom Python/SQL infrastructure to mine your business data for patterns.",
     icon: <Database className="w-8 h-8 text-blue-400" />,
-    size: "col-span-1 md:col-span-2", // Wide box
+    size: "col-span-1 md:col-span-2",
     gradient: "from-blue-500/20 to-cyan-500/20"
   },
   {
     title: "AI Agents (RAG)",
     description: "Chatbots that actually know your business. Trained on your specific documents and data.",
     icon: <Bot className="w-8 h-8 text-purple-400" />,
-    size: "col-span-1", // Standard box
+    size: "col-span-1",
     gradient: "from-purple-500/20 to-pink-500/20"
   },
   {
@@ -37,19 +37,24 @@ export default function Services() {
   return (
     <section id="intelligence" className="relative py-12 md:py-32 bg-black overflow-hidden scroll-mt-14 md:scroll-mt-0">
       
-      {/* PERFORMANCE FIX 1: 
-          - Added 'pointer-events-none' so scroll doesn't get stuck on the div.
-          - Added 'translate-z-0' to force GPU hardware acceleration.
-      */}
-      <div className="absolute inset-0 opacity-20 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] pointer-events-none translate-z-0" />
+      {/* --- HYBRID BACKGROUND STRATEGY --- */}
+
+      {/* 1. MOBILE: Lightweight CSS Dots (Fast, No Lag) */}
+      {/* 'block md:hidden' means: Show on Mobile, Hide on Desktop */}
+      <div className="absolute inset-0 block md:hidden opacity-20 bg-[radial-gradient(#ffffff33_1px,transparent_1px)] [background-size:16px_16px] pointer-events-none" />
+
+      {/* 2. DESKTOP: Heavy Noise Texture (Beautiful, High Quality) */}
+      {/* 'hidden md:block' means: Hide on Mobile, Show on Desktop */}
+      <div className="absolute inset-0 hidden md:block opacity-20 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] pointer-events-none translate-z-0" />
+
+      {/* ---------------------------------- */}
 
       <div className="relative max-w-7xl mx-auto px-6">
         
-        {/* Section Header */}
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }} // Ensures it doesn't re-animate constantly
+          viewport={{ once: true }}
           transition={{ duration: 0.6 }}
           className="mb-16"
         >
@@ -61,7 +66,6 @@ export default function Services() {
           </p>
         </motion.div>
 
-        {/* The Bento Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {services.map((service, index) => (
             <motion.div
@@ -70,16 +74,11 @@ export default function Services() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
               viewport={{ once: true }}
-              // PERFORMANCE FIX 2: Added 'will-change-transform' to hint the browser
               className={`${service.size} group relative p-8 rounded-3xl bg-white/5 border border-white/10 hover:border-white/20 transition-colors duration-300 overflow-hidden will-change-transform`}
             >
-              {/* Hover Gradient Glow */}
               <div className={`absolute inset-0 bg-gradient-to-br ${service.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
               
               <div className="relative z-10 flex flex-col h-full justify-between">
-                {/* PERFORMANCE FIX 3: Removed 'backdrop-blur-sm' 
-                    This filter kills mobile framerates. The box is small enough that you don't need it.
-                */}
                 <div className="mb-4 p-3 bg-white/5 rounded-2xl w-fit border border-white/10">
                   {service.icon}
                 </div>

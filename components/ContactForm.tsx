@@ -21,12 +21,37 @@ export default function ContactForm() {
     e.preventDefault();
     setIsSubmitting(true);
 
-    // TODO: Connect this to your actual Backend (Supabase/Email) later.
-    // For now, we simulate a network delay to show the animation.
-    setTimeout(() => {
+    // 1. Create a FormData object to send to Google Sheets
+    const formData = new FormData();
+    // We map the keys to match the Google Sheet Headers (Capitalized)
+    formData.append("Name", formState.name);
+    formData.append("Email", formState.email);
+    formData.append("Company", formState.company); 
+    formData.append("Message", formState.message);
+    // Note: 'Timestamp' is added automatically by the script, no need to send it.
+
+    // 2. PASTE YOUR GOOGLE SCRIPT WEB APP URL HERE 👇
+    const scriptURL = "https://script.google.com/macros/s/AKfycbwkpq5n2hNH8NmchzRnWszCwz0CL5qgGN7iwPS4qLiYf9ixV_7yt9hKxFMzEogBgiqI/exec";
+
+    try {
+      await fetch(scriptURL, {
+        method: "POST",
+        body: formData,
+        mode: "no-cors", // Essential for Google Sheets
+      });
+
+      // Google Sheets blocks the response in 'no-cors' mode, so we assume success if no error was thrown.
       setIsSubmitting(false);
       setIsSuccess(true);
-    }, 2000);
+      
+      // Reset form state
+      setFormState({ name: "", email: "", company: "", message: "" });
+
+    } catch (err) {
+      console.error("Error!", err);
+      setIsSubmitting(false);
+      alert("Something went wrong. Please check your internet connection.");
+    }
   };
 
   const inputClasses = "w-full bg-white/5 border border-white/10 rounded-xl px-5 py-4 text-white placeholder-gray-500 focus:outline-none focus:border-blue-500/50 focus:bg-blue-500/5 transition-all duration-300";
@@ -74,7 +99,7 @@ export default function ContactForm() {
               name="name" 
               value={formState.name}
               onChange={handleChange}
-              placeholder="John Doe" 
+              placeholder="Name" 
               className={inputClasses} 
               required
             />
@@ -86,7 +111,7 @@ export default function ContactForm() {
               name="email" 
               value={formState.email}
               onChange={handleChange}
-              placeholder="john@company.com" 
+              placeholder="E-mail" 
               className={inputClasses} 
               required
             />
@@ -101,7 +126,7 @@ export default function ContactForm() {
             name="company" 
             value={formState.company}
             onChange={handleChange}
-            placeholder="webartist.lk" 
+            placeholder="Your Company name" 
             className={inputClasses} 
           />
         </div>
@@ -134,7 +159,7 @@ export default function ContactForm() {
             </>
           ) : (
             <>
-              Start Your Project
+              Send Message
               <Send className="w-5 h-5" />
             </>
           )}

@@ -7,22 +7,22 @@ import Image from "next/image";
 const founders = [
   {
     name: "Rajindra Ratnayake", 
-    role: "Co-Founder & Lead Data Scientist",
-    image: null, // Add "/rajindra.jpg" to public folder later
-    bio: "Specializing in Predictive Analytics and Computer Vision. I build the AI engines that power our intelligent platforms.",
+    role: "Co-Founder & Data Scientist",
+    image: "/rajindra5.png", // Add "/rajindra.jpg" to public folder later
+    bio: "Specializes in Predictive Analytics and Computer Vision. Builds the AI engines that power the intelligent platforms.",
     socials: {
-      linkedin: "#", 
-      github: "#"    
+      linkedin: "https://www.linkedin.com/in/rajindra-ratnayake-70ab1b193", 
+      github: "https://github.com/rajicodez"    
     }
   },
   {
     name: "Nipun Nirmal", 
     role: "Co-Founder & AI Engineer",
-    image: null, // Add "/nipun.jpg" to public folder later
+    image: "/nipun.jpg", // Add "/nipun.jpg" to public folder later
     bio: "Expert in Large Language Models (LLMs) and RAG Architectures. Focused on turning raw business data into conversational intelligence.",
     socials: {
-      linkedin: "#", 
-      github: "#"
+      linkedin: "https://www.linkedin.com/in/nipun-nirmal-6892a4202", 
+      github: "https://github.com/nipunnirmal21"
     }
   }
 ];
@@ -71,9 +71,9 @@ export default function Founders() {
               <div className="relative overflow-hidden rounded-3xl bg-white/5 border border-white/10 p-8 md:p-12 hover:border-blue-500/30 transition-all duration-300 hover:bg-white/10">
                 
                 {/* Image Placeholder Circle */}
-                <div className="relative w-40 h-40 mb-8 rounded-full overflow-hidden border-2 border-blue-500/30 mx-auto bg-gradient-to-br from-gray-800 to-black group-hover:scale-105 transition-transform">
+                <div className="relative w-40 h-40 mb-8 rounded-full overflow-hidden border-2 border-blue-500/30 mx-auto bg-gradient-to-br from-gray-800 to-black group-hover:scale-[1.02] transition-transform will-change-transform">
                     {founder.image ? (
-                       <Image src={founder.image} alt={founder.name} fill className="object-cover" />
+                       <Image src={founder.image} alt={founder.name} fill  sizes="160px" quality={90} priority={index === 0} className="object-cover rounded-full [image-rendering:auto] [backface-visibility:hidden] [transform:translateZ(0)]" />
                     ) : (
                        <div className="w-full h-full flex items-center justify-center text-gray-600 font-mono text-sm">
                           NO IMAGE

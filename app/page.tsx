@@ -7,12 +7,14 @@ import Work from "../components/Work";
 import FAQ from "../components/FAQ";
 import TeamTeaser from "../components/TeamTeaser";
 import Footer from "../components/Footer";
+import Comparison from "../components/Comparison";
 
 export default function Home() {
   return (
     <main className="min-h-screen bg-black text-white selection:bg-blue-500/30">
       <Hero />
       <Services />
+      <Comparison />
       <Process />
       <TechStack />
       <Work />

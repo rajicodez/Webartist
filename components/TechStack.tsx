@@ -5,7 +5,7 @@ const technologies = [
   { name: "Next.js", logo: "https://cdn.simpleicons.org/nextdotjs/white" },
   { name: "React", logo: "https://cdn.simpleicons.org/react" },
   { name: "Tailwind", logo: "https://cdn.simpleicons.org/tailwindcss" },
-  { name: "OpenAI", logo: "https://cdn.simpleicons.org/openai/white" },
+  { name: "Gemini", logo: "https://cdn.simpleicons.org/googlegemini" },
   { name: "Analytics", logo: "https://cdn.simpleicons.org/googleanalytics" }, 
   { name: "LangChain", logo: "https://cdn.simpleicons.org/langchain" },
   { name: "Supabase", logo: "https://cdn.simpleicons.org/supabase" },

@@ -27,7 +27,7 @@ export default function AboutPage() {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="text-xl text-gray-400 max-w-2xl mx-auto leading-relaxed"
           >
-            To democratize Artificial Intelligence. We believe data intelligence shouldn't be a luxury for the Fortune 500—it should be the standard for everyone.
+            To democratize Artificial Intelligence. We believe data intelligence shouldn't be a luxury for the Fortune 500, it should be the standard for everyone.
           </motion.p>
         </div>
 
