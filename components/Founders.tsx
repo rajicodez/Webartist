@@ -9,7 +9,7 @@ const founders = [
     name: "Rajindra Ratnayake", 
     role: "Co-Founder & Head of Data & AI",
     image: "/rajindra5.png", // Add "/rajindra.jpg" to public folder later
-    bio: "Specializes in Predictive Analytics and Computer Vision. Builds the AI engines that power the intelligent platforms.",
+    bio: "Leads the technical implementation of intelligent systems. Focused on turning raw business data into actionable insights through machine learning, while deploying custom generative AI models to power conversational agents.",
     socials: {
       linkedin: "https://www.linkedin.com/in/rajindra-ratnayake-70ab1b193", 
       github: "https://github.com/rajicodez"    
@@ -19,7 +19,7 @@ const founders = [
     name: "Nipun Nirmal", 
     role: "Co-Founder & Head of Frontend Design",
     image: "/nipun.jpg", // Add "/nipun.jpg" to public folder later
-    bio: "Expert in Large Language Models (LLMs) and RAG Architectures. Focused on turning raw business data into conversational intelligence.",
+    bio: "Bridges the gap between creative vision and code. Manages the complete user journey, crafting intuitive designs and implementing them with clean, modern frontend architecture to ensure a flawless user experience.",
     socials: {
       linkedin: "https://www.linkedin.com/in/nipun-nirmal-6892a4202", 
       github: "https://github.com/nipunnirmal21"
