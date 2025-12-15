@@ -7,7 +7,7 @@ import Image from "next/image";
 const founders = [
   {
     name: "Rajindra Ratnayake", 
-    role: "Co-Founder & Data Scientist",
+    role: "Co-Founder & Head of Data & AI",
     image: "/rajindra5.png", // Add "/rajindra.jpg" to public folder later
     bio: "Specializes in Predictive Analytics and Computer Vision. Builds the AI engines that power the intelligent platforms.",
     socials: {
@@ -17,7 +17,7 @@ const founders = [
   },
   {
     name: "Nipun Nirmal", 
-    role: "Co-Founder & AI Engineer",
+    role: "Co-Founder & Head of Frontend Design",
     image: "/nipun.jpg", // Add "/nipun.jpg" to public folder later
     bio: "Expert in Large Language Models (LLMs) and RAG Architectures. Focused on turning raw business data into conversational intelligence.",
     socials: {
