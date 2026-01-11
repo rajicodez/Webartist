@@ -10,7 +10,7 @@ export default function Hero() {
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-black text-white">
 
       {/* 1. ANIMATED 3D BACKGROUND */}
-      <div className="absolute inset-0 z-0">
+      <div className="hidden md:block absolute inset-0 z-0">
         <Suspense fallback={<div className="w-full h-full bg-black/90" />}>
           <SplineScene />
         </Suspense>
