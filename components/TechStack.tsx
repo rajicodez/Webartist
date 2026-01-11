@@ -1,24 +1,26 @@
 "use client";
 
 const technologies = [
-  { name: "Python", logo: "https://cdn.simpleicons.org/python" },
+  { name: "Python", logo: "https://cdn.simpleicons.org/python/white" },
   { name: "Next.js", logo: "https://cdn.simpleicons.org/nextdotjs/white" },
-  { name: "React", logo: "https://cdn.simpleicons.org/react" },
-  { name: "Tailwind", logo: "https://cdn.simpleicons.org/tailwindcss" },
-  { name: "Gemini", logo: "https://cdn.simpleicons.org/googlegemini" },
-  { name: "Analytics", logo: "https://cdn.simpleicons.org/googleanalytics" }, 
-  { name: "LangChain", logo: "https://cdn.simpleicons.org/langchain" },
-  { name: "Supabase", logo: "https://cdn.simpleicons.org/supabase" },
-  { name: "TensorFlow", logo: "https://cdn.simpleicons.org/tensorflow" },
+  { name: "React", logo: "https://cdn.simpleicons.org/react/white" },
+  { name: "Tailwind", logo: "https://cdn.simpleicons.org/tailwindcss/white" },
+  { name: "Gemini", logo: "https://cdn.simpleicons.org/googlegemini/white" },
+  { name: "Analytics", logo: "https://cdn.simpleicons.org/googleanalytics/white" },
+  { name: "MCP", logo: "https://cdn.simpleicons.org/modelcontextprotocol/white" },
+  { name: "LangChain", logo: "https://cdn.simpleicons.org/langchain/white" },
+  { name: "Anthropic", logo: "https://cdn.simpleicons.org/anthropic/white" },
+  { name: "Supabase", logo: "https://cdn.simpleicons.org/supabase/white" },
+  { name: "TensorFlow", logo: "https://cdn.simpleicons.org/tensorflow/white" },
   { name: "Render", logo: "https://cdn.simpleicons.org/render/white" },
-  { name: "Hadoop", logo: "https://cdn.simpleicons.org/apachehadoop" }, 
-  { name: "Firebase", logo: "https://cdn.simpleicons.org/firebase" }, 
+  { name: "Hadoop", logo: "https://cdn.simpleicons.org/apachehadoop/white" },
+  { name: "Firebase", logo: "https://cdn.simpleicons.org/firebase/white" },
 ];
 
 export default function TechStack() {
   return (
     <section className="py-10 md:py-20 bg-black overflow-hidden border-y border-white/5">
-      
+
       <div className="text-center mb-10">
         <p className="text-sm font-mono text-gray-500 uppercase tracking-widest">
           Powered by Modern Infrastructure
@@ -30,14 +32,14 @@ export default function TechStack() {
         <div className="flex animate-marquee whitespace-nowrap gap-16 items-center">
           {[...technologies, ...technologies].map((tech, index) => (
             <div key={index} className="flex items-center gap-4 group/item cursor-default">
-              
+
               {/* The Logo Image */}
               <div className="relative w-12 h-12 grayscale opacity-50 group-hover/item:grayscale-0 group-hover/item:opacity-100 transition-all duration-300">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img 
-                  src={tech.logo} 
-                  alt={tech.name} 
-                  className="w-full h-full object-contain" 
+                <img
+                  src={tech.logo}
+                  alt={tech.name}
+                  className="w-full h-full object-contain"
                 />
               </div>
 

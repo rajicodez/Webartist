@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { XCircle, CheckCircle, Cpu, ServerCrash, ArrowRight, RefreshCcw } from "lucide-react";
+import { XCircle, CheckCircle, Cpu, ServerCrash, ArrowRight, Activity, Users, FileWarning } from "lucide-react"; // Added new icons
 
 // --- CUSTOM CSS FOR GLITCH TEXT ---
 const GlitchText = ({ children }: { children: React.ReactNode }) => (
@@ -28,25 +28,23 @@ export default function Comparison() {
         {/* HEADER (Shared) */}
         <div className="text-center mb-12 md:mb-20">
           <h2 className="text-4xl md:text-6xl font-bold text-white mb-6 tracking-tight">
-            Evolve or <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-orange-600 line-through decoration-red-500/50 decoration-4">Expire.</span>
+            Manual vs. <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-600">Autonomous.</span>
           </h2>
           <p className="text-xl text-gray-400 max-w-2xl mx-auto hidden md:block">
-            The era of the static website is over. See the difference between a digital liability and a digital asset.
+            Stop relying on human-only workflows. See the difference between a traditional business and an AI-driven enterprise.
           </p>
           <p className="text-lg text-gray-400 max-w-sm mx-auto block md:hidden">
-            Toggle the switch below to compare against the old way.
+            Toggle below to see the AI advantage.
           </p>
         </div>
 
         {/* =========================================
             MOBILE LAYOUT (Visible on < lg screens)
-            Uses a "Toggle Switch" interaction
            ========================================= */}
         <div className="block lg:hidden max-w-md mx-auto">
           
           {/* THE SWITCH CONTROL */}
           <div className="flex bg-white/5 p-1 rounded-full border border-white/10 mb-8 relative">
-            {/* The sliding background pill */}
             <motion.div 
                className={`absolute top-1 bottom-1 w-[calc(50%-4px)] rounded-full ${isNewWay ? 'bg-blue-600' : 'bg-red-900/80'}`}
                animate={{ left: isNewWay ? "50%" : "4px" }}
@@ -57,18 +55,18 @@ export default function Comparison() {
               onClick={() => setIsNewWay(false)}
               className={`flex-1 py-3 text-sm font-bold relative z-10 transition-colors ${!isNewWay ? 'text-white' : 'text-gray-400'}`}
             >
-              Legacy Way
+              Manual Ops
             </button>
             <button 
               onClick={() => setIsNewWay(true)}
               className={`flex-1 py-3 text-sm font-bold relative z-10 transition-colors ${isNewWay ? 'text-white' : 'text-gray-400'}`}
             >
-              Webartist Way
+              AI Systems
             </button>
           </div>
 
           {/* THE CARD (Swaps Content based on state) */}
-          <div className="relative h-[460px]"> {/* Changed from 550px to 460px */}
+          <div className="relative h-[480px]"> 
             <AnimatePresence mode="wait">
               {isNewWay ? (
                 /* NEW WAY CARD (MOBILE) */
@@ -87,14 +85,14 @@ export default function Comparison() {
                      <div className="w-16 h-16 bg-blue-500/20 rounded-full flex items-center justify-center mx-auto mb-6 text-blue-400 ring-2 ring-blue-500/50 shadow-[0_0_30px_rgba(59,130,246,0.5)]">
                         <Cpu size={32} />
                      </div>
-                     <h3 className="text-2xl font-bold text-white mb-2">Intelligent Platform</h3>
-                     <p className="text-blue-200/60 text-sm mb-8">Your website acts as an employee.</p>
+                     <h3 className="text-2xl font-bold text-white mb-2">The Intelligent Enterprise</h3>
+                     <p className="text-blue-200/60 text-sm mb-8">Systems that think, act, and grow.</p>
                      
                      <ul className="space-y-4 text-left w-full">
-                       <ComparisonItem icon={CheckCircle} color="text-blue-400" text="AI Agent Active 24/7" glow />
-                       <ComparisonItem icon={CheckCircle} color="text-blue-400" text="Predictive Analytics" glow />
-                       <ComparisonItem icon={CheckCircle} color="text-blue-400" text="Automated Leads" glow />
-                       <ComparisonItem icon={CheckCircle} color="text-blue-400" text="Instant Page Load" glow />
+                       <ComparisonItem icon={CheckCircle} color="text-blue-400" text="Autonomous AI Agents" glow />
+                       <ComparisonItem icon={CheckCircle} color="text-blue-400" text="Predictive Sales Models" glow />
+                       <ComparisonItem icon={CheckCircle} color="text-blue-400" text="Automated Workflows" glow />
+                       <ComparisonItem icon={CheckCircle} color="text-blue-400" text="Zero Human Error" glow />
                      </ul>
                    </div>
                 </motion.div>
@@ -109,16 +107,16 @@ export default function Comparison() {
                   className="absolute inset-0 rounded-[2rem] bg-[#0f0f0f] border border-white/10 p-8 flex flex-col items-center text-center grayscale"
                 >
                    <div className="w-16 h-16 bg-gray-800 rounded-full flex items-center justify-center mx-auto mb-6 text-gray-500">
-                      <ServerCrash size={32} />
+                      <Users size={32} />
                    </div>
-                   <h3 className="text-2xl font-bold text-gray-400 mb-2">Static Brochure</h3>
-                   <p className="text-gray-600 text-sm mb-8">Just a digital poster. Does nothing.</p>
+                   <h3 className="text-2xl font-bold text-gray-400 mb-2">The Manual Business</h3>
+                   <p className="text-gray-600 text-sm mb-8">Slow, expensive, and reactive.</p>
                    
                    <ul className="space-y-4 text-left w-full opacity-60">
-                     <ComparisonItem icon={XCircle} color="text-red-500" text="Dumb Information" />
-                     <ComparisonItem icon={XCircle} color="text-red-500" text="Zero Data Collection" />
-                     <ComparisonItem icon={XCircle} color="text-red-500" text="Contact Form Blackhole" />
-                     <ComparisonItem icon={XCircle} color="text-red-500" text="Slow Performance" />
+                     <ComparisonItem icon={XCircle} color="text-red-500" text="Missed Leads (Sleeping)" />
+                     <ComparisonItem icon={XCircle} color="text-red-500" text="Manual Data Entry" />
+                     <ComparisonItem icon={XCircle} color="text-red-500" text="Guesswork Decisions" />
+                     <ComparisonItem icon={XCircle} color="text-red-500" text="High Staff Costs" />
                    </ul>
                 </motion.div>
               )}
@@ -129,32 +127,29 @@ export default function Comparison() {
 
         {/* =========================================
             DESKTOP LAYOUT (Visible on lg+ screens)
-            Uses the "Side-by-Side Reactor" layout
            ========================================= */}
         <div className="hidden lg:grid grid-cols-11 gap-8 items-stretch relative">
           
           {/* LEFT SIDE (DESKTOP) */}
           <div className="col-span-5 group relative p-10 rounded-[2.5rem] border border-white/5 bg-[#0a0a0a] overflow-hidden">
             <div className="absolute inset-0 opacity-[0.03] bg-[url('https://grainy-gradients.vercel.app/noise.svg') animate-pulse]" />
-            <div className="inline-block bg-[#1a1a1a] px-4 py-1.5 rounded-full border border-red-500/20 text-xs font-mono uppercase tracking-wider text-red-400 mb-8">⚫ Legacy Approach</div>
+            <div className="inline-block bg-[#1a1a1a] px-4 py-1.5 rounded-full border border-red-500/20 text-xs font-mono uppercase tracking-wider text-red-400 mb-8">⚫ The Old Way</div>
             <div className="w-full h-52 bg-[#111] rounded-2xl mb-10 p-6 flex flex-col justify-center items-center border border-white/5 relative grayscale opacity-70 group-hover:opacity-100 transition-opacity">
-               <ServerCrash size={48} className="text-gray-600 mb-4" />
-               <div className="text-gray-500 font-mono text-sm">System Offline.</div>
+               <FileWarning size={48} className="text-gray-600 mb-4" />
+               <div className="text-gray-500 font-mono text-sm">Human Limit Reached.</div>
             </div>
-            <h3 className="text-3xl font-bold text-gray-300 mb-6">The Static Brochure</h3>
+            <h3 className="text-3xl font-bold text-gray-300 mb-6">Manual Operations</h3>
             <ul className="space-y-5 text-lg text-gray-400">
-              <ComparisonItem icon={XCircle} color="text-red-500/70" text="Dumb Information (Never updates)" />
-              <ComparisonItem icon={XCircle} color="text-red-500/70" text="Zero Data Collection" />
-              <ComparisonItem icon={XCircle} color="text-red-500/70" text="Slow, bloated WordPress backend" />
-              <ComparisonItem icon={XCircle} color="text-red-500/70" text="Looks like everyone else" />
+              <ComparisonItem icon={XCircle} color="text-red-500/70" text="Missed customers after 5 PM" />
+              <ComparisonItem icon={XCircle} color="text-red-500/70" text="Slow manual data entry" />
+              <ComparisonItem icon={XCircle} color="text-red-500/70" text="Decisions based on gut feeling" />
+              <ComparisonItem icon={XCircle} color="text-red-500/70" text="Static website (Brochure)" />
             </ul>
           </div>
 
-          {/* --- CENTER DIVIDER (The "Transformation Engine") --- */}
+          {/* --- CENTER DIVIDER --- */}
           <div className="hidden lg:flex col-span-1 items-center justify-center relative">
-             {/* The glowing line */}
              <div className="absolute h-full w-[1px] bg-gradient-to-b from-transparent via-blue-500 to-transparent opacity-50" />
-             {/* The central animated arrow */}
              <motion.div 
                animate={{ x: [0, 10, 0] }}
                transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
@@ -174,7 +169,7 @@ export default function Comparison() {
                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
                  <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
                </span>
-               Intelligent Platform
+               WebArtist Intelligence
             </div>
 
             <div className="relative w-full h-52 bg-blue-950/30 rounded-2xl mb-10 p-6 flex items-center justify-center border border-blue-500/20 overflow-hidden">
@@ -183,18 +178,18 @@ export default function Comparison() {
                      <Cpu size={32} className="text-blue-300" />
                      <div className="absolute inset-0 border-2 border-t-blue-400 border-r-transparent border-b-blue-400/30 border-l-transparent rounded-full animate-spin" />
                   </div>
-                  <div className="mt-4 text-blue-300 font-mono text-sm">AI Neural Core: Active</div>
+                  <div className="mt-4 text-blue-300 font-mono text-sm">Autonomous Core: Active</div>
                </div>
                <DataStream style="left-10 top-0" delay={0} />
                <DataStream style="right-10 bottom-0" delay={1.5} />
             </div>
 
-            <h3 className="relative text-3xl font-bold text-white mb-6 tracking-tight">The Intelligent Employee</h3>
+            <h3 className="relative text-3xl font-bold text-white mb-6 tracking-tight">The Autonomous Enterprise</h3>
             <ul className="relative space-y-5 text-lg">
-              <ComparisonItem icon={CheckCircle} color="text-blue-400" text="AI Agent Active 24/7" glow />
-              <ComparisonItem icon={CheckCircle} color="text-blue-400" text="Real-time Analytics Dashboard" glow />
-              <ComparisonItem icon={CheckCircle} color="text-blue-400" text="Automated Lead Capture" glow />
-              <ComparisonItem icon={CheckCircle} color="text-blue-400" text="Custom Next.js Engineering" glow />
+              <ComparisonItem icon={CheckCircle} color="text-blue-400" text="AI Agents working 24/7" glow />
+              <ComparisonItem icon={CheckCircle} color="text-blue-400" text="Predictive Sales Models" glow />
+              <ComparisonItem icon={CheckCircle} color="text-blue-400" text="Automated Workflows" glow />
+              <ComparisonItem icon={CheckCircle} color="text-blue-400" text="Zero Human Error" glow />
             </ul>
           </div>
 

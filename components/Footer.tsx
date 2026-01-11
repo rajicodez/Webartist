@@ -68,7 +68,7 @@ export default function Footer() {
             <div className="flex gap-4 md:gap-6">
               {[
                 { icon: <Linkedin className="w-5 h-5" />, href: "https://www.linkedin.com/company/webartistlk/" },
-                { icon: <Mail className="w-5 h-5" />, href: "webartist65@gmail.com" },
+                { icon: <Mail className="w-5 h-5" />, href: "mailto:webartist65@gmail.com" },
                 { icon: <Instagram className="w-5 h-5" />, href: "https://www.instagram.com/webartistlk/" },
                 { icon: <Github className="w-5 h-5" />, href: "#" },
               ].map((social, index) => (

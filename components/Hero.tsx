@@ -1,115 +1,66 @@
 "use client";
+import React, { Suspense } from "react";
 import { motion } from "framer-motion";
+import { ArrowRight, Cpu, Network } from "lucide-react";
 import Link from "next/link";
-import { useState, useEffect } from "react";
-import dynamic from "next/dynamic";
-
-const Spline = dynamic(() => import("@splinetool/react-spline"), {
-  ssr: false,
-  loading: () => <div className="w-full h-full bg-black"></div>,
-});
-
-function useIsDesktop() {
-  const [isDesktop, setIsDesktop] = useState(false);
-  useEffect(() => {
-    const check = () => setIsDesktop(window.innerWidth >= 768);
-    check();
-    window.addEventListener("resize", check);
-    return () => window.removeEventListener("resize", check);
-  }, []);
-  return isDesktop;
-}
+const SplineScene = React.lazy(() => import("./SplineScene"));
 
 export default function Hero() {
-  const isDesktop = useIsDesktop();
-
   return (
-    <section id="home" className="relative w-full h-screen overflow-hidden bg-black">
-      
-      {/* 1. DESKTOP BACKGROUND (3D Scene) */}
-      {isDesktop && (
-        <div className="absolute inset-0 z-0 translate-x-[10%] md:translate-x-[20%]">
-          <Spline scene="https://prod.spline.design/5NmCBGbq7rsmHDb4/scene.splinecode" />
-        </div>
-      )}
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-black text-white">
 
-      {/* 2. MOBILE BACKGROUND (Optimized for Performance) */}
-      {!isDesktop && (
-        <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
-            
-            {/* STATIC ORBS (No Animation Loop) 
-                We removed 'animate' to save the Phone GPU. 
-                It still looks glowing and cool, but 0% battery usage.
-            */}
-            <div className="absolute top-[15%] left-[10%] w-[300px] h-[300px] bg-blue-600/20 rounded-full blur-[80px]" />
-            
-            <div className="absolute bottom-[20%] right-[-10%] w-[250px] h-[250px] bg-purple-600/20 rounded-full blur-[80px]" />
-            
-            {/* Tech Grid Overlay */}
-            <div className="absolute inset-0 bg-[linear-gradient(to_right,#4f4f4f2e_1px,transparent_1px),linear-gradient(to_bottom,#4f4f4f2e_1px,transparent_1px)] bg-[size:24px_24px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] opacity-20" />
-        </div>
-      )}
-
-      {/* Content Overlay */}
-      <div className="relative z-10 h-full max-w-7xl mx-auto flex flex-col justify-center px-6 pointer-events-none pt-16 md:pt-24">
-        
-        <div className="max-w-3xl pointer-events-auto">
-
-            <motion.h1
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              className="text-5xl md:text-8xl font-bold tracking-tighter text-white mb-6 leading-tight"
-            >
-              Websites that <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-purple-600">
-                Think.
-              </span>
-            </motion.h1>
-
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.4 }}
-              className="text-lg md:text-xl text-gray-400 max-w-xl leading-relaxed"
-            >
-              We don't just build digital brochures. We engineer intelligent 
-              growth platforms powered by <span className="text-white font-medium">Data Science</span> and <span className="text-white font-medium">AI</span>.
-            </motion.p>
-            
-            <motion.div 
-               initial={{ opacity: 0, y: 20 }}
-               animate={{ opacity: 1, y: 0 }}
-               transition={{ duration: 0.5, delay: 0.6 }}
-               className="mt-8 flex flex-col sm:flex-row gap-4"
-            >
-                <Link href="/contact" className="w-full sm:w-auto"> 
-                    <button className="w-full sm:w-auto px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-full transition-all shadow-lg shadow-blue-600/25">
-                        Start Project
-                    </button>
-                </Link>
-                
-                <button
-                  onClick={() => {
-                    const workSection = document.getElementById("work");
-                    workSection?.scrollIntoView({ behavior: "smooth" });
-                  }}
-                  className="w-full sm:w-auto px-8 py-4 border border-white/10 hover:bg-white/5 text-white font-medium rounded-full transition-all backdrop-blur-sm"
-                >
-                    View Work
-                </button>
-            </motion.div>
-        </div>
+      {/* 1. ANIMATED 3D BACKGROUND */}
+      <div className="absolute inset-0 z-0">
+        <Suspense fallback={<div className="w-full h-full bg-black/90" />}>
+          <SplineScene />
+        </Suspense>
+        {/* Overlay to ensure text is readable over the 3D scene */}
+        <div className="absolute inset-0 bg-black/10 pointer-events-none" />
+        <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-black to-transparent pointer-events-none" />
       </div>
 
-      {/* Gradient Fade at Bottom */}
-      <div className="absolute bottom-0 w-full h-32 bg-gradient-to-t from-black to-transparent z-20 pointer-events-none" />
+      {/* 2. MAIN CONTENT */}
+      <div className="relative z-10 max-w-7xl mx-auto px-6 text-center mt-20">
 
-      {/* Spline Logo Cover Patch (Desktop Only) */}
-      {isDesktop && (
-         <div className="absolute bottom-0 right-0 w-40 h-16 bg-black z-50 pointer-events-none" />
-      )}
-      
+        {/* Headline */}
+        <h1 className="text-5xl md:text-8xl font-display font-bold tracking-tighter mb-8 leading-tight">
+          Engineering the <br />
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-500 to-blue-600 animate-gradient-x">
+            Autonomous Enterprise.
+          </span>
+        </h1>
+
+        {/* Subheadline */}
+        <p className="text-xl md:text-2xl text-gray-400 max-w-3xl mx-auto leading-relaxed mb-12">
+          We are an AI development agency. We build Custom Chatbots, Computer Vision Systems, and Automated Workflows that save your business time and money.
+        </p>
+
+        {/* Buttons */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.2, duration: 0.5 }}
+          className="flex flex-col sm:flex-row items-center justify-center gap-4"
+        >
+          <Link href="/contact" className="relative px-8 py-4 bg-blue-600 hover:bg-blue-500 text-white rounded-full font-bold text-lg transition-all flex items-center gap-2 group shadow-[0_0_60px_-15px_rgba(37,99,235,0.7)] hover:shadow-[0_0_80px_-10px_rgba(37,99,235,0.9)]">
+            <span className="absolute inset-0 rounded-full bg-white/20 opacity-0 group-hover:opacity-100 transition-opacity blur-md" />
+            <span className="relative flex items-center gap-2">
+              Audit My Business
+              <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
+            </span>
+          </Link>
+
+          <Link href="/work" className="px-8 py-4 bg-white/5 hover:bg-white/10 border border-white/10 backdrop-blur-md text-white rounded-full font-bold text-lg transition-all flex items-center gap-2 hover:border-white/20">
+            <Network size={20} className="text-purple-400" />
+            View Work
+          </Link>
+        </motion.div>
+
+      </div>
+
+      {/* 3. DECORATIVE ELEMENTS (Floating Tech) */}
+      <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-black to-transparent z-20" />
+
     </section>
   );
 }

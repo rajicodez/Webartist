@@ -14,39 +14,55 @@ export default function Navbar() {
   // Initialize State
   const [activeTab, setActiveTab] = useState("Home");
 
-  // Handle Page Changes
+  // --- 1. HANDLE PAGE CHANGES (Updated for Multi-Page) ---
   useEffect(() => {
     setIsMobileMenuOpen(false);
-    
-    if (pathname === "/team" || pathname === "/careers" || pathname === "/about" || pathname === "/contact" || pathname === "/apply") {
+
+    // Check which page we are on and highlight the correct tab
+    if (pathname === "/services") {
+      setActiveTab("Services");
+      setIsDropdownOpen(false);
+    } else if (pathname === "/industries") {
+      setActiveTab("Solutions");
+      setIsDropdownOpen(false);
+    } else if (pathname === "/work") {
+      setActiveTab("Work");
+      setIsDropdownOpen(false);
+    } else if (pathname === "/faq") {
+      setActiveTab("FAQ");
+      setIsDropdownOpen(false);
+    } else if (pathname === "/team" || pathname === "/careers" || pathname === "/about" || pathname === "/contact") {
       setActiveTab("Company");
       setIsDropdownOpen(false);
     } else if (pathname === "/") {
+      // Logic for Home Page (Scroll Spy)
       if (typeof window !== 'undefined' && window.location.hash) {
-         const hash = window.location.hash.replace("#", "");
-         if (hash === "faq") setActiveTab("FAQ");
-         else setActiveTab(hash.charAt(0).toUpperCase() + hash.slice(1));
+        const hash = window.location.hash.replace("#", "");
+        if (hash === "faq") setActiveTab("FAQ");
+        else setActiveTab("Home");
       } else {
-         setActiveTab("Home");
+        setActiveTab("Home");
       }
     }
   }, [pathname]);
 
-  // Scroll Spy (Same as before)
+  // --- 2. SCROLL SPY (Only runs on Home Page) ---
   useEffect(() => {
-    if (pathname !== "/") return;
+    if (pathname !== "/") return; // Don't spy scroll on other pages
+
     const handleScroll = () => {
       if (isManualScroll.current) return;
-      const sections = ["home", "intelligence", "work", "faq"];
+      // We only track 'faq' now, as other sections are on their own pages
+      const sections = ["faq"];
       const scrollPosition = window.scrollY + (window.innerHeight * 0.3);
+
       for (const section of sections) {
         const element = document.getElementById(section);
         if (element) {
           const offsetTop = element.offsetTop;
           const height = element.offsetHeight;
           if (scrollPosition >= offsetTop && scrollPosition < offsetTop + height) {
-            if (section === "faq") setActiveTab("FAQ");
-            else setActiveTab(section.charAt(0).toUpperCase() + section.slice(1));
+            setActiveTab("FAQ");
           }
         }
       }
@@ -58,15 +74,16 @@ export default function Navbar() {
   const handleNavClick = (tabName: string) => {
     setActiveTab(tabName);
     isManualScroll.current = true;
-    setTimeout(() => { isManualScroll.current = false; }, 1000); 
-    setIsMobileMenuOpen(false); // Close mobile menu on click
+    setTimeout(() => { isManualScroll.current = false; }, 1000);
+    setIsMobileMenuOpen(false);
   };
 
+  // --- 3. THE NEW MENU ITEMS (Links to Pages) ---
   const navItems = [
-    { name: "Home", link: "/#home" },
-    { name: "Intelligence", link: "/#intelligence" },
-    { name: "Work", link: "/#work" },
-    { name: "FAQ", link: "/#faq" },
+    { name: "Home", link: "/" },
+    { name: "Services", link: "/services" },
+    { name: "Work", link: "/work" },
+    { name: "FAQ", link: "/faq" },
   ];
 
   const companyLinks = [
@@ -80,17 +97,17 @@ export default function Navbar() {
     <>
       <div className="fixed top-6 inset-x-0 max-w-5xl mx-auto z-50 px-4 md:px-0 pointer-events-none">
         <div className="pointer-events-auto flex items-center justify-between p-2 rounded-full bg-black/50 backdrop-blur-md border border-white/10 shadow-2xl shadow-blue-500/10 transition-all hover:border-white/20">
-          
+
           {/* Logo */}
-          <Link 
-            href="/" 
+          <Link
+            href="/"
             onClick={() => handleNavClick("Home")}
-            className="pl-4 font-bold text-white tracking-wider cursor-pointer text-lg"
+            className="pl-4 font-display font-bold text-white tracking-wider cursor-pointer text-lg"
           >
             Webartist<span className="text-blue-500">.</span>
           </Link>
 
-          {/* DESKTOP LINKS (Hidden on Mobile) */}
+          {/* DESKTOP LINKS */}
           <div className="hidden md:flex space-x-1 items-center">
             {navItems.map((item) => (
               <Link
@@ -114,7 +131,7 @@ export default function Navbar() {
             ))}
 
             {/* Desktop Company Dropdown */}
-            <div 
+            <div
               className="relative"
               onMouseEnter={() => setIsDropdownOpen(true)}
               onMouseLeave={() => setIsDropdownOpen(false)}
@@ -156,8 +173,8 @@ export default function Navbar() {
 
           {/* MOBILE ACTIONS */}
           <div className="flex items-center gap-2 md:hidden">
-             {/* Start Button (Always Visible) */}
-             <Link
+            {/* Start Button */}
+            <Link
               href="/contact"
               className="px-4 py-2 bg-blue-600 text-white text-xs font-bold rounded-full"
             >
@@ -165,15 +182,15 @@ export default function Navbar() {
             </Link>
 
             {/* Hamburger Icon */}
-            <button 
+            <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               className="p-2 text-white bg-white/10 rounded-full"
             >
-              {isMobileMenuOpen ? <X className="w-5 h-5"/> : <Menu className="w-5 h-5"/>}
+              {isMobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
             </button>
           </div>
 
-          {/* Desktop Start Button (Hidden on Mobile) */}
+          {/* Desktop Start Button */}
           <div className="hidden md:block">
             <Link
               href="/contact"
@@ -208,7 +225,7 @@ export default function Navbar() {
                 </Link>
               ))}
 
-              {/* Company Links (Expanded) */}
+              {/* Company Links */}
               <div className="flex flex-col gap-4 pt-2">
                 <span className="text-sm text-blue-500 font-mono uppercase tracking-widest">Company</span>
                 {companyLinks.map((item) => (

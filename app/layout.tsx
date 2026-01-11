@@ -1,12 +1,13 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Inter, Outfit } from "next/font/google";
 import "./globals.css";
 import Navbar from "../components/Navbar";
 import { Analytics } from '@vercel/analytics/next';
 import ChatWidget from "../components/ChatWidget";
 import { GoogleTagManager } from '@next/third-parties/google'
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({ subsets: ["latin"], variable: '--font-inter' });
+const outfit = Outfit({ subsets: ["latin"], variable: '--font-outfit' });
 
 export const metadata: Metadata = {
   title: "WebArtist | Intelligent Web Platforms",
@@ -21,7 +22,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth" suppressHydrationWarning>
       <GoogleTagManager gtmId="GTM-NFBHX3DG" />
-      <body className={inter.className} suppressHydrationWarning>
+      <body className={`${inter.variable} ${outfit.variable} font-sans antialiased`} suppressHydrationWarning>
         <Navbar />
         {children}
         <ChatWidget />

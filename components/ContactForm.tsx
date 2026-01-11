@@ -26,7 +26,7 @@ export default function ContactForm() {
     // We map the keys to match the Google Sheet Headers (Capitalized)
     formData.append("Name", formState.name);
     formData.append("Email", formState.email);
-    formData.append("Company", formState.company); 
+    formData.append("Company", formState.company);
     formData.append("Message", formState.message);
     // Note: 'Timestamp' is added automatically by the script, no need to send it.
 
@@ -43,7 +43,7 @@ export default function ContactForm() {
       // Google Sheets blocks the response in 'no-cors' mode, so we assume success if no error was thrown.
       setIsSubmitting(false);
       setIsSuccess(true);
-      
+
       // Reset form state
       setFormState({ name: "", email: "", company: "", message: "" });
 
@@ -59,7 +59,7 @@ export default function ContactForm() {
 
   if (isSuccess) {
     return (
-      <motion.div 
+      <motion.div
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
         className="w-full max-w-lg mx-auto bg-[#0A0A0A] border border-white/10 p-12 rounded-[2.5rem] text-center"
@@ -67,11 +67,11 @@ export default function ContactForm() {
         <div className="w-20 h-20 bg-green-500/20 rounded-full flex items-center justify-center mx-auto mb-6 text-green-500">
           <CheckCircle className="w-10 h-10" />
         </div>
-        <h3 className="text-3xl font-bold text-white mb-4">Message Sent!</h3>
+        <h3 className="text-3xl font-display font-bold text-white mb-4">Message Sent!</h3>
         <p className="text-gray-400">
           Thank you for reaching out. Our engineering team will analyze your request and get back to you within 24 hours.
         </p>
-        <button 
+        <button
           onClick={() => setIsSuccess(false)}
           className="mt-8 text-blue-400 hover:text-white transition-colors"
         >
@@ -89,30 +89,30 @@ export default function ContactForm() {
       className="w-full max-w-2xl mx-auto"
     >
       <form onSubmit={handleSubmit} className="space-y-6">
-        
+
         {/* Name & Email Row */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div className="group">
             <label className={labelClasses}>Your Name</label>
-            <input 
-              type="text" 
-              name="name" 
+            <input
+              type="text"
+              name="name"
               value={formState.name}
               onChange={handleChange}
-              placeholder="Name" 
-              className={inputClasses} 
+              placeholder="Name"
+              className={inputClasses}
               required
             />
           </div>
           <div className="group">
             <label className={labelClasses}>Email Address</label>
-            <input 
-              type="email" 
-              name="email" 
+            <input
+              type="email"
+              name="email"
               value={formState.email}
               onChange={handleChange}
-              placeholder="E-mail" 
-              className={inputClasses} 
+              placeholder="E-mail"
+              className={inputClasses}
               required
             />
           </div>
@@ -121,26 +121,26 @@ export default function ContactForm() {
         {/* Company / Website */}
         <div>
           <label className={labelClasses}>Company / Website (Optional)</label>
-          <input 
-            type="text" 
-            name="company" 
+          <input
+            type="text"
+            name="company"
             value={formState.company}
             onChange={handleChange}
-            placeholder="Your Company name" 
-            className={inputClasses} 
+            placeholder="Company name"
+            className={inputClasses}
           />
         </div>
 
         {/* Message Area */}
         <div>
           <label className={labelClasses}>Tell us about your project</label>
-          <textarea 
-            name="message" 
+          <textarea
+            name="message"
             value={formState.message}
             onChange={handleChange}
             rows={5}
-            placeholder="I need a platform that..." 
-            className={inputClasses} 
+            placeholder="I need a platform that..."
+            className={inputClasses}
             required
           />
         </div>
