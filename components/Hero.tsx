@@ -50,7 +50,7 @@ export default function Hero() {
             </span>
           </Link>
 
-          <Link href="/work" className="px-8 py-4 bg-white/5 hover:bg-white/10 border border-white/10 backdrop-blur-md text-white rounded-full font-bold text-lg transition-all flex items-center gap-2 hover:border-white/20">
+          <Link href="/work" className="px-8 py-4 bg-white/10 md:bg-white/5 hover:bg-white/10 border border-white/10 backdrop-blur-md text-white rounded-full font-bold text-lg transition-all flex items-center gap-2 hover:border-white/20">
             <Network size={20} className="text-purple-400" />
             View Work
           </Link>
@@ -59,7 +59,7 @@ export default function Hero() {
       </div>
 
       {/* 3. DECORATIVE ELEMENTS (Floating Tech) */}
-      <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-black to-transparent z-20" />
+      <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-black to-transparent z-20 pointer-events-none" />
 
     </section>
   );
