@@ -7,7 +7,7 @@ const SplineScene = React.lazy(() => import("./SplineScene"));
 
 export default function Hero() {
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-black text-white">
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-black text-white pb-24 md:pb-0">
 
       {/* 1. ANIMATED 3D BACKGROUND */}
       <div className="hidden md:block absolute inset-0 z-0">
@@ -20,10 +20,10 @@ export default function Hero() {
       </div>
 
       {/* 2. MAIN CONTENT */}
-      <div className="relative z-10 max-w-7xl mx-auto px-6 text-center mt-20">
+      <div className="relative z-10 max-w-7xl mx-auto px-6 text-center mt-24 md:mt-20">
 
         {/* Headline */}
-        <h1 className="text-5xl md:text-8xl font-display font-bold tracking-tighter mb-8 leading-tight">
+        <h1 className="text-5xl md:text-8xl font-display font-bold tracking-tighter mb-5 md:mb-8 leading-tight">
           Engineering the <br />
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-500 to-blue-600 animate-gradient-x">
             Autonomous Enterprise.
@@ -31,7 +31,7 @@ export default function Hero() {
         </h1>
 
         {/* Subheadline */}
-        <p className="text-xl md:text-2xl text-gray-400 max-w-3xl mx-auto leading-relaxed mb-12">
+        <p className="text-lg md:text-2xl text-gray-400 max-w-3xl mx-auto leading-relaxed mb-8 md:mb-12">
           We are an AI development agency. We build Custom Chatbots, Computer Vision Systems, and Automated Workflows that save your business time and money.
         </p>
 
