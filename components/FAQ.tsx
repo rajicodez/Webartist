@@ -114,7 +114,7 @@ export default function FAQ() {
           </div>
 
           <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 tracking-tight">
-            Knowledge & <br /> <span className="text-blue-500">Insights.</span>
+            Knowledge & <br /> <span className="text-blue-500">Insights</span>
           </h1>
           <p className="text-xl text-gray-400 max-w-2xl mx-auto">
             Transparency is our default state. Here is exactly how we work, what we charge, and what you get.

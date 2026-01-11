@@ -8,20 +8,20 @@ export default function AboutPage() {
   return (
     // FIX 1: Added 'overflow-x-hidden' to prevent side-scrolling
     <main className="min-h-screen bg-black text-white selection:bg-blue-500/30 overflow-x-hidden">
-      
+
       <div className="pt-32 pb-20 px-6">
-        
+
         {/* HERO SECTION */}
         <div className="max-w-4xl mx-auto text-center mb-24">
-          <motion.h1 
+          <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
             className="text-5xl md:text-7xl font-bold mb-8"
           >
-            Our <span className="text-blue-500">Mission.</span>
+            Our <span className="text-blue-500">Mission</span>
           </motion.h1>
-          <motion.p 
+          <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
@@ -38,7 +38,7 @@ export default function AboutPage() {
             { icon: <Lightbulb className="w-6 h-6 text-purple-400" />, title: "The Innovation", text: "We don't just use AI; we engineer it. R&D is in our DNA.", color: "purple" },
             { icon: <Flag className="w-6 h-6 text-green-400" />, title: "The Standard", text: "Obsession with quality. We refuse to deliver 'average'.", color: "green" }
           ].map((item, index) => (
-            <motion.div 
+            <motion.div
               key={index}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -57,8 +57,8 @@ export default function AboutPage() {
 
         {/* STORY SECTION */}
         <div className="max-w-5xl mx-auto relative">
-          
-          <motion.div 
+
+          <motion.div
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             className="text-center mb-16"
@@ -69,8 +69,8 @@ export default function AboutPage() {
 
           {/* The Timeline Grid */}
           <div className="space-y-8">
-            
-            <StoryCard 
+
+            <StoryCard
               number="01"
               title="The Frustration"
               icon={<Sparkles className="w-6 h-6 text-white" />}
@@ -84,7 +84,7 @@ export default function AboutPage() {
               </p>
             </StoryCard>
 
-            <StoryCard 
+            <StoryCard
               number="02"
               title="The Shift"
               icon={<Cpu className="w-6 h-6 text-white" />}
@@ -99,7 +99,7 @@ export default function AboutPage() {
               </p>
             </StoryCard>
 
-            <StoryCard 
+            <StoryCard
               number="03"
               title="The Reality"
               icon={<Rocket className="w-6 h-6 text-white" />}
@@ -126,7 +126,7 @@ export default function AboutPage() {
 // REUSABLE STORY CARD
 function StoryCard({ number, title, icon, children, gradient, align = "left" }: any) {
   return (
-    <motion.div 
+    <motion.div
       initial={{ opacity: 0, x: align === "left" ? -50 : 50 }}
       whileInView={{ opacity: 1, x: 0 }}
       viewport={{ once: true, amount: 0.3 }}
@@ -136,7 +136,7 @@ function StoryCard({ number, title, icon, children, gradient, align = "left" }: 
       {/* Width logic: Full width on mobile, 3/4 width on desktop */}
       <div className="relative w-full md:w-3/4 p-1 rounded-3xl bg-gradient-to-br from-white/10 to-transparent">
         <div className={`relative overflow-hidden rounded-[22px] bg-[#0A0A0A] p-8 md:p-12 border border-white/5 group hover:border-white/10 transition-colors`}>
-          
+
           {/* Glowing Background Number - RESIZED FOR MOBILE */}
           {/* FIX 2: text-[80px] on mobile, text-[150px] on desktop */}
           <div className="absolute -right-4 -bottom-8 md:-bottom-12 text-[80px] md:text-[150px] font-bold text-white/5 select-none pointer-events-none group-hover:text-white/10 transition-colors duration-700 leading-none">
@@ -154,7 +154,7 @@ function StoryCard({ number, title, icon, children, gradient, align = "left" }: 
               </div>
               <h3 className="text-2xl md:text-3xl font-bold text-white">{title}</h3>
             </div>
-            
+
             <div className="text-gray-400 text-base md:text-lg leading-relaxed">
               {children}
             </div>

@@ -7,7 +7,7 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 
 export default function CareersPage() {
-  
+
   const benefits = [
     {
       title: "Rapid Career Growth",
@@ -47,7 +47,7 @@ export default function CareersPage() {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.1, 
+        staggerChildren: 0.1,
         delayChildren: 0.3, // Wait for header to finish
       },
     },
@@ -61,18 +61,18 @@ export default function CareersPage() {
   return (
     <main className="min-h-screen bg-black text-white selection:bg-blue-500/30">
       {/* Navbar is handled in layout, but ensuring padding exists */}
-      
+
       <section className="pt-32 pb-20 px-6">
-        
+
         {/* HEADER SECTION - Runs Immediately */}
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }} // CHANGED: animate instead of whileInView
           transition={{ duration: 0.8, ease: "easeOut" }}
           className="max-w-4xl mx-auto text-center mb-24"
         >
           <h1 className="text-5xl md:text-7xl font-bold mb-8">
-            Join the <span className="text-blue-500">Intelligence.</span>
+            Join the <span className="text-blue-500">Intelligence</span>
           </h1>
           <p className="text-xl text-gray-400 max-w-2xl mx-auto">
             We are always looking for exceptional Data Scientists and Engineers to help us build the next generation of web platforms.
@@ -81,7 +81,7 @@ export default function CareersPage() {
 
         {/* WHY WORK WITH US (Animated Grid) - Runs Immediately */}
         <div className="max-w-7xl mx-auto mb-32">
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }} // CHANGED: animate
             transition={{ duration: 0.6, delay: 0.2 }}
@@ -90,16 +90,16 @@ export default function CareersPage() {
             <h2 className="text-4xl font-bold text-white mb-4">Why WebArtist?</h2>
             <p className="text-gray-400">More than just a job. It's a launchpad.</p>
           </motion.div>
-          
-          <motion.div 
+
+          <motion.div
             variants={containerVariants}
             initial="hidden"
             animate="visible" // CHANGED: animate ensures it never stays hidden
             className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
           >
             {benefits.map((item, index) => (
-              <motion.div 
-                key={index} 
+              <motion.div
+                key={index}
                 variants={itemVariants}
                 className="p-8 rounded-2xl bg-white/5 border border-white/10 hover:bg-white/10 hover:border-blue-500/30 transition-all group"
               >
@@ -114,16 +114,16 @@ export default function CareersPage() {
         </div>
 
         {/* OPEN POSITIONS - Runs Immediately */}
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }} // CHANGED: animate
           transition={{ duration: 0.8, delay: 0.5 }}
           className="max-w-4xl mx-auto"
         >
           <h2 className="text-3xl font-bold text-white mb-8 border-b border-white/10 pb-4">Open Positions</h2>
-          
+
           <div className="grid gap-6">
-            
+
             {/* Job Card 1 - NOW CLICKABLE */}
             <Link
               href="/apply?role=AI Engineer Intern"

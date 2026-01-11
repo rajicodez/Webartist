@@ -16,7 +16,7 @@ export default function ContactPage() {
 
           <div className="text-center mb-16">
             <h1 className="text-5xl md:text-7xl font-bold mb-6">
-              Let's Build the <span className="text-blue-500">Future.</span>
+              Let's Build the <span className="text-blue-500">Future</span>
             </h1>
             <p className="text-xl text-gray-400 max-w-2xl mx-auto">
               Ready to upgrade your digital presence? Fill out the form below, and our engineering team will get back to you within 24 hours.

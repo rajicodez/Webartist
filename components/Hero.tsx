@@ -26,7 +26,7 @@ export default function Hero() {
         <h1 className="text-5xl md:text-8xl font-display font-bold tracking-tighter mb-5 md:mb-8 leading-tight">
           Engineering the <br />
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-500 to-blue-600 animate-gradient-x">
-            Autonomous Enterprise.
+            Autonomous Enterprise
           </span>
         </h1>
 

@@ -38,7 +38,7 @@ export default function ServicesPage() {
           >
             We Build Digital <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-400 to-white">
-              Intelligence.
+              Intelligence
             </span>
           </motion.h1>
 

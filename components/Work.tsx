@@ -77,7 +77,7 @@ export default function Work() {
           >
             Engineering <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-white to-purple-400">
-              Reality.
+              Reality
             </span>
           </motion.h1>
           <motion.p
