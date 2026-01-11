@@ -15,7 +15,7 @@ export default function ServicesPage() {
       <Navbar />
 
       {/* 1. HERO SECTION */}
-      <section className="pt-48 pb-32 relative overflow-hidden">
+      <section className="pt-32 pb-4 md:pt-48 md:pb-32 relative overflow-hidden">
         {/* Background Effects */}
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[600px] bg-blue-600/10 blur-[120px] rounded-full pointer-events-none" />
         <div className="absolute bottom-0 right-0 w-[800px] h-[500px] bg-purple-600/5 blur-[100px] rounded-full pointer-events-none" />
@@ -34,7 +34,7 @@ export default function ServicesPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
-            className="text-6xl md:text-8xl font-bold tracking-tight mb-8 leading-tight"
+            className="text-5xl md:text-8xl font-bold tracking-tight mb-6 md:mb-8 leading-tight"
           >
             We Build Digital <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-400 to-white">

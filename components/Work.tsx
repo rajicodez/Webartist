@@ -51,7 +51,7 @@ export default function Work() {
   const y = useTransform(scrollYProgress, [0, 1], [100, -100]);
 
   return (
-    <section ref={containerRef} id="work" className="relative py-20 pb-40 bg-black overflow-hidden scroll-mt-14 md:scroll-mt-0 font-sans">
+    <section ref={containerRef} id="work" className="relative py-12 md:py-20 pb-20 md:pb-40 bg-black overflow-hidden scroll-mt-14 md:scroll-mt-0 font-sans">
       {/* Cinematic Background */}
       <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-blue-900/10 rounded-full blur-[128px] pointer-events-none" />
       <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-purple-900/10 rounded-full blur-[100px] pointer-events-none" />
@@ -59,7 +59,7 @@ export default function Work() {
       <div className="max-w-7xl mx-auto px-6 relative z-10">
 
         {/* HERO HEADER */}
-        <motion.div style={{ y }} className="mb-32 text-center max-w-4xl mx-auto pt-20">
+        <motion.div style={{ y }} className="mb-32 text-center max-w-4xl mx-auto pt-10 md:pt-20">
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -73,7 +73,7 @@ export default function Work() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="text-6xl md:text-8xl font-bold text-white mb-8 tracking-tight"
+            className="text-5xl md:text-8xl font-bold text-white mb-8 tracking-tight"
           >
             Engineering <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-white to-purple-400">

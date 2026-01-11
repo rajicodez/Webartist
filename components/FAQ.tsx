@@ -67,6 +67,14 @@ const faqData = [
 export default function FAQ() {
   const [openIndex, setOpenIndex] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState("");
+  const [isMobile, setIsMobile] = useState(false);
+
+  React.useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile(); // Check on mount
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
 
   const toggleFAQ = (id: string) => {
     setOpenIndex(openIndex === id ? null : id);
@@ -148,10 +156,10 @@ export default function FAQ() {
                         <AnimatePresence>
                           {openIndex === id && (
                             <motion.div
-                              initial={{ height: 0, opacity: 0 }}
+                              initial={isMobile ? { height: 0, opacity: 1 } : { height: 0, opacity: 0 }}
                               animate={{ height: "auto", opacity: 1 }}
-                              exit={{ height: 0, opacity: 0 }}
-                              transition={{ duration: 0.2, ease: "easeOut" }}
+                              exit={isMobile ? { height: 0, opacity: 1 } : { height: 0, opacity: 0 }}
+                              transition={{ duration: isMobile ? 0 : 0.2, ease: "easeOut" }}
                               className="overflow-hidden"
                             >
                               <div className="pb-8 text-gray-400 text-lg leading-relaxed max-w-2xl">
