@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import { motion } from "framer-motion";
-import { Github, Linkedin, Instagram, Mail, ArrowRight } from "lucide-react";
+import { Facebook, Linkedin, Instagram, Mail, ArrowRight } from "lucide-react";
 import Link from "next/link";
 
 export default function Footer() {
@@ -67,10 +67,10 @@ export default function Footer() {
           <div className="flex justify-center">
             <div className="flex gap-4 md:gap-6">
               {[
-                { icon: <Linkedin className="w-5 h-5" />, href: "https://www.linkedin.com/company/webartistlk/" },
+                { icon: <Linkedin className="w-5 h-5" />, href: "https://www.linkedin.com/company/kindforth/" },
                 { icon: <Mail className="w-5 h-5" />, href: "mailto:webartist65@gmail.com" },
-                { icon: <Instagram className="w-5 h-5" />, href: "https://www.instagram.com/webartistlk/" },
-                { icon: <Github className="w-5 h-5" />, href: "#" },
+                { icon: <Instagram className="w-5 h-5" />, href: "https://www.instagram.com/kindforth/" },
+                { icon: <Facebook className="w-5 h-5" />, href: "https://www.facebook.com/share/1DLNEwfB9n/" },
               ].map((social, index) => (
                 <a
                   key={index}
