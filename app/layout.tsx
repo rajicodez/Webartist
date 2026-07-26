@@ -10,7 +10,7 @@ const inter = Inter({ subsets: ["latin"], variable: '--font-inter' });
 const outfit = Outfit({ subsets: ["latin"], variable: '--font-outfit' });
 
 export const metadata: Metadata = {
-  title: "WebArtist | Intelligent Web Platforms",
+  title: "Kindforth | Intelligent Web Platforms",
   description: "We build data-driven websites powered by AI.",
 };
 

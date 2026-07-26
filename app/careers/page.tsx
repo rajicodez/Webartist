@@ -87,7 +87,7 @@ export default function CareersPage() {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="text-center mb-16"
           >
-            <h2 className="text-4xl font-bold text-white mb-4">Why WebArtist?</h2>
+            <h2 className="text-4xl font-bold text-white mb-4">Why Kindforth?</h2>
             <p className="text-gray-400">More than just a job. It's a launchpad.</p>
           </motion.div>
 

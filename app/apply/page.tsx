@@ -59,7 +59,7 @@ function ApplyForm() {
           </div>
           <h3 className="text-3xl font-bold text-white mb-4">Application Sent!</h3>
           <p className="text-gray-400 mb-8">
-            Thanks for applying to Webartist. We will review your CV and get back to you soon.
+            Thanks for applying to Kindforth. We will review your CV and get back to you soon.
           </p>
           <Link href="/careers" className="text-blue-400 hover:text-white transition-colors">
             Return to Careers

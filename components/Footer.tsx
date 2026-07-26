@@ -59,7 +59,7 @@ export default function Footer() {
           {/* 1. Logo (Top on Mobile, Left on Desktop) */}
           <div className="flex justify-center md:justify-start">
             <span className="font-bold text-xl tracking-wider text-white">
-              Webartist<span className="text-blue-500">.</span>
+              Kindforth<span className="text-blue-500">.</span>
             </span>
           </div>
 
@@ -87,7 +87,7 @@ export default function Footer() {
 
           {/* 3. Copyright (Bottom on Mobile, Right on Desktop) */}
           <div className="flex flex-col md:flex-row justify-center md:justify-end items-center gap-2 md:gap-4 text-xs text-gray-600">
-            <p>© {currentYear} Webartist.</p>
+            <p>© {currentYear} Kindforth.</p>
             <div className="flex gap-4">
               <a href="#" className="hover:text-gray-400 transition-colors">Privacy</a>
               <a href="#" className="hover:text-gray-400 transition-colors">Terms</a>
