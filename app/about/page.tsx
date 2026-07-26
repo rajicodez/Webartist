@@ -106,7 +106,7 @@ export default function AboutPage() {
               gradient="from-green-600/20 to-transparent"
             >
               <p>
-                Today, WebArtist is a specialized <strong>R&D Engineering Unit</strong>. We are no longer just students with an idea; we are partners to forward-thinking companies.
+                Today, Kindforth is a specialized <strong>R&D Engineering Unit</strong>. We are no longer just students with an idea; we are partners to forward-thinking companies.
               </p>
               <p className="mt-4 text-white font-medium">
                 We bridge the gap between your vision and the mathematical precision needed to make it profitable. We build the future.

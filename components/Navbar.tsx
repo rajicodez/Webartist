@@ -104,7 +104,7 @@ export default function Navbar() {
             onClick={() => handleNavClick("Home")}
             className="pl-4 font-display font-bold text-white tracking-wider cursor-pointer text-lg"
           >
-            Webartist<span className="text-blue-500">.</span>
+            Kindforth<span className="text-blue-500">.</span>
           </Link>
 
           {/* DESKTOP LINKS */}

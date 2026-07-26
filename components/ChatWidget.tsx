@@ -14,7 +14,7 @@ export default function ChatWidget() {
   
   // Initial Welcome Message
   const [messages, setMessages] = useState<{ role: "user" | "bot"; text: string }[]>([
-    { role: "bot", text: "Hello! I am the Webartist AI. Ask me about our services, pricing, or the team!" }
+    { role: "bot", text: "Hello! I am the Kindforth AI. Ask me about our services, pricing, or the team!" }
   ]);
 
   const messagesEndRef = useRef<HTMLDivElement>(null);
@@ -88,7 +88,7 @@ export default function ChatWidget() {
                   <Sparkles className="w-4 h-4 text-white" />
                 </div>
                 <div>
-                  <h3 className="text-white font-bold text-sm">Webartist Intelligence</h3>
+                  <h3 className="text-white font-bold text-sm">Kindforth Intelligence</h3>
                   <div className="flex items-center gap-1.5">
                     <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
                     <span className="text-xs text-gray-400">Online</span>
