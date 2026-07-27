@@ -52,7 +52,7 @@ const projects = [
       { label: "Dispatch", value: "Instant" },
     ],
     tags: ["Next.js", "Tailwind", "Realtime"],
-    link: "#"
+    link: "https://callmetaxi.lk"
   },
   {
     id: 4,
@@ -62,13 +62,13 @@ const projects = [
     challenge: "Devotees struggled to simply find the location or book meditation slots due to zero digital presence.",
     solution: "We engineered a calming web experience with a custom bilingual booking engine to manage retreats.",
     image: "/asapuwa.jpg",
-    url: "sathimath.org",
+    url: "sathimathvivekasenasuna.lk",
     stats: [
       { label: "Locales", value: "2 (En/Si)" },
       { label: "Bookings", value: "Automated" },
     ],
     tags: ["Next.js", "Tailwind", "Framer Motion"],
-    link: "#"
+    link: "https://sathimathvivekasenasuna.lk"
   }
 ];
 

@@ -1,4 +1,6 @@
 
+import { Phone, Mail } from "lucide-react";
+import WhatsAppIcon from "../../components/WhatsAppIcon";
 import Footer from "../../components/Footer";
 import ContactForm from "../../components/ContactForm";
 
@@ -21,6 +23,32 @@ export default function ContactPage() {
             <p className="text-xl text-gray-400 max-w-2xl mx-auto">
               Ready to upgrade your digital presence? Fill out the form below, and our engineering team will get back to you within 24 hours.
             </p>
+
+            <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4 text-sm">
+              <a
+                href="tel:+94717802777"
+                className="inline-flex items-center gap-3 px-5 py-3 rounded-full bg-white/5 border border-white/10 text-gray-300 hover:text-white hover:border-blue-500/50 hover:bg-white/10 transition-all duration-300"
+              >
+                <Phone className="w-4 h-4 text-blue-500" />
+                <span className="font-medium">+94 71 780 2777</span>
+              </a>
+              <a
+                href="https://wa.me/94717802777"
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center gap-3 px-5 py-3 rounded-full bg-white/5 border border-white/10 text-gray-300 hover:text-white hover:border-emerald-500/50 hover:bg-white/10 transition-all duration-300"
+              >
+                <WhatsAppIcon className="w-4 h-4 text-emerald-500" />
+                <span className="font-medium">WhatsApp</span>
+              </a>
+              <a
+                href="mailto:webartist65@gmail.com"
+                className="inline-flex items-center gap-3 px-5 py-3 rounded-full bg-white/5 border border-white/10 text-gray-300 hover:text-white hover:border-blue-500/50 hover:bg-white/10 transition-all duration-300"
+              >
+                <Mail className="w-4 h-4 text-blue-500" />
+                <span className="font-medium">webartist65@gmail.com</span>
+              </a>
+            </div>
           </div>
 
           <ContactForm />
