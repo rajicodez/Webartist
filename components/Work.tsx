@@ -22,9 +22,40 @@ const projects = [
     tags: ["Next.js", "Python RAG", "Tailwind"],
     link: "https://gomezhospital.lk"
   },
-  // Placeholder for second project to show layout
   {
     id: 2,
+    title: "Yellow Flag",
+    category: "Audience Growth",
+    description: "A home base for the podcast — episodes to watch, and games to stick around for.",
+    challenge: "The whole audience lived inside YouTube's feed. Listeners watched an episode, drifted off, and there was nowhere to bring them back to.",
+    solution: "We built a site that puts every episode in one place and gave fans playable games on top of it — a reason to return between uploads, and room for the store to grow into.",
+    image: "/yellowflag.png",
+    url: "yellowflagpodcast.com",
+    stats: [
+      { label: "Fan Games", value: "Playable" },
+      { label: "Audience", value: "Owned" },
+    ],
+    tags: ["Next.js", "Tailwind", "Interactive Games"],
+    link: "https://yellowflagpodcast.com"
+  },
+  {
+    id: 3,
+    title: "Call Me Taxi",
+    category: "Mobility & Booking",
+    description: "An always-on booking front end for a 24/7 taxi operation.",
+    challenge: "Every ride had to be booked over the phone, so calls were missed at night and during peak hours.",
+    solution: "We shipped an instant online booking flow with live dispatch notifications, so no ride is ever missed.",
+    image: "/callmetaxi.png",
+    url: "callmetaxi.lk",
+    stats: [
+      { label: "Booking", value: "24/7" },
+      { label: "Dispatch", value: "Instant" },
+    ],
+    tags: ["Next.js", "Tailwind", "Realtime"],
+    link: "#"
+  },
+  {
+    id: 4,
     title: "Sathimath Viweka Senasuna",
     category: "Digital Zen & Systems",
     description: "A serene, bilingual digital sanctuary for the 'Sathimath Viweka Senasuna' meditation center.",
