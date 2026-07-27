@@ -2,6 +2,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { Facebook, Linkedin, Instagram, Mail, ArrowRight } from "lucide-react";
+import WhatsAppIcon from "./WhatsAppIcon";
 import Link from "next/link";
 
 export default function Footer() {
@@ -51,6 +52,16 @@ export default function Footer() {
               <ArrowRight className="w-5 h-5 md:w-6 md:h-6 group-hover:translate-x-1 transition-transform" />
             </motion.button>
           </Link>
+
+          <p className="mt-6 text-sm md:text-base text-gray-500">
+            Or call us{" "}
+            <a
+              href="tel:+94717802777"
+              className="text-gray-300 hover:text-blue-400 font-medium transition-colors"
+            >
+              +94 71 780 2777
+            </a>
+          </p>
         </div>
 
         {/* BOTTOM BAR - Mobile Optimized */}
@@ -67,6 +78,7 @@ export default function Footer() {
           <div className="flex justify-center">
             <div className="flex gap-4 md:gap-6">
               {[
+                { icon: <WhatsAppIcon className="w-5 h-5" />, href: "https://wa.me/94717802777" },
                 { icon: <Linkedin className="w-5 h-5" />, href: "https://www.linkedin.com/company/kindforth/" },
                 { icon: <Mail className="w-5 h-5" />, href: "mailto:webartist65@gmail.com" },
                 { icon: <Instagram className="w-5 h-5" />, href: "https://www.instagram.com/kindforth/" },
