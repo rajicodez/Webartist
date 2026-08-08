@@ -6,11 +6,12 @@ import TechStack from "../components/TechStack";
 import IntelligenceStack from "../components/IntelligenceStack"; // The new Diagram
 import Comparison from "../components/Comparison"; // The "Manual vs Autonomous" toggle
 import Benefits from "../components/Benefits"; // The "ROI" section
+import Testimonials from "../components/Testimonials";
 import Footer from "../components/Footer";
 import { siteConfig } from "../lib/seo";
 
 export const metadata: Metadata = {
-  title: { absolute: "AI Development & Automation Company in Sri Lanka | Kindforth" },
+  title: { absolute: "AI, Automation & Software Company in Sri Lanka | Kindforth" },
   description: siteConfig.description,
   alternates: { canonical: "/" },
 };
@@ -36,6 +37,8 @@ export default function Home() {
 
       {/* 4. THE ROI (Why pay us?) */}
       <Benefits />
+
+      <Testimonials />
 
       {/* 5. THE CLOSE */}
       <Footer />

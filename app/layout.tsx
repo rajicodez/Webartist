@@ -3,7 +3,7 @@ import { Inter, Outfit } from "next/font/google";
 import "./globals.css";
 import Navbar from "../components/Navbar";
 import { Analytics } from '@vercel/analytics/next';
-import LazyChatWidget from "../components/LazyChatWidget";
+import FloatingWhatsAppButton from "../components/FloatingWhatsAppButton";
 import { GoogleTagManager } from '@next/third-parties/google'
 import { organizationSchema, siteConfig } from "../lib/seo";
 
@@ -13,7 +13,7 @@ const outfit = Outfit({ subsets: ["latin"], variable: '--font-outfit' });
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
   title: {
-    default: "AI Development & Automation Company in Sri Lanka | Kindforth",
+    default: "AI, Automation & Software Company in Sri Lanka | Kindforth",
     template: "%s | Kindforth",
   },
   description: siteConfig.description,
@@ -23,7 +23,7 @@ export const metadata: Metadata = {
   publisher: siteConfig.name,
   alternates: { canonical: "/" },
   openGraph: {
-    title: "AI Development & Automation Company in Sri Lanka | Kindforth",
+    title: "AI, Automation & Software Company in Sri Lanka | Kindforth",
     description: siteConfig.description,
     url: "/",
     siteName: siteConfig.name,
@@ -32,7 +32,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "AI Development & Automation Company in Sri Lanka | Kindforth",
+    title: "AI, Automation & Software Company in Sri Lanka | Kindforth",
     description: siteConfig.description,
   },
   robots: { index: true, follow: true },
@@ -55,7 +55,7 @@ export default function RootLayout({
         />
         <Navbar />
         {children}
-        <LazyChatWidget />
+        <FloatingWhatsAppButton />
         <Analytics />
       </body>
     </html>

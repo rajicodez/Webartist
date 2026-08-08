@@ -2,9 +2,9 @@ import type { ReactNode } from "react";
 import { createMetadata } from "../../lib/seo";
 
 export const metadata = createMetadata({
-  title: "AI Development Services in Sri Lanka",
+  title: "AI, Automation, Software & SEO Services",
   description:
-    "Explore custom AI chatbots, workflow automation, computer vision, predictive analytics, and intelligent web development from Kindforth.",
+    "Explore Kindforth's AI development, business automation, custom software, web application, and SEO services for Sri Lankan SMEs and international companies.",
   path: "/services",
 });
 

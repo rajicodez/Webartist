@@ -2,13 +2,12 @@ import type { Metadata } from "next";
 
 export const siteConfig = {
   name: "Kindforth",
-  formerName: "Webartist",
   url: "https://www.kindforth.com",
   email: "hello@kindforth.com",
   phone: "+94717802777",
   displayPhone: "+94 71 780 2777",
   description:
-    "Kindforth builds custom AI chatbots, workflow automation, computer vision, and intelligent web platforms for companies in Sri Lanka and worldwide.",
+    "Kindforth helps Sri Lankan SMEs grow with AI development, business automation, custom software, web applications, and SEO, with international delivery available.",
   social: {
     linkedin: "https://www.linkedin.com/company/kindforth/",
     instagram: "https://www.instagram.com/kindforth/",
@@ -21,6 +20,7 @@ type MetadataOptions = {
   description: string;
   path: string;
   noIndex?: boolean;
+  absoluteTitle?: boolean;
 };
 
 export function createMetadata({
@@ -28,9 +28,10 @@ export function createMetadata({
   description,
   path,
   noIndex = false,
+  absoluteTitle = false,
 }: MetadataOptions): Metadata {
   return {
-    title,
+    title: absoluteTitle ? { absolute: `${title} | ${siteConfig.name}` } : title,
     description,
     alternates: {
       canonical: path,
@@ -68,7 +69,6 @@ export const organizationSchema = {
       "@type": "Organization",
       "@id": `${siteConfig.url}/#organization`,
       name: siteConfig.name,
-      alternateName: siteConfig.formerName,
       url: siteConfig.url,
       logo: {
         "@type": "ImageObject",
@@ -79,7 +79,7 @@ export const organizationSchema = {
       telephone: siteConfig.phone,
       areaServed: [
         { "@type": "Country", name: "Sri Lanka" },
-        "Worldwide",
+        "International",
       ],
       founder: [
         { "@type": "Person", name: "Rajindra Ratnayake" },
@@ -88,11 +88,12 @@ export const organizationSchema = {
       sameAs: Object.values(siteConfig.social),
       knowsAbout: [
         "Artificial Intelligence",
-        "AI Automation",
-        "AI Chatbots",
+        "Machine Learning",
+        "Deep Learning",
         "Computer Vision",
-        "Web Development",
-        "Data Analytics",
+        "Business Process Automation",
+        "Custom Software Development",
+        "Web Application Development",
         "Search Engine Optimization",
       ],
     },

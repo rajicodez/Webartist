@@ -35,9 +35,9 @@ export default function AboutPage() {
         <h2 className="sr-only">What drives Kindforth</h2>
         <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 mb-32 md:mb-40">
           {[
-            { icon: <Target className="w-6 h-6 text-blue-400" />, title: "The Purpose", text: "Replacing 'gut feeling' with data-driven certainty for founders.", color: "blue" },
-            { icon: <Lightbulb className="w-6 h-6 text-purple-400" />, title: "The Innovation", text: "We don't just use AI; we engineer it. R&D is in our DNA.", color: "purple" },
-            { icon: <Flag className="w-6 h-6 text-green-400" />, title: "The Standard", text: "Obsession with quality. We refuse to deliver 'average'.", color: "green" }
+            { icon: <Target className="w-6 h-6 text-blue-400" />, title: "The Purpose", text: "Replacing 'gut feeling' with data-driven certainty for founders." },
+            { icon: <Lightbulb className="w-6 h-6 text-purple-400" />, title: "The Innovation", text: "We don't just use AI; we engineer it. R&D is in our DNA." },
+            { icon: <Flag className="w-6 h-6 text-green-400" />, title: "The Standard", text: "Obsession with quality. We refuse to deliver 'average'." }
           ].map((item, index) => (
             <motion.div
               key={index}
@@ -47,7 +47,7 @@ export default function AboutPage() {
               transition={{ delay: index * 0.2 }}
               className="p-8 rounded-3xl bg-white/5 border border-white/10 hover:border-white/20 transition-colors"
             >
-              <div className={`mb-6 p-4 rounded-full bg-${item.color}-500/10 w-fit border border-${item.color}-500/20`}>
+              <div className="mb-6 w-fit rounded-full border border-white/10 bg-black/60 p-4">
                 {item.icon}
               </div>
               <h3 className="text-2xl font-bold mb-4">{item.title}</h3>
@@ -111,9 +111,6 @@ export default function AboutPage() {
               </p>
               <p className="mt-4 text-white font-medium">
                 We bridge the gap between your vision and the mathematical precision needed to make it profitable. We build the future.
-              </p>
-              <p className="mt-4">
-                Kindforth is the new name of Webartist. The same Sri Lankan founding team and commitment continue under a brand built for our wider AI engineering mission.
               </p>
             </StoryCard>
 

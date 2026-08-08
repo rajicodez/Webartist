@@ -69,7 +69,7 @@ export default function ChatWidget({ initiallyOpen = false }: { initiallyOpen?: 
   };
 
   return (
-    <div className="fixed bottom-6 right-6 z-[9999] flex flex-col items-end font-sans">
+    <div className="fixed bottom-3 right-2 z-[9999] flex flex-col items-end font-sans md:bottom-6 md:right-6">
       
       {/* THE CHAT WINDOW */}
       <AnimatePresence>
@@ -181,7 +181,7 @@ export default function ChatWidget({ initiallyOpen = false }: { initiallyOpen?: 
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
         onClick={() => setIsOpen(!isOpen)}
-        className="relative w-14 h-14 bg-gradient-to-tr from-blue-600 to-purple-600 rounded-full flex items-center justify-center text-white shadow-2xl shadow-blue-600/40 border border-white/20 transition-all z-50 group"
+        className="group relative z-50 flex h-12 w-12 items-center justify-center rounded-full border border-white/20 bg-gradient-to-tr from-blue-600 to-purple-600 text-white shadow-2xl shadow-blue-600/40 transition-all md:h-14 md:w-14"
       >
         <AnimatePresence mode="wait">
           {isOpen ? (
@@ -191,7 +191,7 @@ export default function ChatWidget({ initiallyOpen = false }: { initiallyOpen?: 
               animate={{ rotate: 0, opacity: 1 }}
               exit={{ rotate: 90, opacity: 0 }}
             >
-              <X className="w-6 h-6" />
+              <X className="h-5 w-5 md:h-6 md:w-6" />
             </motion.div>
           ) : (
             <motion.div
@@ -200,7 +200,7 @@ export default function ChatWidget({ initiallyOpen = false }: { initiallyOpen?: 
               animate={{ rotate: 0, opacity: 1 }}
               exit={{ rotate: -90, opacity: 0 }}
             >
-              <MessageSquare className="w-6 h-6 fill-current" />
+              <MessageSquare className="h-5 w-5 fill-current md:h-6 md:w-6" />
             </motion.div>
           )}
         </AnimatePresence>

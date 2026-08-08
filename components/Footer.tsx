@@ -5,6 +5,7 @@ import { Facebook, Linkedin, Instagram, Mail, ArrowRight } from "lucide-react";
 import WhatsAppIcon from "./WhatsAppIcon";
 import Link from "next/link";
 import { siteConfig } from "../lib/seo";
+import { serviceLinks } from "../lib/services";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -60,6 +61,37 @@ export default function Footer() {
               +94 71 780 2777
             </a>
           </p>
+        </div>
+
+        <div className="mb-12 grid gap-10 border-t border-white/10 pt-12 sm:grid-cols-2 lg:grid-cols-[1.2fr_1.8fr_1fr]">
+          <div>
+            <p className="font-bold text-xl tracking-wider text-white">
+              Kindforth<span className="text-blue-500">.</span>
+            </p>
+            <p className="mt-4 max-w-sm text-sm leading-relaxed text-gray-500">
+              AI, automation, software, web, and organic growth for ambitious Sri Lankan SMEs and international teams.
+            </p>
+          </div>
+          <div>
+            <p className="mb-4 text-sm font-semibold uppercase tracking-wider text-gray-300">Services</p>
+            <div className="grid gap-3 sm:grid-cols-2">
+              {serviceLinks.map((service) => (
+                <Link key={service.href} href={service.href} className="text-sm text-gray-500 transition-colors hover:text-white">
+                  {service.label}
+                </Link>
+              ))}
+            </div>
+          </div>
+          <div>
+            <p className="mb-4 text-sm font-semibold uppercase tracking-wider text-gray-300">Company</p>
+            <div className="flex flex-col gap-3">
+              <Link href="/about" className="text-sm text-gray-500 transition-colors hover:text-white">About</Link>
+              <Link href="/team" className="text-sm text-gray-500 transition-colors hover:text-white">Team</Link>
+              <Link href="/work" className="text-sm text-gray-500 transition-colors hover:text-white">Work</Link>
+              <Link href="/careers" className="text-sm text-gray-500 transition-colors hover:text-white">Future careers</Link>
+              <Link href="/contact" className="text-sm text-gray-500 transition-colors hover:text-white">Contact</Link>
+            </div>
+          </div>
         </div>
 
         {/* BOTTOM BAR - Mobile Optimized */}

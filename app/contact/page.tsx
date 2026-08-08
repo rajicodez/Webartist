@@ -4,8 +4,12 @@ import WhatsAppIcon from "../../components/WhatsAppIcon";
 import Footer from "../../components/Footer";
 import ContactForm from "../../components/ContactForm";
 import { siteConfig } from "../../lib/seo";
+import { serviceLinks } from "../../lib/services";
 
-export default function ContactPage() {
+export default async function ContactPage({ searchParams }: { searchParams: Promise<{ service?: string }> }) {
+  const requestedService = (await searchParams).service ?? "";
+  const initialService = serviceLinks.some((service) => service.key === requestedService) ? requestedService : "";
+
   return (
     <main className="min-h-screen bg-black text-white selection:bg-blue-500/30">
 
@@ -52,7 +56,7 @@ export default function ContactPage() {
             </div>
           </div>
 
-          <ContactForm />
+          <ContactForm initialService={initialService} />
 
         </div>
       </div>

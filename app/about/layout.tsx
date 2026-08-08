@@ -4,7 +4,7 @@ import { createMetadata } from "../../lib/seo";
 export const metadata = createMetadata({
   title: "About Our AI Engineering Company",
   description:
-    "Meet Kindforth, formerly Webartist: a Sri Lankan AI engineering company building practical automation, data, and web systems for ambitious businesses.",
+    "Meet Kindforth, a Sri Lankan technology company building practical AI, automation, software, web, and organic growth systems for ambitious businesses.",
   path: "/about",
 });
 

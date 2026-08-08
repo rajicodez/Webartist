@@ -1,124 +1,119 @@
 "use client";
-import React, { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+
+import { AnimatePresence, motion } from "framer-motion";
+import { ChevronDown, Menu, X } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { ChevronDown, Menu, X } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
+import { serviceLinks } from "../lib/services";
+
+type DropdownName = "services" | "company";
+
+const companyLinks = [
+  { label: "About Kindforth", href: "/about" },
+  { label: "Meet the Team", href: "/team" },
+  { label: "Contact Us", href: "/contact" },
+];
 
 export default function Navbar() {
   const pathname = usePathname();
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [openDropdown, setOpenDropdown] = useState<DropdownName | null>(null);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  const companyRoutes = ["/about", "/team", "/careers", "/contact", "/privacy", "/terms", "/webartist-is-now-kindforth"];
-  const activeTab = pathname.startsWith("/services")
-    ? "Services"
-    : pathname.startsWith("/work")
-      ? "Work"
-      : pathname.startsWith("/faq")
-        ? "FAQ"
-        : companyRoutes.some((route) => pathname.startsWith(route))
-          ? "Company"
-          : "Home";
+  const isServicesActive = pathname.startsWith("/services");
+  const isCompanyActive = ["/about", "/team", "/contact", "/careers"].some((route) => pathname.startsWith(route));
 
-  const handleNavClick = () => {
+  const closeMenus = () => {
+    if (closeTimer.current) clearTimeout(closeTimer.current);
     setIsMobileMenuOpen(false);
-    setIsDropdownOpen(false);
+    setOpenDropdown(null);
   };
 
-  // --- 3. THE NEW MENU ITEMS (Links to Pages) ---
-  const navItems = [
-    { name: "Home", link: "/" },
-    { name: "Services", link: "/services" },
-    { name: "Work", link: "/work" },
-    { name: "FAQ", link: "/faq" },
-  ];
+  const openDesktopDropdown = (name: DropdownName) => {
+    if (closeTimer.current) clearTimeout(closeTimer.current);
+    closeTimer.current = null;
+    setOpenDropdown(name);
+  };
 
-  const companyLinks = [
-    { name: "About Us", link: "/about" },
-    { name: "Meet the Team", link: "/team" },
-    { name: "Careers", link: "/careers" },
-    { name: "Contact Us", link: "/contact" },
-  ];
+  const scheduleDropdownClose = () => {
+    if (closeTimer.current) clearTimeout(closeTimer.current);
+    closeTimer.current = setTimeout(() => {
+      setOpenDropdown(null);
+      closeTimer.current = null;
+    }, 140);
+  };
+
+  useEffect(() => {
+    if (!isMobileMenuOpen) return;
+
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+
+    return () => {
+      document.body.style.overflow = previousOverflow;
+    };
+  }, [isMobileMenuOpen]);
+
+  useEffect(() => {
+    return () => {
+      if (closeTimer.current) clearTimeout(closeTimer.current);
+    };
+  }, []);
 
   return (
     <>
-      <div className="fixed top-6 inset-x-0 max-w-5xl mx-auto z-50 px-4 md:px-0 pointer-events-none">
-        <div className="pointer-events-auto flex items-center justify-between p-2 rounded-full bg-black/50 backdrop-blur-md border border-white/10 shadow-2xl shadow-blue-500/10 transition-all hover:border-white/20">
-
-          {/* Logo */}
-          <Link
-            href="/"
-            onClick={handleNavClick}
-            className="pl-4 font-display font-bold text-white tracking-wider cursor-pointer text-lg"
-          >
+      <header className="pointer-events-none fixed inset-x-0 top-4 z-[10001] mx-auto max-w-6xl px-4 md:top-6">
+        <nav aria-label="Primary navigation" className="pointer-events-auto flex items-center justify-between rounded-full border border-white/10 bg-black/70 p-2 shadow-2xl shadow-blue-500/10 backdrop-blur-xl">
+          <Link href="/" onClick={closeMenus} aria-label="Kindforth home" className="pl-4 font-display text-lg font-bold tracking-wider text-white">
             Kindforth<span className="text-blue-500">.</span>
           </Link>
 
-          {/* DESKTOP LINKS */}
-          <div className="hidden md:flex space-x-1 items-center">
-            {navItems.map((item) => (
-              <Link
-                key={item.name}
-                href={item.link}
-                onClick={handleNavClick}
-                className="relative px-4 py-2 text-sm font-medium rounded-full transition-colors"
-              >
-                <span className={`relative z-10 transition-colors duration-200 ${activeTab === item.name ? "text-white" : "text-gray-400 hover:text-gray-200"}`}>
-                  {item.name}
-                </span>
-                {activeTab === item.name && (
-                  <motion.div
-                    layoutId="active-pill"
-                    initial={false}
-                    transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                    className="absolute inset-0 bg-white/10 rounded-full border border-white/5 will-change-transform"
-                  />
-                )}
-              </Link>
-            ))}
-
-            {/* Desktop Company Dropdown */}
+          <div className="hidden items-center gap-1 md:flex">
             <div
               className="relative"
-              onMouseEnter={() => setIsDropdownOpen(true)}
-              onMouseLeave={() => setIsDropdownOpen(false)}
+              onMouseEnter={() => openDesktopDropdown("services")}
+              onMouseLeave={scheduleDropdownClose}
+              onKeyDown={(event) => {
+                if (event.key === "Escape") closeMenus();
+              }}
             >
               <button
                 type="button"
                 aria-haspopup="menu"
-                aria-expanded={isDropdownOpen}
-                aria-controls="company-navigation-menu"
-                onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-                className="relative px-4 py-2 text-sm font-medium rounded-full transition-colors flex items-center gap-1"
+                aria-expanded={openDropdown === "services"}
+                aria-controls="services-navigation-menu"
+                onClick={() => openDesktopDropdown("services")}
+                className={`flex items-center gap-1 rounded-full px-4 py-2 text-sm font-medium transition-colors ${isServicesActive ? "bg-white/10 text-white" : "text-gray-400 hover:text-white"}`}
               >
-                <span className={`relative z-10 transition-colors duration-200 flex items-center gap-1 ${activeTab === "Company" ? "text-white" : "text-gray-400 hover:text-gray-200"}`}>
-                  Company <ChevronDown className={`w-3 h-3 transition-transform ${isDropdownOpen ? "rotate-180" : ""}`} />
-                </span>
-                {activeTab === "Company" && (
-                  <motion.div
-                    id="company-navigation-menu"
-                    role="menu"
-                    layoutId="active-pill"
-                    initial={false}
-                    transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                    className="absolute inset-0 bg-white/10 rounded-full border border-white/5 will-change-transform"
-                  />
-                )}
+                Services
+                <ChevronDown className={`h-3.5 w-3.5 transition-transform ${openDropdown === "services" ? "rotate-180" : ""}`} aria-hidden="true" />
               </button>
               <AnimatePresence>
-                {isDropdownOpen && (
+                {openDropdown === "services" && (
                   <motion.div
-                    initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                    id="services-navigation-menu"
+                    role="menu"
+                    initial={{ opacity: 0, y: 10, scale: 0.97 }}
                     animate={{ opacity: 1, y: 0, scale: 1 }}
-                    exit={{ opacity: 0, y: 10, scale: 0.95 }}
-                    transition={{ duration: 0.2 }}
-                    className="absolute top-full mt-2 right-0 w-48 p-2 rounded-2xl bg-black/90 backdrop-blur-xl border border-white/10 shadow-2xl overflow-hidden"
+                    exit={{ opacity: 0, y: 10, scale: 0.97 }}
+                    transition={{ duration: 0.16 }}
+                    className="absolute left-0 top-full mt-2 w-[420px] overflow-visible rounded-3xl border border-white/10 bg-[#080808]/95 p-3 shadow-2xl backdrop-blur-xl before:absolute before:-top-2 before:left-0 before:h-2 before:w-full before:content-['']"
                   >
-                    <div className="flex flex-col gap-1">
-                      {companyLinks.map((subItem) => (
-                        <Link key={subItem.name} href={subItem.link} className="px-4 py-2 text-sm text-gray-400 hover:text-white hover:bg-white/10 rounded-lg transition-all text-left">
-                          {subItem.name}
+                    <Link role="menuitem" href="/services" onClick={closeMenus} className="group mb-2 flex items-center justify-between rounded-2xl border border-blue-500/20 bg-blue-500/10 px-4 py-3 text-sm font-semibold text-white transition-colors hover:bg-blue-500/20">
+                      Explore all services
+                      <span className="text-blue-300 transition-transform group-hover:translate-x-1" aria-hidden="true">→</span>
+                    </Link>
+                    <div className="grid grid-cols-2 gap-1">
+                      {serviceLinks.map((service) => (
+                        <Link
+                          role="menuitem"
+                          key={service.href}
+                          href={service.href}
+                          onClick={closeMenus}
+                          className="rounded-2xl px-4 py-3 transition-colors hover:bg-white/10"
+                        >
+                          <span className="block text-sm font-semibold text-white">{service.label}</span>
                         </Link>
                       ))}
                     </div>
@@ -126,79 +121,110 @@ export default function Navbar() {
                 )}
               </AnimatePresence>
             </div>
-          </div>
 
-          {/* MOBILE ACTIONS */}
-          <div className="flex items-center gap-2 md:hidden">
-            {/* Start Button */}
-            <Link
-              href="/contact"
-              className="px-4 py-2 bg-blue-600 text-white text-xs font-bold rounded-full"
-            >
-              Start
+            <Link href="/work" onClick={closeMenus} className={`rounded-full px-4 py-2 text-sm font-medium transition-colors ${pathname.startsWith("/work") ? "bg-white/10 text-white" : "text-gray-400 hover:text-white"}`}>
+              Work
+            </Link>
+            <Link href="/faq" onClick={closeMenus} className={`rounded-full px-4 py-2 text-sm font-medium transition-colors ${pathname.startsWith("/faq") ? "bg-white/10 text-white" : "text-gray-400 hover:text-white"}`}>
+              FAQ
             </Link>
 
-            {/* Hamburger Icon */}
+            <div
+              className="relative"
+              onMouseEnter={() => openDesktopDropdown("company")}
+              onMouseLeave={scheduleDropdownClose}
+              onKeyDown={(event) => {
+                if (event.key === "Escape") closeMenus();
+              }}
+            >
+              <button
+                type="button"
+                aria-haspopup="menu"
+                aria-expanded={openDropdown === "company"}
+                aria-controls="company-navigation-menu"
+                onClick={() => openDesktopDropdown("company")}
+                className={`flex items-center gap-1 rounded-full px-4 py-2 text-sm font-medium transition-colors ${isCompanyActive ? "bg-white/10 text-white" : "text-gray-400 hover:text-white"}`}
+              >
+                Company
+                <ChevronDown className={`h-3.5 w-3.5 transition-transform ${openDropdown === "company" ? "rotate-180" : ""}`} aria-hidden="true" />
+              </button>
+              <AnimatePresence>
+                {openDropdown === "company" && (
+                  <motion.div
+                    id="company-navigation-menu"
+                    role="menu"
+                    initial={{ opacity: 0, y: 10, scale: 0.97 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    exit={{ opacity: 0, y: 10, scale: 0.97 }}
+                    transition={{ duration: 0.16 }}
+                    className="absolute right-0 top-full mt-2 w-52 rounded-2xl border border-white/10 bg-[#080808]/95 p-2 shadow-2xl backdrop-blur-xl before:absolute before:-top-2 before:left-0 before:h-2 before:w-full before:content-['']"
+                  >
+                    {companyLinks.map((link) => (
+                      <Link role="menuitem" key={link.href} href={link.href} onClick={closeMenus} className="block rounded-xl px-4 py-3 text-sm text-gray-300 transition-colors hover:bg-white/10 hover:text-white">
+                        {link.label}
+                      </Link>
+                    ))}
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+          </div>
+
+          <div className="flex items-center gap-2">
+            <Link href="/contact" onClick={closeMenus} className="rounded-full bg-blue-600 px-4 py-2 text-xs font-bold text-white transition-colors hover:bg-blue-500 md:px-5 md:text-sm">
+              <span className="md:hidden">Start</span>
+              <span className="hidden md:inline">Start a Project</span>
+            </Link>
             <button
               type="button"
               aria-label={isMobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
               aria-expanded={isMobileMenuOpen}
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="p-2 text-white bg-white/10 rounded-full"
+              aria-controls="mobile-navigation-menu"
+              onClick={() => setIsMobileMenuOpen((open) => !open)}
+              className="rounded-full bg-white/10 p-2 text-white md:hidden"
             >
-              {isMobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+              {isMobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
             </button>
           </div>
+        </nav>
+      </header>
 
-          {/* Desktop Start Button */}
-          <div className="hidden md:block">
-            <Link
-              href="/contact"
-              className="px-5 py-2 bg-blue-600 hover:bg-blue-500 text-white text-sm font-medium rounded-full transition-all shadow-[0_0_20px_-5px_rgba(37,99,235,0.5)] hover:shadow-[0_0_30px_-5px_rgba(37,99,235,0.6)]"
-            >
-              Start
-            </Link>
-          </div>
-
-        </div>
-      </div>
-
-      {/* MOBILE MENU OVERLAY */}
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            className="fixed inset-0 z-40 bg-black/95 backdrop-blur-xl pt-24 px-6 md:hidden overflow-y-auto"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            onClick={closeMenus}
+            className="fixed inset-0 z-[10000] bg-black/45 md:hidden"
           >
-            <div className="flex flex-col gap-6">
-              {/* Main Links */}
-              {navItems.map((item) => (
-                <Link
-                  key={item.name}
-                  href={item.link}
-                  onClick={handleNavClick}
-                  className="text-2xl font-bold text-white border-b border-white/10 pb-4"
-                >
-                  {item.name}
-                </Link>
-              ))}
-
-              {/* Company Links */}
-              <div className="flex flex-col gap-4 pt-2">
-                <span className="text-sm text-blue-500 font-mono uppercase tracking-widest">Company</span>
-                {companyLinks.map((item) => (
-                  <Link
-                    key={item.name}
-                    href={item.link}
-                    className="text-xl text-gray-400 hover:text-white"
-                  >
-                    {item.name}
-                  </Link>
+            <motion.nav
+              id="mobile-navigation-menu"
+              aria-label="Mobile navigation"
+              initial={{ x: "100%" }}
+              animate={{ x: 0 }}
+              exit={{ x: "100%" }}
+              transition={{ type: "spring", stiffness: 320, damping: 32 }}
+              onClick={(event) => event.stopPropagation()}
+              className="absolute inset-y-0 right-0 flex w-[calc(100%-3.5rem)] max-w-sm flex-col overflow-y-auto overscroll-contain border-l border-white/10 bg-[#070707]/95 px-6 pb-12 pt-28 shadow-2xl backdrop-blur-xl"
+            >
+              <Link href="/" onClick={closeMenus} className="border-b border-white/10 py-4 text-2xl font-bold text-white">Home</Link>
+              <Link href="/services" onClick={closeMenus} className="border-b border-white/10 py-4 text-2xl font-bold text-white">Services</Link>
+              <div className="grid grid-cols-1 gap-1 border-b border-white/10 py-3 pl-3">
+                {serviceLinks.map((service) => (
+                  <Link key={service.href} href={service.href} onClick={closeMenus} className="py-2 text-base text-gray-300">{service.label}</Link>
                 ))}
               </div>
-            </div>
+              <Link href="/work" onClick={closeMenus} className="border-b border-white/10 py-4 text-2xl font-bold text-white">Work</Link>
+              <Link href="/faq" onClick={closeMenus} className="border-b border-white/10 py-4 text-2xl font-bold text-white">FAQ</Link>
+              <p className="border-b border-white/10 py-4 text-2xl font-bold text-white">Company</p>
+              <div className="grid grid-cols-1 gap-1 py-3 pl-3">
+                {companyLinks.map((link) => (
+                  <Link key={link.href} href={link.href} onClick={closeMenus} className="py-2 text-base text-gray-300">{link.label}</Link>
+                ))}
+              </div>
+            </motion.nav>
           </motion.div>
         )}
       </AnimatePresence>

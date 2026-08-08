@@ -3,18 +3,21 @@ import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { Send, CheckCircle, Loader2 } from "lucide-react";
 import Link from "next/link";
+import { serviceLinks } from "../lib/services";
 
-export default function ContactForm() {
+export default function ContactForm({ initialService = "" }: { initialService?: string }) {
   const [formState, setFormState] = useState({
     name: "",
     email: "",
     company: "",
+    service: initialService,
     message: "",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+  const [submitError, setSubmitError] = useState("");
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     setFormState({ ...formState, [e.target.name]: e.target.value });
   };
 
@@ -22,36 +25,43 @@ export default function ContactForm() {
     e.preventDefault();
     setIsSubmitting(true);
 
-    // 1. Create a FormData object to send to Google Sheets
-    const formData = new FormData();
-    // We map the keys to match the Google Sheet Headers (Capitalized)
-    formData.append("Name", formState.name);
-    formData.append("Email", formState.email);
-    formData.append("Company", formState.company);
-    formData.append("Message", formState.message);
-    // Note: 'Timestamp' is added automatically by the script, no need to send it.
-
-    // 2. PASTE YOUR GOOGLE SCRIPT WEB APP URL HERE 👇
-    const scriptURL = "https://script.google.com/macros/s/AKfycbwkpq5n2hNH8NmchzRnWszCwz0CL5qgGN7iwPS4qLiYf9ixV_7yt9hKxFMzEogBgiqI/exec";
+    setSubmitError("");
 
     try {
-      await fetch(scriptURL, {
+      const response = await fetch("/api/contact", {
         method: "POST",
-        body: formData,
-        mode: "no-cors", // Essential for Google Sheets
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formState),
       });
 
-      // Google Sheets blocks the response in 'no-cors' mode, so we assume success if no error was thrown.
-      setIsSubmitting(false);
+      const result = (await response.json().catch(() => null)) as
+        | { success?: boolean; error?: string }
+        | null;
+
+      if (!response.ok || !result?.success) {
+        throw new Error(result?.error || "We could not deliver your message.");
+      }
+
       setIsSuccess(true);
 
-      // Reset form state
-      setFormState({ name: "", email: "", company: "", message: "" });
+      const analyticsWindow = window as Window & { dataLayer?: Record<string, unknown>[] };
+      analyticsWindow.dataLayer?.push({
+        event: "generate_lead",
+        form_name: "project_enquiry",
+        service: formState.service || "not_selected",
+      });
 
-    } catch (err) {
-      console.error("Error!", err);
+      // Reset form state
+      setFormState({ name: "", email: "", company: "", service: initialService, message: "" });
+
+    } catch (error) {
+      setSubmitError(
+        error instanceof Error
+          ? error.message
+          : "We could not deliver your message. Please try again.",
+      );
+    } finally {
       setIsSubmitting(false);
-      alert("Something went wrong. Please check your internet connection.");
     }
   };
 
@@ -135,6 +145,22 @@ export default function ContactForm() {
           />
         </div>
 
+        <div>
+          <label htmlFor="contact-service" className={labelClasses}>What can we help with?</label>
+          <select
+            id="contact-service"
+            name="service"
+            value={formState.service}
+            onChange={handleChange}
+            className={inputClasses}
+          >
+            <option value="" className="bg-black">I&apos;m not sure yet</option>
+            {serviceLinks.map((service) => (
+              <option key={service.key} value={service.key} className="bg-black">{service.label}</option>
+            ))}
+          </select>
+        </div>
+
         {/* Message Area */}
         <div>
           <label htmlFor="contact-message" className={labelClasses}>Tell us about your project</label>
@@ -152,6 +178,7 @@ export default function ContactForm() {
 
         {/* Submit Button */}
         <motion.button
+          type="submit"
           whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.98 }}
           disabled={isSubmitting}
@@ -169,6 +196,12 @@ export default function ContactForm() {
             </>
           )}
         </motion.button>
+
+        {submitError && (
+          <p role="alert" aria-live="polite" className="text-center text-sm text-red-300">
+            {submitError}
+          </p>
+        )}
 
         <p className="text-center text-xs text-gray-600 mt-4">
           By submitting this form, you agree to our{" "}
