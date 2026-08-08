@@ -1,5 +1,5 @@
 "use client";
-import Navbar from "../../components/Navbar";
+import type { ReactNode } from "react";
 import Footer from "../../components/Footer";
 import { Target, Lightbulb, Flag, Sparkles, Cpu, Rocket } from "lucide-react";
 import { motion } from "framer-motion";
@@ -27,16 +27,17 @@ export default function AboutPage() {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="text-xl text-gray-400 max-w-2xl mx-auto leading-relaxed"
           >
-            To democratize Artificial Intelligence. We believe data intelligence shouldn't be a luxury for the Fortune 500, it should be the standard for everyone.
+            To democratize Artificial Intelligence. We believe data intelligence shouldn&apos;t be a luxury for the Fortune 500; it should be the standard for everyone.
           </motion.p>
         </div>
 
         {/* THE 3 PILLARS */}
+        <h2 className="sr-only">What drives Kindforth</h2>
         <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 mb-32 md:mb-40">
           {[
-            { icon: <Target className="w-6 h-6 text-blue-400" />, title: "The Purpose", text: "Replacing 'gut feeling' with data-driven certainty for founders.", color: "blue" },
-            { icon: <Lightbulb className="w-6 h-6 text-purple-400" />, title: "The Innovation", text: "We don't just use AI; we engineer it. R&D is in our DNA.", color: "purple" },
-            { icon: <Flag className="w-6 h-6 text-green-400" />, title: "The Standard", text: "Obsession with quality. We refuse to deliver 'average'.", color: "green" }
+            { icon: <Target className="w-6 h-6 text-blue-400" />, title: "The Purpose", text: "Replacing 'gut feeling' with data-driven certainty for founders." },
+            { icon: <Lightbulb className="w-6 h-6 text-purple-400" />, title: "The Innovation", text: "We don't just use AI; we engineer it. R&D is in our DNA." },
+            { icon: <Flag className="w-6 h-6 text-green-400" />, title: "The Standard", text: "Obsession with quality. We refuse to deliver 'average'." }
           ].map((item, index) => (
             <motion.div
               key={index}
@@ -46,7 +47,7 @@ export default function AboutPage() {
               transition={{ delay: index * 0.2 }}
               className="p-8 rounded-3xl bg-white/5 border border-white/10 hover:border-white/20 transition-colors"
             >
-              <div className={`mb-6 p-4 rounded-full bg-${item.color}-500/10 w-fit border border-${item.color}-500/20`}>
+              <div className="mb-6 w-fit rounded-full border border-white/10 bg-black/60 p-4">
                 {item.icon}
               </div>
               <h3 className="text-2xl font-bold mb-4">{item.title}</h3>
@@ -80,7 +81,7 @@ export default function AboutPage() {
                 It started with a simple observation. We looked at the digital landscape and saw a sea of beautiful, expensive websites that were... <strong>silent</strong>.
               </p>
               <p className="mt-4">
-                Businesses were pouring millions into "Design," but ignoring "Intelligence." They were building digital art when they needed digital engines. We knew there had to be a better way.
+                Businesses were pouring millions into &quot;Design,&quot; but ignoring &quot;Intelligence.&quot; They were building digital art when they needed digital engines. We knew there had to be a better way.
               </p>
             </StoryCard>
 
@@ -92,10 +93,10 @@ export default function AboutPage() {
               align="right"
             >
               <p>
-                We realized that the missing link was <strong>Data Science</strong>. A website shouldn't just sit there; it should think. It should track patterns, predict user needs, and adapt in real-time.
+                We realized that the missing link was <strong>Data Science</strong>. A website shouldn&apos;t just sit there; it should think. It should track patterns, predict user needs, and adapt in real-time.
               </p>
               <p className="mt-4">
-                So we stopped being just "web developers" and became "Data Architects." We fused Python analytics with Next.js performance to create a new category of web platform.
+                So we stopped being just &quot;web developers&quot; and became &quot;Data Architects.&quot; We fused Python analytics with Next.js performance to create a new category of web platform.
               </p>
             </StoryCard>
 
@@ -124,7 +125,16 @@ export default function AboutPage() {
 }
 
 // REUSABLE STORY CARD
-function StoryCard({ number, title, icon, children, gradient, align = "left" }: any) {
+type StoryCardProps = {
+  number: string;
+  title: string;
+  icon: ReactNode;
+  children: ReactNode;
+  gradient: string;
+  align?: "left" | "right";
+};
+
+function StoryCard({ number, title, icon, children, gradient, align = "left" }: StoryCardProps) {
   return (
     <motion.div
       initial={{ opacity: 0, x: align === "left" ? -50 : 50 }}

@@ -7,8 +7,8 @@ import ReactMarkdown from "react-markdown";
 // Your Backend URL
 const BACKEND_URL = "https://web-production-ee00.up.railway.app"; 
 
-export default function ChatWidget() {
-  const [isOpen, setIsOpen] = useState(false);
+export default function ChatWidget({ initiallyOpen = false }: { initiallyOpen?: boolean }) {
+  const [isOpen, setIsOpen] = useState(initiallyOpen);
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   
@@ -62,14 +62,14 @@ export default function ChatWidget() {
         await new Promise((resolve) => setTimeout(resolve, 15));
       }
 
-    } catch (error) {
+    } catch {
       setIsLoading(false);
       setMessages((prev) => [...prev, { role: "bot", text: "I'm having trouble connecting to my brain right now. Please try again later." }]);
     }
   };
 
   return (
-    <div className="fixed bottom-6 right-6 z-[9999] flex flex-col items-end font-sans">
+    <div className="fixed bottom-3 right-2 z-[9999] flex flex-col items-end font-sans md:bottom-6 md:right-6">
       
       {/* THE CHAT WINDOW */}
       <AnimatePresence>
@@ -96,6 +96,8 @@ export default function ChatWidget() {
                 </div>
               </div>
               <button 
+                type="button"
+                aria-label="Close Kindforth AI chat"
                 onClick={() => setIsOpen(false)}
                 className="text-gray-400 hover:text-white transition-colors"
               >
@@ -122,11 +124,11 @@ export default function ChatWidget() {
                     ) : (
                       <ReactMarkdown
                         components={{
-                          strong: ({node, ...props}) => <span className="font-bold text-blue-300" {...props} />,
-                          ul: ({node, ...props}) => <ul className="list-disc ml-4 mb-2 space-y-1" {...props} />,
-                          ol: ({node, ...props}) => <ol className="list-decimal ml-4 mb-2 space-y-1" {...props} />,
-                          li: ({node, ...props}) => <li className="mb-1" {...props} />,
-                          p: ({node, ...props}) => <p className="mb-2 last:mb-0" {...props} />,
+                          strong: ({ children }) => <span className="font-bold text-blue-300">{children}</span>,
+                          ul: ({ children }) => <ul className="list-disc ml-4 mb-2 space-y-1">{children}</ul>,
+                          ol: ({ children }) => <ol className="list-decimal ml-4 mb-2 space-y-1">{children}</ol>,
+                          li: ({ children }) => <li className="mb-1">{children}</li>,
+                          p: ({ children }) => <p className="mb-2 last:mb-0">{children}</p>,
                         }}
                       >
                         {msg.text}
@@ -158,6 +160,8 @@ export default function ChatWidget() {
                   className="flex-1 bg-black/50 border border-white/10 rounded-full px-5 py-3 text-sm text-white focus:outline-none focus:border-blue-500/50 transition-colors placeholder:text-gray-600"
                 />
                 <button 
+                  type="submit"
+                  aria-label="Send chat message"
                   disabled={isLoading || !input.trim()} 
                   className="p-3 bg-blue-600 hover:bg-blue-500 text-white rounded-full transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-lg shadow-blue-600/20"
                 >
@@ -171,10 +175,13 @@ export default function ChatWidget() {
 
       {/* TOGGLE BUTTON */}
       <motion.button
+        type="button"
+        aria-label={isOpen ? "Close Kindforth AI chat" : "Open Kindforth AI chat"}
+        aria-expanded={isOpen}
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
         onClick={() => setIsOpen(!isOpen)}
-        className="relative w-14 h-14 bg-gradient-to-tr from-blue-600 to-purple-600 rounded-full flex items-center justify-center text-white shadow-2xl shadow-blue-600/40 border border-white/20 transition-all z-50 group"
+        className="group relative z-50 flex h-12 w-12 items-center justify-center rounded-full border border-white/20 bg-gradient-to-tr from-blue-600 to-purple-600 text-white shadow-2xl shadow-blue-600/40 transition-all md:h-14 md:w-14"
       >
         <AnimatePresence mode="wait">
           {isOpen ? (
@@ -184,7 +191,7 @@ export default function ChatWidget() {
               animate={{ rotate: 0, opacity: 1 }}
               exit={{ rotate: 90, opacity: 0 }}
             >
-              <X className="w-6 h-6" />
+              <X className="h-5 w-5 md:h-6 md:w-6" />
             </motion.div>
           ) : (
             <motion.div
@@ -193,7 +200,7 @@ export default function ChatWidget() {
               animate={{ rotate: 0, opacity: 1 }}
               exit={{ rotate: -90, opacity: 0 }}
             >
-              <MessageSquare className="w-6 h-6 fill-current" />
+              <MessageSquare className="h-5 w-5 fill-current md:h-6 md:w-6" />
             </motion.div>
           )}
         </AnimatePresence>
