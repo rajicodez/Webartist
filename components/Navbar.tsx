@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -7,75 +7,23 @@ import { ChevronDown, Menu, X } from "lucide-react";
 
 export default function Navbar() {
   const pathname = usePathname();
-  const isManualScroll = useRef(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-  // Initialize State
-  const [activeTab, setActiveTab] = useState("Home");
+  const companyRoutes = ["/about", "/team", "/careers", "/contact", "/privacy", "/terms", "/webartist-is-now-kindforth"];
+  const activeTab = pathname.startsWith("/services")
+    ? "Services"
+    : pathname.startsWith("/work")
+      ? "Work"
+      : pathname.startsWith("/faq")
+        ? "FAQ"
+        : companyRoutes.some((route) => pathname.startsWith(route))
+          ? "Company"
+          : "Home";
 
-  // --- 1. HANDLE PAGE CHANGES (Updated for Multi-Page) ---
-  useEffect(() => {
+  const handleNavClick = () => {
     setIsMobileMenuOpen(false);
-
-    // Check which page we are on and highlight the correct tab
-    if (pathname === "/services") {
-      setActiveTab("Services");
-      setIsDropdownOpen(false);
-    } else if (pathname === "/industries") {
-      setActiveTab("Solutions");
-      setIsDropdownOpen(false);
-    } else if (pathname === "/work") {
-      setActiveTab("Work");
-      setIsDropdownOpen(false);
-    } else if (pathname === "/faq") {
-      setActiveTab("FAQ");
-      setIsDropdownOpen(false);
-    } else if (pathname === "/team" || pathname === "/careers" || pathname === "/about" || pathname === "/contact") {
-      setActiveTab("Company");
-      setIsDropdownOpen(false);
-    } else if (pathname === "/") {
-      // Logic for Home Page (Scroll Spy)
-      if (typeof window !== 'undefined' && window.location.hash) {
-        const hash = window.location.hash.replace("#", "");
-        if (hash === "faq") setActiveTab("FAQ");
-        else setActiveTab("Home");
-      } else {
-        setActiveTab("Home");
-      }
-    }
-  }, [pathname]);
-
-  // --- 2. SCROLL SPY (Only runs on Home Page) ---
-  useEffect(() => {
-    if (pathname !== "/") return; // Don't spy scroll on other pages
-
-    const handleScroll = () => {
-      if (isManualScroll.current) return;
-      // We only track 'faq' now, as other sections are on their own pages
-      const sections = ["faq"];
-      const scrollPosition = window.scrollY + (window.innerHeight * 0.3);
-
-      for (const section of sections) {
-        const element = document.getElementById(section);
-        if (element) {
-          const offsetTop = element.offsetTop;
-          const height = element.offsetHeight;
-          if (scrollPosition >= offsetTop && scrollPosition < offsetTop + height) {
-            setActiveTab("FAQ");
-          }
-        }
-      }
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [pathname]);
-
-  const handleNavClick = (tabName: string) => {
-    setActiveTab(tabName);
-    isManualScroll.current = true;
-    setTimeout(() => { isManualScroll.current = false; }, 1000);
-    setIsMobileMenuOpen(false);
+    setIsDropdownOpen(false);
   };
 
   // --- 3. THE NEW MENU ITEMS (Links to Pages) ---
@@ -101,7 +49,7 @@ export default function Navbar() {
           {/* Logo */}
           <Link
             href="/"
-            onClick={() => handleNavClick("Home")}
+            onClick={handleNavClick}
             className="pl-4 font-display font-bold text-white tracking-wider cursor-pointer text-lg"
           >
             Kindforth<span className="text-blue-500">.</span>
@@ -113,7 +61,7 @@ export default function Navbar() {
               <Link
                 key={item.name}
                 href={item.link}
-                onClick={() => handleNavClick(item.name)}
+                onClick={handleNavClick}
                 className="relative px-4 py-2 text-sm font-medium rounded-full transition-colors"
               >
                 <span className={`relative z-10 transition-colors duration-200 ${activeTab === item.name ? "text-white" : "text-gray-400 hover:text-gray-200"}`}>
@@ -136,12 +84,21 @@ export default function Navbar() {
               onMouseEnter={() => setIsDropdownOpen(true)}
               onMouseLeave={() => setIsDropdownOpen(false)}
             >
-              <button className="relative px-4 py-2 text-sm font-medium rounded-full transition-colors flex items-center gap-1">
+              <button
+                type="button"
+                aria-haspopup="menu"
+                aria-expanded={isDropdownOpen}
+                aria-controls="company-navigation-menu"
+                onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                className="relative px-4 py-2 text-sm font-medium rounded-full transition-colors flex items-center gap-1"
+              >
                 <span className={`relative z-10 transition-colors duration-200 flex items-center gap-1 ${activeTab === "Company" ? "text-white" : "text-gray-400 hover:text-gray-200"}`}>
                   Company <ChevronDown className={`w-3 h-3 transition-transform ${isDropdownOpen ? "rotate-180" : ""}`} />
                 </span>
                 {activeTab === "Company" && (
                   <motion.div
+                    id="company-navigation-menu"
+                    role="menu"
                     layoutId="active-pill"
                     initial={false}
                     transition={{ type: "spring", stiffness: 300, damping: 30 }}
@@ -183,6 +140,9 @@ export default function Navbar() {
 
             {/* Hamburger Icon */}
             <button
+              type="button"
+              aria-label={isMobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
+              aria-expanded={isMobileMenuOpen}
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               className="p-2 text-white bg-white/10 rounded-full"
             >
@@ -218,7 +178,7 @@ export default function Navbar() {
                 <Link
                   key={item.name}
                   href={item.link}
-                  onClick={() => handleNavClick(item.name)}
+                  onClick={handleNavClick}
                   className="text-2xl font-bold text-white border-b border-white/10 pb-4"
                 >
                   {item.name}

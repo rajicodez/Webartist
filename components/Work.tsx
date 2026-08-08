@@ -2,7 +2,6 @@
 import React, { useRef } from "react";
 import { motion, useScroll, useTransform, useMotionValue, useSpring } from "framer-motion";
 import Image from "next/image";
-import { ArrowUpRight, ArrowRight, CheckCircle2 } from "lucide-react";
 
 // 1. DATA: REAL RESULTS
 const projects = [
@@ -117,7 +116,7 @@ export default function Work() {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="text-xl text-gray-400 max-w-2xl mx-auto leading-relaxed"
           >
-            We don't build demos. We build mission-critical infrastructure that handles millions of dollars in transactions.
+            We don&apos;t build demos. We build mission-critical infrastructure that handles millions of dollars in transactions.
           </motion.p>
         </motion.div>
 
@@ -133,7 +132,9 @@ export default function Work() {
 }
 
 // 2. THE REUSABLE CARD COMPONENT
-function ProjectCard({ project, index }: { project: any, index: number }) {
+type Project = (typeof projects)[number];
+
+function ProjectCard({ project, index }: { project: Project; index: number }) {
   const ref = useRef<HTMLDivElement>(null);
 
   // 3D Tilt Logic
@@ -221,7 +222,7 @@ function ProjectCard({ project, index }: { project: any, index: number }) {
         </h3>
 
         <p className="text-lg text-gray-400 leading-relaxed mb-8 border-l-2 border-white/10 pl-6">
-          "{project.description}"
+          &quot;{project.description}&quot;
         </p>
 
         {/* Problem vs Solution */}
@@ -238,7 +239,7 @@ function ProjectCard({ project, index }: { project: any, index: number }) {
 
         {/* Stats Grid */}
         <div className="grid grid-cols-2 gap-4 mb-8">
-          {project.stats.map((stat: any, i: number) => (
+          {project.stats.map((stat, i) => (
             <div key={i}>
               <h4 className="text-3xl font-bold text-white mb-1">{stat.value}</h4>
               <p className="text-xs text-gray-500 font-mono uppercase tracking-wider">{stat.label}</p>

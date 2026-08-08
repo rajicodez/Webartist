@@ -47,9 +47,9 @@ export default function Founders() {
           transition={{ duration: 0.8 }}
           className="text-center mb-20"
         >
-          <h2 className="text-5xl md:text-6xl font-bold text-white mb-6">
+          <h1 className="text-5xl md:text-6xl font-bold text-white mb-6">
             Meet the <span className="text-blue-500">Engineers</span>
-          </h2>
+          </h1>
           <p className="text-xl text-gray-400 max-w-2xl mx-auto">
             A specialized R&D team building the next generation of web intelligence. We combine deep technical expertise with commercial strategy to drive real business growth.
           </p>
@@ -94,11 +94,11 @@ export default function Founders() {
                   </p>
 
                   <div className="flex justify-center gap-4">
-                    <a href={founder.socials.linkedin} target="_blank" rel="noopener noreferrer" className="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center text-gray-400 hover:text-white hover:bg-blue-600 transition-all border border-white/5 hover:border-blue-500">
-                      <Linkedin className="w-5 h-5" />
+                    <a aria-label={`${founder.name} on LinkedIn`} href={founder.socials.linkedin} target="_blank" rel="noopener noreferrer" className="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center text-gray-400 hover:text-white hover:bg-blue-600 transition-all border border-white/5 hover:border-blue-500">
+                      <Linkedin aria-hidden="true" className="w-5 h-5" />
                     </a>
-                    <a href={founder.socials.github} target="_blank" rel="noopener noreferrer" className="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center text-gray-400 hover:text-white hover:bg-gray-700 transition-all border border-white/5 hover:border-gray-500">
-                      <Github className="w-5 h-5" />
+                    <a aria-label={`${founder.name} on GitHub`} href={founder.socials.github} target="_blank" rel="noopener noreferrer" className="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center text-gray-400 hover:text-white hover:bg-gray-700 transition-all border border-white/5 hover:border-gray-500">
+                      <Github aria-hidden="true" className="w-5 h-5" />
                     </a>
                   </div>
                 </div>

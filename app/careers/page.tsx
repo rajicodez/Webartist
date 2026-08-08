@@ -1,6 +1,5 @@
 "use client";
 import React from "react";
-import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 import { TrendingUp, Users, Globe, Layers, Shuffle, Heart } from "lucide-react";
 import { motion } from "framer-motion";
@@ -88,7 +87,7 @@ export default function CareersPage() {
             className="text-center mb-16"
           >
             <h2 className="text-4xl font-bold text-white mb-4">Why Kindforth?</h2>
-            <p className="text-gray-400">More than just a job. It's a launchpad.</p>
+            <p className="text-gray-400">More than just a job. It&apos;s a launchpad.</p>
           </motion.div>
 
           <motion.div

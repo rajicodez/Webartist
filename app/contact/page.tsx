@@ -3,6 +3,7 @@ import { Phone, Mail } from "lucide-react";
 import WhatsAppIcon from "../../components/WhatsAppIcon";
 import Footer from "../../components/Footer";
 import ContactForm from "../../components/ContactForm";
+import { siteConfig } from "../../lib/seo";
 
 export default function ContactPage() {
   return (
@@ -18,7 +19,7 @@ export default function ContactPage() {
 
           <div className="text-center mb-16">
             <h1 className="text-5xl md:text-7xl font-bold mb-6">
-              Let's Build the <span className="text-blue-500">Future</span>
+              Let&apos;s Build the <span className="text-blue-500">Future</span>
             </h1>
             <p className="text-xl text-gray-400 max-w-2xl mx-auto">
               Ready to upgrade your digital presence? Fill out the form below, and our engineering team will get back to you within 24 hours.
@@ -42,11 +43,11 @@ export default function ContactPage() {
                 <span className="font-medium">WhatsApp</span>
               </a>
               <a
-                href="mailto:webartist65@gmail.com"
+                href={`mailto:${siteConfig.email}`}
                 className="inline-flex items-center gap-3 px-5 py-3 rounded-full bg-white/5 border border-white/10 text-gray-300 hover:text-white hover:border-blue-500/50 hover:bg-white/10 transition-all duration-300"
               >
                 <Mail className="w-4 h-4 text-blue-500" />
-                <span className="font-medium">webartist65@gmail.com</span>
+                <span className="font-medium">{siteConfig.email}</span>
               </a>
             </div>
           </div>

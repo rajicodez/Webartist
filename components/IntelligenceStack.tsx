@@ -1,6 +1,7 @@
 "use client";
 import { motion } from "framer-motion";
-import { Database, BrainCircuit, MessageSquare, Zap } from "lucide-react";
+import { Database, BrainCircuit, MessageSquare } from "lucide-react";
+import type { LucideIcon } from "lucide-react";
 
 export default function IntelligenceStack() {
   return (
@@ -14,7 +15,7 @@ export default function IntelligenceStack() {
         {/* HEADER */}
         <div className="text-center mb-20">
           <h2 className="text-3xl md:text-5xl font-bold mb-6 tracking-tight">
-            We don't just write code. <br />
+            We don&apos;t just write code. <br />
             We build <span className="text-blue-500">Digital Employees.</span>
           </h2>
           <p className="text-gray-400 max-w-2xl mx-auto text-lg">
@@ -76,11 +77,25 @@ export default function IntelligenceStack() {
 }
 
 // --- SUB-COMPONENT ---
-function StackCard({ step, title, subtitle, desc, icon: Icon, color, tags, isCore, align }: any) {
+type StackColor = "blue" | "purple" | "cyan";
+
+type StackCardProps = {
+  step: string;
+  title: string;
+  subtitle: string;
+  desc: string;
+  icon: LucideIcon;
+  color: StackColor;
+  tags: string[];
+  isCore?: boolean;
+  align: "left" | "right";
+};
+
+function StackCard({ step, title, subtitle, desc, icon: Icon, color, tags, isCore, align }: StackCardProps) {
   // Mobile: Always Left Aligned. Desktop: Alternating.
   const isRight = align === "right";
 
-  const colors: any = {
+  const colors: Record<StackColor, string> = {
     blue: "border-blue-500/20 bg-blue-500/5 hover:border-blue-500/50 text-blue-400",
     purple: "border-purple-500/20 bg-purple-500/5 hover:border-purple-500/50 text-purple-400",
     cyan: "border-cyan-500/20 bg-cyan-500/5 hover:border-cyan-500/50 text-cyan-400",
@@ -109,6 +124,7 @@ function StackCard({ step, title, subtitle, desc, icon: Icon, color, tags, isCor
               <Icon size={24} />
             </div>
             <div>
+              <span className="text-[10px] font-mono text-gray-500">LAYER {step}</span>
               <h3 className="text-xl md:text-2xl font-bold text-white">{title}</h3>
               <p className="text-xs md:text-sm font-mono uppercase tracking-wider opacity-70">{subtitle}</p>
             </div>

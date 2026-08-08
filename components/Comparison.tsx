@@ -1,16 +1,11 @@
 "use client";
 import { useState } from "react";
+import type { CSSProperties } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { XCircle, CheckCircle, Cpu, ServerCrash, ArrowRight, Activity, Users, FileWarning } from "lucide-react"; // Added new icons
+import { XCircle, CheckCircle, Cpu, ArrowRight, Users, FileWarning } from "lucide-react";
+import type { LucideIcon } from "lucide-react";
 
-// --- CUSTOM CSS FOR GLITCH TEXT ---
-const GlitchText = ({ children }: { children: React.ReactNode }) => (
-  <span className="relative inline-block">
-    <span className="absolute top-0 left-0 -ml-[2px] text-red-500/50 opacity-50 animate-pulse">{children}</span>
-    <span className="absolute top-0 left-0 ml-[2px] text-blue-500/50 opacity-50 animate-pulse delay-75">{children}</span>
-    <span className="relative z-10">{children}</span>
-  </span>
-);
+const shimmerStyle = { "--shimmer-angle": "0deg" } as CSSProperties;
 
 export default function Comparison() {
   // State for Mobile Toggle (False = Old Way, True = New Way)
@@ -79,7 +74,7 @@ export default function Comparison() {
                   className="absolute inset-0 rounded-[2rem] bg-gradient-to-b from-[#0d1117] to-[#050505] border border-blue-500/30 p-8 flex flex-col items-center text-center overflow-hidden"
                 >
                    {/* Rotating Border Effect */}
-                   <div className="absolute inset-0 rounded-[2rem] p-[1px] bg-[conic-gradient(from_var(--shimmer-angle),theme(colors.blue.600)_0%,theme(colors.purple.600)_50%,theme(colors.blue.600)_100%)] animate-[shimmer_4s_linear_infinite] opacity-100 [mask-image:linear-gradient(black,black),linear-gradient(black,black)] [-webkit-mask-clip:content-box,border-box] [-webkit-mask-composite:xor] mask-composite:exclude" style={{ "--shimmer-angle": "0deg" } as any} />
+                   <div className="absolute inset-0 rounded-[2rem] p-[1px] bg-[conic-gradient(from_var(--shimmer-angle),theme(colors.blue.600)_0%,theme(colors.purple.600)_50%,theme(colors.blue.600)_100%)] animate-[shimmer_4s_linear_infinite] opacity-100 [mask-image:linear-gradient(black,black),linear-gradient(black,black)] [-webkit-mask-clip:content-box,border-box] [-webkit-mask-composite:xor] mask-composite:exclude" style={shimmerStyle} />
                    
                    <div className="relative z-10">
                      <div className="w-16 h-16 bg-blue-500/20 rounded-full flex items-center justify-center mx-auto mb-6 text-blue-400 ring-2 ring-blue-500/50 shadow-[0_0_30px_rgba(59,130,246,0.5)]">
@@ -161,7 +156,7 @@ export default function Comparison() {
 
           {/* RIGHT SIDE (DESKTOP) */}
           <div className="col-span-5 relative p-10 rounded-[2.5rem] bg-gradient-to-b from-[#0d1117] to-[#050505] overflow-hidden group hover:scale-[1.02] transition-transform duration-500 z-20">
-            <div className="absolute inset-0 rounded-[2.5rem] p-[1px] bg-[conic-gradient(from_var(--shimmer-angle),theme(colors.blue.600)_0%,theme(colors.purple.600)_50%,theme(colors.blue.600)_100%)] animate-[shimmer_4s_linear_infinite] opacity-100 [mask-image:linear-gradient(black,black),linear-gradient(black,black)] [-webkit-mask-clip:content-box,border-box] [-webkit-mask-composite:xor] mask-composite:exclude" style={{ "--shimmer-angle": "0deg" } as any} />
+            <div className="absolute inset-0 rounded-[2.5rem] p-[1px] bg-[conic-gradient(from_var(--shimmer-angle),theme(colors.blue.600)_0%,theme(colors.purple.600)_50%,theme(colors.blue.600)_100%)] animate-[shimmer_4s_linear_infinite] opacity-100 [mask-image:linear-gradient(black,black),linear-gradient(black,black)] [-webkit-mask-clip:content-box,border-box] [-webkit-mask-composite:xor] mask-composite:exclude" style={shimmerStyle} />
             <div className="absolute inset-0 bg-blue-600/10 blur-3xl opacity-40 group-hover:opacity-70 transition-opacity" />
             
             <div className="relative inline-flex items-center gap-2 bg-blue-600/20 px-4 py-1.5 rounded-full border border-blue-400/30 text-xs font-mono uppercase tracking-wider text-blue-300 mb-8 shadow-[0_0_20px_-5px_rgba(59,130,246,0.5)]">
@@ -200,7 +195,14 @@ export default function Comparison() {
 }
 
 // --- HELPERS ---
-const ComparisonItem = ({ icon: Icon, color, text, glow = false }: any) => (
+type ComparisonItemProps = {
+  icon: LucideIcon;
+  color: string;
+  text: string;
+  glow?: boolean;
+};
+
+const ComparisonItem = ({ icon: Icon, color, text, glow = false }: ComparisonItemProps) => (
   <li className="flex items-center gap-4 group/item">
     <div className={`${color} ${glow ? 'shadow-[0_0_15px_-5px_rgba(59,130,246,0.5)] group-hover/item:shadow-[0_0_25px_-5px_rgba(59,130,246,0.8)] transition-shadow' : ''} rounded-full p-1 shrink-0`}>
        <Icon size={20} />

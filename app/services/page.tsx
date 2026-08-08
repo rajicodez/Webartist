@@ -1,19 +1,13 @@
 "use client";
 import React from "react";
 import { motion } from "framer-motion";
-import {
-  Bot, Eye, LineChart, Share2, FileText, ShoppingCart,
-  Layout, Globe, BarChart3, ArrowRight, CheckCircle2,
-  Cpu, Code2, Rocket
-} from "lucide-react";
-import Navbar from "../../components/Navbar";
+import { Bot, Layout, Cpu } from "lucide-react";
+import type { LucideIcon } from "lucide-react";
 import Footer from "../../components/Footer";
 
 export default function ServicesPage() {
   return (
     <main className="min-h-screen bg-[#050505] text-white selection:bg-blue-500/30 font-sans">
-      <Navbar />
-
       {/* 1. HERO SECTION */}
       <section className="pt-32 pb-4 md:pt-48 md:pb-32 relative overflow-hidden">
         {/* Background Effects */}
@@ -184,14 +178,32 @@ export default function ServicesPage() {
 
 // --- SUB-COMPONENTS ---
 
-function ServiceCategory({ title, subtitle, description, items, icon: Icon, color, reverse }: any) {
-  const colors: any = {
+type ServiceColor = "blue" | "purple" | "green";
+
+type ServiceItem = {
+  title: string;
+  desc: string;
+  tags: string[];
+};
+
+type ServiceCategoryProps = {
+  title: string;
+  subtitle: string;
+  description: string;
+  items: ServiceItem[];
+  icon: LucideIcon;
+  color: ServiceColor;
+  reverse?: boolean;
+};
+
+function ServiceCategory({ title, subtitle, description, items, icon: Icon, color, reverse }: ServiceCategoryProps) {
+  const colors: Record<ServiceColor, string> = {
     blue: "text-blue-400 bg-blue-500/10 border-blue-500/20",
     purple: "text-purple-400 bg-purple-500/10 border-purple-500/20",
     green: "text-emerald-400 bg-emerald-500/10 border-emerald-500/20",
   };
 
-  const cardHoverBorders: any = {
+  const cardHoverBorders: Record<ServiceColor, string> = {
     blue: "hover:border-blue-500/30",
     purple: "hover:border-purple-500/30",
     green: "hover:border-emerald-500/30",
@@ -211,14 +223,11 @@ function ServiceCategory({ title, subtitle, description, items, icon: Icon, colo
         <p className="text-gray-400 text-lg leading-relaxed mb-8">
           {description}
         </p>
-        <button className="text-white hover:text-gray-300 font-medium flex items-center gap-2 group transition-colors self-start">
-          Learn More <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-        </button>
       </div>
 
       {/* Cards Side */}
       <div className="lg:w-2/3 grid grid-cols-1 md:grid-cols-2 gap-6">
-        {items.map((item: any, idx: number) => (
+        {items.map((item, idx) => (
           <motion.div
             key={idx}
             initial={{ opacity: 0, y: 20 }}
@@ -243,7 +252,7 @@ function ServiceCategory({ title, subtitle, description, items, icon: Icon, colo
   );
 }
 
-function ProcessStep({ number, title, desc }: any) {
+function ProcessStep({ number, title, desc }: { number: string; title: string; desc: string }) {
   return (
     <div className="relative p-6 border-l border-white/10 hover:border-blue-500/50 transition-colors group">
       <span className="text-6xl font-bold text-white/5 absolute -top-4 left-4 group-hover:text-white/10 transition-colors select-none">

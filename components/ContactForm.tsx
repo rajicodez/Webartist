@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { Send, CheckCircle, Loader2 } from "lucide-react";
+import Link from "next/link";
 
 export default function ContactForm() {
   const [formState, setFormState] = useState({
@@ -93,8 +94,9 @@ export default function ContactForm() {
         {/* Name & Email Row */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div className="group">
-            <label className={labelClasses}>Your Name</label>
+            <label htmlFor="contact-name" className={labelClasses}>Your Name</label>
             <input
+              id="contact-name"
               type="text"
               name="name"
               value={formState.name}
@@ -105,8 +107,9 @@ export default function ContactForm() {
             />
           </div>
           <div className="group">
-            <label className={labelClasses}>Email Address</label>
+            <label htmlFor="contact-email" className={labelClasses}>Email Address</label>
             <input
+              id="contact-email"
               type="email"
               name="email"
               value={formState.email}
@@ -120,8 +123,9 @@ export default function ContactForm() {
 
         {/* Company / Website */}
         <div>
-          <label className={labelClasses}>Company / Website (Optional)</label>
+          <label htmlFor="contact-company" className={labelClasses}>Company / Website (Optional)</label>
           <input
+            id="contact-company"
             type="text"
             name="company"
             value={formState.company}
@@ -133,8 +137,9 @@ export default function ContactForm() {
 
         {/* Message Area */}
         <div>
-          <label className={labelClasses}>Tell us about your project</label>
+          <label htmlFor="contact-message" className={labelClasses}>Tell us about your project</label>
           <textarea
+            id="contact-message"
             name="message"
             value={formState.message}
             onChange={handleChange}
@@ -166,7 +171,9 @@ export default function ContactForm() {
         </motion.button>
 
         <p className="text-center text-xs text-gray-600 mt-4">
-          By submitting this form, you agree to our privacy policy. We respect your data.
+          By submitting this form, you agree to our{" "}
+          <Link href="/privacy" className="underline hover:text-gray-400">privacy policy</Link>.
+          We respect your data.
         </p>
 
       </form>

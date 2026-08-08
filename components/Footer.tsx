@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { Facebook, Linkedin, Instagram, Mail, ArrowRight } from "lucide-react";
 import WhatsAppIcon from "./WhatsAppIcon";
 import Link from "next/link";
+import { siteConfig } from "../lib/seo";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -42,15 +43,12 @@ export default function Footer() {
             Stop building digital brochures. Start building intelligent platforms that grow your business.
           </motion.p>
 
-          <Link href="/contact">
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="group relative px-8 py-4 md:px-10 md:py-5 bg-blue-600 hover:bg-blue-500 text-white text-lg md:text-xl font-bold rounded-full shadow-[0_0_40px_-10px_rgba(37,99,235,0.5)] transition-all flex items-center gap-3"
-            >
+          <Link
+            href="/contact"
+            className="group relative px-8 py-4 md:px-10 md:py-5 bg-blue-600 hover:bg-blue-500 text-white text-lg md:text-xl font-bold rounded-full shadow-[0_0_40px_-10px_rgba(37,99,235,0.5)] transition-all flex items-center gap-3 hover:scale-105"
+          >
               Start Your Project
               <ArrowRight className="w-5 h-5 md:w-6 md:h-6 group-hover:translate-x-1 transition-transform" />
-            </motion.button>
           </Link>
 
           <p className="mt-6 text-sm md:text-base text-gray-500">
@@ -78,14 +76,15 @@ export default function Footer() {
           <div className="flex justify-center">
             <div className="flex gap-4 md:gap-6">
               {[
-                { icon: <WhatsAppIcon className="w-5 h-5" />, href: "https://wa.me/94717802777" },
-                { icon: <Linkedin className="w-5 h-5" />, href: "https://www.linkedin.com/company/kindforth/" },
-                { icon: <Mail className="w-5 h-5" />, href: "mailto:webartist65@gmail.com" },
-                { icon: <Instagram className="w-5 h-5" />, href: "https://www.instagram.com/kindforth/" },
-                { icon: <Facebook className="w-5 h-5" />, href: "https://www.facebook.com/share/1DLNEwfB9n/" },
+                { label: "Contact Kindforth on WhatsApp", icon: <WhatsAppIcon className="w-5 h-5" />, href: "https://wa.me/94717802777" },
+                { label: "Kindforth on LinkedIn", icon: <Linkedin className="w-5 h-5" />, href: siteConfig.social.linkedin },
+                { label: "Email Kindforth", icon: <Mail className="w-5 h-5" />, href: `mailto:${siteConfig.email}` },
+                { label: "Kindforth on Instagram", icon: <Instagram className="w-5 h-5" />, href: siteConfig.social.instagram },
+                { label: "Kindforth on Facebook", icon: <Facebook className="w-5 h-5" />, href: siteConfig.social.facebook },
               ].map((social, index) => (
                 <a
                   key={index}
+                  aria-label={social.label}
                   href={social.href}
                   target="_blank"
                   rel="noreferrer"
@@ -101,8 +100,8 @@ export default function Footer() {
           <div className="flex flex-col md:flex-row justify-center md:justify-end items-center gap-2 md:gap-4 text-xs text-gray-600">
             <p>© {currentYear} Kindforth.</p>
             <div className="flex gap-4">
-              <a href="#" className="hover:text-gray-400 transition-colors">Privacy</a>
-              <a href="#" className="hover:text-gray-400 transition-colors">Terms</a>
+              <Link href="/privacy" className="hover:text-gray-400 transition-colors">Privacy</Link>
+              <Link href="/terms" className="hover:text-gray-400 transition-colors">Terms</Link>
             </div>
           </div>
 

@@ -1,19 +1,29 @@
 "use client";
-import React, { Suspense } from "react";
+import React, { useEffect, useState } from "react";
+import dynamic from "next/dynamic";
 import { motion } from "framer-motion";
-import { ArrowRight, Cpu, Network } from "lucide-react";
+import { ArrowRight, Network } from "lucide-react";
 import Link from "next/link";
-const SplineScene = React.lazy(() => import("./SplineScene"));
+const SplineScene = dynamic(() => import("./SplineScene"), { ssr: false });
 
 export default function Hero() {
+  const [showSpline, setShowSpline] = useState(false);
+
+  useEffect(() => {
+    const desktopQuery = window.matchMedia("(min-width: 768px)");
+    const updateSpline = () => setShowSpline(desktopQuery.matches);
+
+    updateSpline();
+    desktopQuery.addEventListener("change", updateSpline);
+    return () => desktopQuery.removeEventListener("change", updateSpline);
+  }, []);
+
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-black text-white pb-24 md:pb-0">
 
       {/* 1. ANIMATED 3D BACKGROUND */}
       <div className="hidden md:block absolute inset-0 z-0">
-        <Suspense fallback={<div className="w-full h-full bg-black/90" />}>
-          <SplineScene />
-        </Suspense>
+        {showSpline ? <SplineScene /> : <div className="w-full h-full bg-black/90" />}
         {/* Overlay to ensure text is readable over the 3D scene */}
         <div className="absolute inset-0 bg-black/10 pointer-events-none" />
         <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-black to-transparent pointer-events-none" />
@@ -21,6 +31,10 @@ export default function Hero() {
 
       {/* 2. MAIN CONTENT */}
       <div className="relative z-10 max-w-7xl mx-auto px-6 text-center mt-24 md:mt-20">
+
+        <p className="text-sm md:text-base font-mono uppercase tracking-[0.24em] text-blue-300 mb-5">
+          Sri Lanka-based AI engineering company
+        </p>
 
         {/* Headline */}
         <h1 className="text-5xl md:text-8xl font-display font-bold tracking-tighter mb-5 md:mb-8 leading-tight">
@@ -32,7 +46,7 @@ export default function Hero() {
 
         {/* Subheadline */}
         <p className="text-lg md:text-2xl text-gray-400 max-w-3xl mx-auto leading-relaxed mb-8 md:mb-12">
-          We are an AI development agency. We build Custom Chatbots, Computer Vision Systems, and Automated Workflows that save your business time and money.
+          We build custom AI chatbots, computer vision systems, and automated workflows for companies in Sri Lanka and worldwide.
         </p>
 
         {/* Buttons */}

@@ -31,3 +31,31 @@ body {
     --shimmer-angle: 360deg;
   }
 }
+/* Long-form legal pages use explicit typography without an extra plugin. */
+.legal-content h1 {
+  margin: 1rem 0 2rem;
+  font-family: var(--font-outfit), sans-serif;
+  font-size: clamp(2.75rem, 8vw, 5rem);
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  line-height: 1;
+}
+
+.legal-content h2 {
+  margin: 3rem 0 1rem;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.legal-content p {
+  margin: 1rem 0;
+  color: rgb(156 163 175);
+  font-size: 1.0625rem;
+  line-height: 1.8;
+}
+
+.legal-content a {
+  color: rgb(96 165 250);
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}

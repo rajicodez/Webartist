@@ -4,8 +4,7 @@ import { useSearchParams } from "next/navigation";
 import { motion } from "framer-motion";
 import { UploadCloud, Send, CheckCircle, Loader2, FileText, ArrowLeft } from "lucide-react";
 import Link from "next/link";
-// 👇 FIX: Changed from "@/" to relative path to match your other files
-import Navbar from "../../components/Navbar"; 
+import { siteConfig } from "../../lib/seo";
 
 function ApplyForm() {
   const searchParams = useSearchParams();
@@ -13,6 +12,7 @@ function ApplyForm() {
 
   const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
   const [fileName, setFileName] = useState<string | null>(null);
+  const accessKey = process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY;
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
@@ -22,11 +22,14 @@ function ApplyForm() {
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    if (!accessKey) {
+      setStatus("error");
+      return;
+    }
     setStatus("submitting");
 
     const formData = new FormData(e.currentTarget);
-    // ⚠️ REPLACE WITH YOUR ACTUAL WEB3FORMS ACCESS KEY
-    formData.append("access_key", "YOUR-ACCESS-KEY-HERE"); 
+    formData.append("access_key", accessKey);
     formData.append("subject", `New Job Application: ${role}`);
 
     try {
@@ -41,7 +44,7 @@ function ApplyForm() {
       } else {
         setStatus("error");
       }
-    } catch (err) {
+    } catch {
       setStatus("error");
     }
   }
@@ -71,8 +74,6 @@ function ApplyForm() {
 
   return (
     <div className="min-h-screen bg-black text-white selection:bg-blue-500/30">
-      <Navbar />
-      
       <div className="max-w-3xl mx-auto px-6 pt-32 pb-20">
         
         <Link href="/careers" className="inline-flex items-center text-gray-400 hover:text-white mb-8 transition-colors">
@@ -94,26 +95,27 @@ function ApplyForm() {
             {/* Name & Email */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="space-y-2">
-                <label className="text-sm font-medium text-gray-400 ml-1">Full Name</label>
-                <input required type="text" name="name" placeholder="John Doe" className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-blue-500 transition-all" />
+                <label htmlFor="application-name" className="text-sm font-medium text-gray-400 ml-1">Full Name</label>
+                <input id="application-name" required type="text" name="name" placeholder="John Doe" className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-blue-500 transition-all" />
               </div>
               <div className="space-y-2">
-                <label className="text-sm font-medium text-gray-400 ml-1">Email Address</label>
-                <input required type="email" name="email" placeholder="john@example.com" className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-blue-500 transition-all" />
+                <label htmlFor="application-email" className="text-sm font-medium text-gray-400 ml-1">Email Address</label>
+                <input id="application-email" required type="email" name="email" placeholder="john@example.com" className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-blue-500 transition-all" />
               </div>
             </div>
 
             {/* Portfolio Link */}
             <div className="space-y-2">
-              <label className="text-sm font-medium text-gray-400 ml-1">Portfolio / LinkedIn / GitHub</label>
-              <input type="url" name="portfolio" placeholder="https://..." className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-blue-500 transition-all" />
+              <label htmlFor="application-portfolio" className="text-sm font-medium text-gray-400 ml-1">Portfolio / LinkedIn / GitHub</label>
+              <input id="application-portfolio" type="url" name="portfolio" placeholder="https://..." className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-blue-500 transition-all" />
             </div>
 
             {/* CV Upload Area */}
             <div className="space-y-2">
-              <label className="text-sm font-medium text-gray-400 ml-1">Upload CV (PDF)</label>
+              <label htmlFor="application-cv" className="text-sm font-medium text-gray-400 ml-1">Upload CV (PDF)</label>
               <div className="relative group">
-                <input 
+                  <input
+                    id="application-cv"
                   type="file" 
                   name="attachment" 
                   accept=".pdf,.doc,.docx"
@@ -141,19 +143,28 @@ function ApplyForm() {
 
             {/* Message */}
             <div className="space-y-2">
-              <label className="text-sm font-medium text-gray-400 ml-1">Why do you want to join us?</label>
-              <textarea required name="message" rows={4} className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-blue-500 transition-all resize-none" />
+              <label htmlFor="application-message" className="text-sm font-medium text-gray-400 ml-1">Why do you want to join us?</label>
+              <textarea id="application-message" required name="message" rows={4} className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-blue-500 transition-all resize-none" />
             </div>
 
             <button 
               type="submit" 
-              disabled={status === "submitting"}
+              disabled={status === "submitting" || !accessKey}
               className="w-full bg-white text-black font-bold py-4 rounded-xl hover:bg-gray-200 transition-all flex items-center justify-center gap-2"
             >
               {status === "submitting" ? <Loader2 className="animate-spin" /> : <>Submit Application <Send size={18} /></>}
             </button>
             
-            {status === "error" && <p className="text-red-400 text-center text-sm">Something went wrong. Please try again.</p>}
+            {!accessKey && (
+              <p className="text-amber-300 text-center text-sm">
+                Online applications are temporarily unavailable. Please email your CV to{" "}
+                <a className="underline" href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a>.
+              </p>
+            )}
+            {status === "error" && accessKey && <p className="text-red-400 text-center text-sm">Something went wrong. Please try again.</p>}
+            <p className="text-xs text-gray-500 text-center">
+              By applying, you acknowledge our <Link href="/privacy" className="underline">privacy policy</Link>.
+            </p>
           </form>
         </motion.div>
       </div>

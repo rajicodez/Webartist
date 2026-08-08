@@ -28,6 +28,7 @@ export default function ServiceStrip() {
   return (
     <section className="bg-white/5 border-y border-white/10 py-12 relative z-20">
       <div className="max-w-7xl mx-auto px-6">
+        <h2 className="sr-only">AI development and automation services</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {services.map((s, i) => (
             <div key={i} className="flex flex-col gap-3 group">

@@ -1,4 +1,5 @@
 // Navbar removed (in layout)
+import type { Metadata } from "next";
 import Hero from "../components/Hero"; // Your new Cinematic Hero
 import ServiceStrip from "../components/ServiceStrip";
 import TechStack from "../components/TechStack";
@@ -6,6 +7,13 @@ import IntelligenceStack from "../components/IntelligenceStack"; // The new Diag
 import Comparison from "../components/Comparison"; // The "Manual vs Autonomous" toggle
 import Benefits from "../components/Benefits"; // The "ROI" section
 import Footer from "../components/Footer";
+import { siteConfig } from "../lib/seo";
+
+export const metadata: Metadata = {
+  title: { absolute: "AI Development & Automation Company in Sri Lanka | Kindforth" },
+  description: siteConfig.description,
+  alternates: { canonical: "/" },
+};
 
 // NOTE: We temporarily removed Services, UseCases, Process, TechStack, Work, FAQ.
 // We will move them to /intelligence, /solutions, and /work pages next.
