@@ -21,42 +21,42 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         
         {/* CTA SECTION */}
-        <div className="flex flex-col items-center text-center mb-16 md:mb-24">
+        <div className="mb-16 flex flex-col items-center text-center md:mb-24">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
-             <h2 className="text-5xl md:text-9xl font-bold tracking-tighter text-white mb-6 md:mb-8">
+            <h2 className="mb-6 text-5xl font-bold tracking-tighter text-white md:mb-8 md:text-9xl">
               READY TO <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">
+              <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
                 UPGRADE?
               </span>
             </h2>
           </motion.div>
 
-          <motion.p 
+          <motion.p
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-lg md:text-xl text-gray-400 max-w-2xl mb-8 md:mb-12"
+            className="mb-8 max-w-2xl text-lg text-gray-400 md:mb-12 md:text-xl"
           >
             Stop building digital brochures. Start building intelligent platforms that grow your business.
           </motion.p>
 
           <Link
             href="/contact"
-            className="group relative px-8 py-4 md:px-10 md:py-5 bg-blue-600 hover:bg-blue-500 text-white text-lg md:text-xl font-bold rounded-full shadow-[0_0_40px_-10px_rgba(37,99,235,0.5)] transition-all flex items-center gap-3 hover:scale-105"
+            className="group relative flex items-center gap-3 rounded-full bg-blue-600 px-8 py-4 text-lg font-bold text-white shadow-[0_0_40px_-10px_rgba(37,99,235,0.5)] transition-all hover:scale-105 hover:bg-blue-500 md:px-10 md:py-5 md:text-xl"
           >
-              Start Your Project
-              <ArrowRight className="w-5 h-5 md:w-6 md:h-6 group-hover:translate-x-1 transition-transform" />
+            Start Your Project
+            <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1 md:h-6 md:w-6" />
           </Link>
 
-          <p className="mt-6 text-sm md:text-base text-gray-500">
+          <p className="mt-6 text-sm text-gray-500 md:text-base">
             Or call us{" "}
             <a
               href="tel:+94717802777"
-              className="text-gray-300 hover:text-blue-400 font-medium transition-colors"
+              className="font-medium text-gray-300 transition-colors hover:text-blue-400"
             >
               +94 71 780 2777
             </a>
