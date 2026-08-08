@@ -3,6 +3,7 @@ import { Inter, Outfit } from "next/font/google";
 import "./globals.css";
 import Navbar from "../components/Navbar";
 import { Analytics } from '@vercel/analytics/next';
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import FloatingWhatsAppButton from "../components/FloatingWhatsAppButton";
 import { GoogleTagManager } from '@next/third-parties/google'
 import { organizationSchema, siteConfig } from "../lib/seo";
@@ -57,6 +58,7 @@ export default function RootLayout({
         {children}
         <FloatingWhatsAppButton />
         <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );
