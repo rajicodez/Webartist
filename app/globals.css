@@ -40,6 +40,51 @@ body {
     --shimmer-angle: 360deg;
   }
 }
+
+/* Desktop intelligence sequence: JavaScript updates only transform and opacity
+   on scroll. There is no permanent animation loop consuming resources. */
+.intelligence-signal {
+  opacity: 0;
+}
+
+@media (min-width: 768px) and (prefers-reduced-motion: no-preference) {
+  .intelligence-flow-line {
+    transform-origin: top;
+    transform: translateX(-50%) scaleY(0.025);
+    will-change: transform;
+  }
+
+  .intelligence-signal {
+    will-change: transform, opacity;
+  }
+
+  .intelligence-card-energy,
+  .intelligence-sequence-node {
+    opacity: 0.22;
+    transform: scale(0.84);
+    transition: opacity 320ms ease, transform 320ms ease, box-shadow 320ms ease;
+  }
+
+  .intelligence-sequence-card {
+    transition: border-color 320ms ease, transform 320ms ease, box-shadow 320ms ease;
+  }
+
+  .intelligence-sequence-step[data-sequence-active="true"] .intelligence-card-energy,
+  .intelligence-sequence-step[data-sequence-active="true"] .intelligence-sequence-node {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  .intelligence-sequence-step[data-sequence-active="true"] .intelligence-sequence-node {
+    border-color: rgb(191 219 254);
+    box-shadow: 0 0 28px 6px rgb(59 130 246 / 0.48);
+  }
+
+  .intelligence-sequence-step[data-sequence-active="true"] .intelligence-sequence-card {
+    transform: translateY(-6px);
+    box-shadow: 0 28px 80px -36px rgb(59 130 246 / 0.5);
+  }
+}
 /* Long-form legal pages use explicit typography without an extra plugin. */
 .legal-content h1 {
   margin: 1rem 0 2rem;
