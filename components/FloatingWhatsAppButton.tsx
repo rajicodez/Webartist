@@ -33,7 +33,7 @@ export default function FloatingWhatsAppButton() {
     >
       <span
         aria-hidden="true"
-        className="absolute inset-0 rounded-full border border-[#70ef9f]/70 motion-safe:animate-ping"
+        className="absolute inset-0 rounded-full border border-[#70ef9f]/70 motion-safe:animate-ping md:animate-none md:opacity-40"
       />
       <span
         aria-hidden="true"

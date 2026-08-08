@@ -1,5 +1,7 @@
 "use client";
 
+import { useEffect, useRef, useState } from "react";
+
 const technologies = [
   { name: "Python", logo: "https://cdn.simpleicons.org/python/white" },
   { name: "Next.js", logo: "https://cdn.simpleicons.org/nextdotjs/white" },
@@ -18,8 +20,24 @@ const technologies = [
 ];
 
 export default function TechStack() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const [isVisible, setIsVisible] = useState(true);
+
+  useEffect(() => {
+    const section = sectionRef.current;
+    if (!section) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => setIsVisible(entry.isIntersecting),
+      { rootMargin: "160px 0px" },
+    );
+
+    observer.observe(section);
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <section className="py-10 md:py-20 bg-black overflow-hidden border-y border-white/5">
+    <section ref={sectionRef} className="py-10 md:py-20 bg-black overflow-hidden border-y border-white/5">
 
       <div className="text-center mb-10">
         <p className="text-sm font-mono text-gray-500 uppercase tracking-widest">
@@ -29,7 +47,10 @@ export default function TechStack() {
 
       {/* Row 1: Moving Left */}
       <div className="relative flex overflow-hidden group">
-        <div className="flex animate-marquee whitespace-nowrap gap-16 items-center">
+        <div
+          className="flex animate-marquee whitespace-nowrap gap-16 items-center"
+          style={{ animationPlayState: isVisible ? "running" : "paused" }}
+        >
           {[...technologies, ...technologies].map((tech, index) => (
             <div key={index} className="flex items-center gap-4 group/item cursor-default">
 

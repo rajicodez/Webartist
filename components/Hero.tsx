@@ -19,7 +19,7 @@ export default function Hero() {
   }, []);
 
   return (
-    <section className="relative flex min-h-[100svh] items-center justify-center overflow-hidden bg-black pb-12 pt-28 text-white min-[361px]:pt-32 md:min-h-screen md:pb-0 md:pt-0">
+    <section className="relative flex min-h-[100svh] items-center justify-center overflow-hidden bg-black pb-12 pt-24 text-white min-[361px]:pt-32 md:min-h-screen md:pb-0 md:pt-0">
 
       {/* 1. ANIMATED 3D BACKGROUND */}
       <div className="hidden md:block absolute inset-0 z-0">
@@ -32,12 +32,8 @@ export default function Hero() {
       {/* 2. MAIN CONTENT */}
       <div className="relative z-10 mx-auto mt-0 max-w-7xl px-6 text-center md:mt-20">
 
-        <p className="mb-4 text-xs font-mono uppercase tracking-[0.18em] text-blue-300 min-[361px]:mb-5 min-[361px]:text-sm min-[361px]:tracking-[0.24em] md:text-base">
-          Technology partner for Sri Lankan SMEs
-        </p>
-
         {/* Headline */}
-        <h1 className="mb-4 text-[2.55rem] font-display font-bold leading-tight tracking-tighter min-[361px]:mb-5 min-[361px]:text-5xl md:mb-8 md:text-8xl">
+        <h1 className="mb-3 text-[2.55rem] font-display font-bold leading-tight tracking-tighter min-[361px]:mb-5 min-[361px]:text-5xl md:mb-8 md:text-8xl">
           Engineering the <br />
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-500 to-blue-600 animate-gradient-x">
             Autonomous Enterprise
@@ -45,7 +41,7 @@ export default function Hero() {
         </h1>
 
         {/* Subheadline */}
-        <p className="mx-auto mb-7 max-w-3xl text-base leading-relaxed text-gray-400 min-[361px]:text-lg md:mb-12 md:text-2xl">
+        <p className="mx-auto mb-5 max-w-3xl text-base leading-relaxed text-gray-400 min-[361px]:mb-7 min-[361px]:text-lg md:mb-12 md:text-2xl">
           We build AI systems, business automation, custom software, web applications, and search growth engines for ambitious companies in Sri Lanka and beyond.
         </p>
 

@@ -17,6 +17,41 @@ body {
   overflow-x: hidden;
 }
 
+/* Route-level reveal. The persistent navigation and contact control live
+   outside app/template.tsx, so they remain steady between pages. */
+.page-transition-shell {
+  position: relative;
+  isolation: isolate;
+  animation: page-enter 420ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  transform-origin: 50% 12%;
+}
+
+@keyframes page-enter {
+  from {
+    opacity: 0.2;
+    transform: translateY(12px) scale(0.995);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page-transition-shell {
+    animation: none;
+  }
+}
+
+/* Avoid layout and paint work for desktop homepage sections until they approach
+   the viewport. The content remains in the HTML and accessible to search engines. */
+@media (min-width: 768px) {
+  .home-page > :not(:first-child) {
+    content-visibility: auto;
+    contain-intrinsic-size: auto 900px;
+  }
+}
+
 @property --shimmer-angle {
   syntax: '<angle>';
   initial-value: 0deg;
@@ -29,6 +64,51 @@ body {
   }
   100% {
     --shimmer-angle: 360deg;
+  }
+}
+
+/* Desktop intelligence sequence: JavaScript updates only transform and opacity
+   on scroll. There is no permanent animation loop consuming resources. */
+.intelligence-signal {
+  opacity: 0;
+}
+
+@media (min-width: 768px) and (prefers-reduced-motion: no-preference) {
+  .intelligence-flow-line {
+    transform-origin: top;
+    transform: translateX(-50%) scaleY(0.025);
+    will-change: transform;
+  }
+
+  .intelligence-signal {
+    will-change: transform, opacity;
+  }
+
+  .intelligence-card-energy,
+  .intelligence-sequence-node {
+    opacity: 0.22;
+    transform: scale(0.84);
+    transition: opacity 320ms ease, transform 320ms ease, box-shadow 320ms ease;
+  }
+
+  .intelligence-sequence-card {
+    transition: border-color 320ms ease, transform 320ms ease, box-shadow 320ms ease;
+  }
+
+  .intelligence-sequence-step[data-sequence-active="true"] .intelligence-card-energy,
+  .intelligence-sequence-step[data-sequence-active="true"] .intelligence-sequence-node {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  .intelligence-sequence-step[data-sequence-active="true"] .intelligence-sequence-node {
+    border-color: rgb(191 219 254);
+    box-shadow: 0 0 28px 6px rgb(59 130 246 / 0.48);
+  }
+
+  .intelligence-sequence-step[data-sequence-active="true"] .intelligence-sequence-card {
+    transform: translateY(-6px);
+    box-shadow: 0 28px 80px -36px rgb(59 130 246 / 0.5);
   }
 }
 /* Long-form legal pages use explicit typography without an extra plugin. */
