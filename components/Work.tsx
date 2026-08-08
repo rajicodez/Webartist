@@ -161,6 +161,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
 
   return (
     <motion.div
+      id={project.title.toLowerCase().replace(/\s+/g, "-")}
       initial={{ opacity: 0, y: 50 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.2 }}
