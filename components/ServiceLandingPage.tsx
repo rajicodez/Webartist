@@ -151,7 +151,10 @@ export default function ServiceLandingPage({ service }: { service: ServicePageDa
         </div>
       </section>
 
-      <Testimonials heading={`What clients say about Kindforth's ${service.navLabel.toLowerCase()}`} />
+      <Testimonials
+        heading={`What clients say about Kindforth's ${service.navLabel.toLowerCase()}`}
+        service={service.key}
+      />
 
       <section className="px-6 py-24 md:py-32" aria-labelledby="faq-heading">
         <div className="mx-auto max-w-4xl">
