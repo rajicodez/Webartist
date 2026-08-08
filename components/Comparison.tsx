@@ -16,7 +16,7 @@ export default function Comparison() {
       
       {/* Background elements (Shared) */}
       <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff05_1px,transparent_1px),linear-gradient(to_bottom,#ffffff05_1px,transparent_1px)] bg-[size:32px_32px] md:bg-[size:64px_64px] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_0%,#000_70%,transparent_100%)] pointer-events-none" />
-      <div className="hidden lg:block absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-1 h-full bg-blue-500/50 blur-[150px] pointer-events-none" />
+      <div className="pointer-events-none absolute left-1/2 top-1/2 hidden h-4/5 w-40 -translate-x-1/2 -translate-y-1/2 bg-[radial-gradient(ellipse_at_center,rgba(59,130,246,0.12),transparent_70%)] lg:block" />
 
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         
@@ -127,7 +127,7 @@ export default function Comparison() {
           
           {/* LEFT SIDE (DESKTOP) */}
           <div className="col-span-5 group relative p-10 rounded-[2.5rem] border border-white/5 bg-[#0a0a0a] overflow-hidden">
-            <div className="absolute inset-0 opacity-[0.03] bg-[url('https://grainy-gradients.vercel.app/noise.svg') animate-pulse]" />
+            <div className="absolute inset-0 opacity-[0.03] bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
             <div className="inline-block bg-[#1a1a1a] px-4 py-1.5 rounded-full border border-red-500/20 text-xs font-mono uppercase tracking-wider text-red-400 mb-8">⚫ The Old Way</div>
             <div className="w-full h-52 bg-[#111] rounded-2xl mb-10 p-6 flex flex-col justify-center items-center border border-white/5 relative grayscale opacity-70 group-hover:opacity-100 transition-opacity">
                <FileWarning size={48} className="text-gray-600 mb-4" />
@@ -145,23 +145,19 @@ export default function Comparison() {
           {/* --- CENTER DIVIDER --- */}
           <div className="hidden lg:flex col-span-1 items-center justify-center relative">
              <div className="absolute h-full w-[1px] bg-gradient-to-b from-transparent via-blue-500 to-transparent opacity-50" />
-             <motion.div 
-               animate={{ x: [0, 10, 0] }}
-               transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-               className="z-10 bg-[#050505] p-3 rounded-full border border-blue-500/50 shadow-[0_0_30px_-5px_rgba(59,130,246,0.6)]"
-             >
+             <div className="z-10 rounded-full border border-blue-500/50 bg-[#050505] p-3 shadow-[0_0_30px_-5px_rgba(59,130,246,0.6)]">
                  <ArrowRight className="text-blue-400" />
-             </motion.div>
+             </div>
           </div>
 
           {/* RIGHT SIDE (DESKTOP) */}
           <div className="col-span-5 relative p-10 rounded-[2.5rem] bg-gradient-to-b from-[#0d1117] to-[#050505] overflow-hidden group hover:scale-[1.02] transition-transform duration-500 z-20">
-            <div className="absolute inset-0 rounded-[2.5rem] p-[1px] bg-[conic-gradient(from_var(--shimmer-angle),theme(colors.blue.600)_0%,theme(colors.purple.600)_50%,theme(colors.blue.600)_100%)] animate-[shimmer_4s_linear_infinite] opacity-100 [mask-image:linear-gradient(black,black),linear-gradient(black,black)] [-webkit-mask-clip:content-box,border-box] [-webkit-mask-composite:xor] mask-composite:exclude" style={shimmerStyle} />
+            <div className="absolute inset-0 rounded-[2.5rem] border border-blue-500/35" />
             <div className="absolute inset-0 bg-blue-600/10 blur-3xl opacity-40 group-hover:opacity-70 transition-opacity" />
             
             <div className="relative inline-flex items-center gap-2 bg-blue-600/20 px-4 py-1.5 rounded-full border border-blue-400/30 text-xs font-mono uppercase tracking-wider text-blue-300 mb-8 shadow-[0_0_20px_-5px_rgba(59,130,246,0.5)]">
                <span className="relative flex h-2 w-2">
-                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
+                 <span className="absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-30"></span>
                  <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
                </span>
                Kindforth Intelligence
@@ -171,12 +167,12 @@ export default function Comparison() {
                <div className="relative z-10 flex flex-col items-center">
                   <div className="bg-blue-600/20 p-4 rounded-full border border-blue-400/50 shadow-[0_0_40px_-10px_rgba(59,130,246,0.8)] relative">
                      <Cpu size={32} className="text-blue-300" />
-                     <div className="absolute inset-0 border-2 border-t-blue-400 border-r-transparent border-b-blue-400/30 border-l-transparent rounded-full animate-spin" />
+                     <div className="absolute inset-0 rounded-full border-2 border-b-blue-400/30 border-l-transparent border-r-transparent border-t-blue-400" />
                   </div>
                   <div className="mt-4 text-blue-300 font-mono text-sm">Autonomous Core: Active</div>
                </div>
-               <DataStream style="left-10 top-0" delay={0} />
-               <DataStream style="right-10 bottom-0" delay={1.5} />
+               <DataStream style="left-10 top-0" />
+               <DataStream style="right-10 bottom-0" />
             </div>
 
             <h3 className="relative text-3xl font-bold text-white mb-6 tracking-tight">The Autonomous Enterprise</h3>
@@ -211,11 +207,6 @@ const ComparisonItem = ({ icon: Icon, color, text, glow = false }: ComparisonIte
   </li>
 );
 
-const DataStream = ({ style, delay }: { style: string, delay: number }) => (
-   <motion.div
-     initial={{ opacity: 0, y: -100 }}
-     animate={{ opacity: [0, 1, 0], y: ["0%", "200%"] }}
-     transition={{ duration: 3, repeat: Infinity, delay: delay, ease: "linear" }}
-     className={`absolute w-[1px] h-24 bg-gradient-to-b from-blue-400 to-transparent z-0 ${style}`}
-   />
+const DataStream = ({ style }: { style: string }) => (
+   <div className={`absolute z-0 h-24 w-px bg-gradient-to-b from-blue-400/50 to-transparent ${style}`} />
 );

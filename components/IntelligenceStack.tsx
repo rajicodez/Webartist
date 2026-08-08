@@ -117,10 +117,10 @@ function StackCard({ step, title, subtitle, desc, icon: Icon, color, tags, isCor
         {/* Mobile Connector Dot (Visible only on mobile) */}
         <div className="md:hidden absolute left-[20px] top-8 w-4 h-4 rounded-full bg-blue-500 border-4 border-black z-20" />
 
-        <div className={`p-6 md:p-8 rounded-3xl border backdrop-blur-xl transition-all ${colors[color]} ${glowColor}`}>
+        <div className={`rounded-3xl border p-6 backdrop-blur-xl transition-colors md:p-8 md:backdrop-blur-none ${colors[color]} ${glowColor}`}>
 
           <div className="flex items-center gap-4 mb-4">
-            <div className={`p-2 rounded-lg bg-white/5 border border-white/10 ${isCore ? 'animate-pulse' : ''}`}>
+            <div className={`rounded-lg border border-white/10 bg-white/5 p-2 ${isCore ? 'animate-pulse md:animate-none' : ''}`}>
               <Icon size={24} />
             </div>
             <div>

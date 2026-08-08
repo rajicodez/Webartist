@@ -17,6 +17,15 @@ body {
   overflow-x: hidden;
 }
 
+/* Avoid layout and paint work for desktop homepage sections until they approach
+   the viewport. The content remains in the HTML and accessible to search engines. */
+@media (min-width: 768px) {
+  .home-page > :not(:first-child) {
+    content-visibility: auto;
+    contain-intrinsic-size: auto 900px;
+  }
+}
+
 @property --shimmer-angle {
   syntax: '<angle>';
   initial-value: 0deg;
