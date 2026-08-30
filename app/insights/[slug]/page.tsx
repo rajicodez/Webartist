@@ -18,7 +18,7 @@ export default async function InsightPage({ params }: { params: Promise<{ slug: 
   const author = founders.find((founder) => founder.name === item.author)!; const reviewer = founders.find((founder) => founder.name === item.reviewer)!;
   const url = `${siteConfig.url}/insights/${item.slug}`;
   const schema = { "@context": "https://schema.org", "@graph": [
-    { "@type": "Article", "@id": `${url}#article`, headline: item.title, description: item.description, datePublished: item.published, dateModified: item.updated, mainEntityOfPage: url, author: { "@id": `${siteConfig.url}/team#${author.slug}` }, reviewedBy: { "@id": `${siteConfig.url}/team#${reviewer.slug}` }, publisher: { "@id": `${siteConfig.url}/#organization` }, inLanguage: "en-LK" },
+    { "@type": "Article", "@id": `${url}#article`, headline: item.title, description: item.description, datePublished: item.published, dateModified: item.updated, mainEntityOfPage: url, author: { "@id": `${siteConfig.url}/team#${author.slug}` }, editor: { "@id": `${siteConfig.url}/team#${reviewer.slug}` }, publisher: { "@id": `${siteConfig.url}/#organization` }, inLanguage: "en-LK" },
     personSchema(author), personSchema(reviewer),
     { "@type": "BreadcrumbList", itemListElement: [{ "@type": "ListItem", position: 1, name: "Home", item: siteConfig.url }, { "@type": "ListItem", position: 2, name: "Insights", item: `${siteConfig.url}/insights` }, { "@type": "ListItem", position: 3, name: item.title, item: url }] },
   ] };
