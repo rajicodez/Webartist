@@ -7,6 +7,8 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import FloatingWhatsAppButton from "../components/FloatingWhatsAppButton";
 import { GoogleTagManager } from '@next/third-parties/google'
 import { organizationSchema, siteConfig } from "../lib/seo";
+import OrganicLandingTracker from "../components/OrganicLandingTracker";
+import { Suspense } from "react";
 
 const inter = Inter({ subsets: ["latin"], variable: '--font-inter' });
 const outfit = Outfit({ subsets: ["latin"], variable: '--font-outfit' });
@@ -55,6 +57,7 @@ export default function RootLayout({
           }}
         />
         <Navbar />
+        <Suspense fallback={null}><OrganicLandingTracker /></Suspense>
         {children}
         <FloatingWhatsAppButton />
         <Analytics />

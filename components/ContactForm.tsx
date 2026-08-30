@@ -19,6 +19,10 @@ export default function ContactForm({ initialService = "" }: { initialService?: 
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     setFormState({ ...formState, [e.target.name]: e.target.value });
+    if (e.target.name === "service") {
+      const analyticsWindow = window as Window & { dataLayer?: Record<string, unknown>[] };
+      analyticsWindow.dataLayer?.push({ event: "service_selected", service: e.target.value || "not_selected" });
+    }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {

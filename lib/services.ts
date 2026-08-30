@@ -238,9 +238,9 @@ export const servicePages: Record<ServiceKey, ServicePageData> = {
     key: "seo",
     navLabel: "SEO & Organic Growth",
     title: "SEO Services in Sri Lanka",
-    metaTitle: "SEO Services in Sri Lanka",
+    metaTitle: "SEO Services Sri Lanka | Technical SEO, AEO & GEO",
     description:
-      "SEO services for Sri Lankan SMEs covering technical SEO, content strategy, local search, on-page optimization, analytics, and visibility in AI-powered search.",
+      "SEO services in Sri Lanka for SMEs: technical SEO, content, local search, analytics, AEO and GEO implemented by Kindforth's engineering team.",
     eyebrow: "Sustainable organic growth",
     introduction:
       "Kindforth helps Sri Lankan companies build search visibility that leads to useful enquiries, not vanity reports. We combine technical engineering, search-focused content, local relevance, and conversion measurement in one practical growth program.",
@@ -280,4 +280,3 @@ export const serviceLinks = Object.values(servicePages).map(({ key, navLabel, hr
   href,
   description,
 }));
-

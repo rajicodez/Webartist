@@ -82,8 +82,8 @@ export const organizationSchema = {
         "International",
       ],
       founder: [
-        { "@type": "Person", name: "Rajindra Ratnayake" },
-        { "@type": "Person", name: "Nipun Nirmal" },
+        { "@id": `${siteConfig.url}/team#rajindra-ratnayake` },
+        { "@id": `${siteConfig.url}/team#nipun-nirmal` },
       ],
       sameAs: Object.values(siteConfig.social),
       knowsAbout: [

@@ -6,9 +6,14 @@ import WhatsAppIcon from "./WhatsAppIcon";
 import Link from "next/link";
 import { siteConfig } from "../lib/seo";
 import { serviceLinks } from "../lib/services";
+import TrackedLink from "./TrackedLink";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
+  const track = (event: string, placement: string) => {
+    const analyticsWindow = window as Window & { dataLayer?: Record<string, unknown>[] };
+    analyticsWindow.dataLayer?.push({ event, placement });
+  };
 
   return (
     <footer className="relative bg-black pt-20 md:pt-32 pb-8 md:pb-12 overflow-hidden border-t border-white/10">
@@ -44,18 +49,21 @@ export default function Footer() {
             Stop building digital brochures. Start building intelligent platforms that grow your business.
           </motion.p>
 
-          <Link
+          <TrackedLink
             href="/contact"
+            eventName="primary_cta_click"
+            eventData={{ placement: "footer" }}
             className="group relative flex items-center gap-3 rounded-full bg-blue-600 px-8 py-4 text-lg font-bold text-white shadow-[0_0_40px_-10px_rgba(37,99,235,0.5)] transition-all hover:scale-105 hover:bg-blue-500 md:px-10 md:py-5 md:text-xl"
           >
             Start Your Project
             <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1 md:h-6 md:w-6" />
-          </Link>
+          </TrackedLink>
 
           <p className="mt-6 text-sm text-gray-500 md:text-base">
             Or call us{" "}
             <a
               href="tel:+94717802777"
+              onClick={() => track("phone_click", "footer")}
               className="font-medium text-gray-300 transition-colors hover:text-blue-400"
             >
               +94 71 780 2777
@@ -88,6 +96,7 @@ export default function Footer() {
               <Link href="/about" className="text-sm text-gray-500 transition-colors hover:text-white">About</Link>
               <Link href="/team" className="text-sm text-gray-500 transition-colors hover:text-white">Team</Link>
               <Link href="/work" className="text-sm text-gray-500 transition-colors hover:text-white">Work</Link>
+              <Link href="/insights" className="text-sm text-gray-500 transition-colors hover:text-white">Insights</Link>
               <Link href="/careers" className="text-sm text-gray-500 transition-colors hover:text-white">Future careers</Link>
               <Link href="/contact" className="text-sm text-gray-500 transition-colors hover:text-white">Contact</Link>
             </div>
@@ -120,6 +129,7 @@ export default function Footer() {
                   href={social.href}
                   target="_blank"
                   rel="noreferrer"
+                  onClick={() => track(social.href.startsWith("mailto:") ? "email_click" : social.href.includes("wa.me") ? "whatsapp_click" : "social_click", "footer_social")}
                   className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 hover:text-white hover:bg-white/10 hover:border-blue-500 transition-all duration-300"
                 >
                   {social.icon}

@@ -6,6 +6,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { serviceLinks } from "../lib/services";
+import TrackedLink from "./TrackedLink";
 
 type DropdownName = "services" | "company";
 
@@ -125,6 +126,9 @@ export default function Navbar() {
             <Link href="/work" onClick={closeMenus} className={`rounded-full px-4 py-2 text-sm font-medium transition-colors ${pathname.startsWith("/work") ? "bg-white/10 text-white" : "text-gray-400 hover:text-white"}`}>
               Work
             </Link>
+            <Link href="/insights" onClick={closeMenus} className={`rounded-full px-4 py-2 text-sm font-medium transition-colors ${pathname.startsWith("/insights") ? "bg-white/10 text-white" : "text-gray-400 hover:text-white"}`}>
+              Insights
+            </Link>
             <Link href="/faq" onClick={closeMenus} className={`rounded-full px-4 py-2 text-sm font-medium transition-colors ${pathname.startsWith("/faq") ? "bg-white/10 text-white" : "text-gray-400 hover:text-white"}`}>
               FAQ
             </Link>
@@ -171,10 +175,10 @@ export default function Navbar() {
           </div>
 
           <div className="flex items-center gap-2">
-            <Link href="/contact" onClick={closeMenus} className="rounded-full bg-blue-600 px-4 py-2 text-xs font-bold text-white transition-colors hover:bg-blue-500 md:px-5 md:text-sm">
+            <TrackedLink href="/contact" eventName="primary_cta_click" eventData={{ placement: "navigation" }} onClick={closeMenus} className="rounded-full bg-blue-600 px-4 py-2 text-xs font-bold text-white transition-colors hover:bg-blue-500 md:px-5 md:text-sm">
               <span className="md:hidden">Start</span>
               <span className="hidden md:inline">Start a Project</span>
-            </Link>
+            </TrackedLink>
             <button
               type="button"
               aria-label={isMobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
@@ -217,6 +221,7 @@ export default function Navbar() {
                 ))}
               </div>
               <Link href="/work" onClick={closeMenus} className="border-b border-white/10 py-4 text-2xl font-bold text-white">Work</Link>
+              <Link href="/insights" onClick={closeMenus} className="border-b border-white/10 py-4 text-2xl font-bold text-white">Insights</Link>
               <Link href="/faq" onClick={closeMenus} className="border-b border-white/10 py-4 text-2xl font-bold text-white">FAQ</Link>
               <p className="border-b border-white/10 py-4 text-2xl font-bold text-white">Company</p>
               <div className="grid grid-cols-1 gap-1 py-3 pl-3">

@@ -3,6 +3,7 @@ import type { ReactNode } from "react";
 import Footer from "../../components/Footer";
 import { Target, Lightbulb, Flag, Sparkles, Cpu, Rocket } from "lucide-react";
 import { motion } from "framer-motion";
+import Link from "next/link";
 
 export default function AboutPage() {
   return (
@@ -119,6 +120,9 @@ export default function AboutPage() {
         </div>
 
       </div>
+      <section className="border-y border-white/10 bg-white/[.03] px-6 py-20 text-center">
+        <div className="mx-auto max-w-3xl"><p className="font-mono text-sm uppercase tracking-widest text-blue-300">The people behind the work</p><h2 className="mt-4 text-4xl font-bold">Meet Kindforth’s founders</h2><p className="mt-5 text-lg leading-relaxed text-gray-400">See the engineering, data, product, and design expertise behind our client projects and founder-reviewed insights.</p><Link href="/team" className="mt-8 inline-flex rounded-full bg-blue-600 px-7 py-4 font-bold hover:bg-blue-500">Meet the team</Link></div>
+      </section>
       <Footer />
     </main>
   );
