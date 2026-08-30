@@ -3,29 +3,8 @@ import React from "react";
 import { motion } from "framer-motion";
 import { Linkedin, Github } from "lucide-react";
 import Image from "next/image";
+import { founders } from "../lib/team";
 
-const founders = [
-  {
-    name: "Rajindra Ratnayake",
-    role: "Co-Founder & Head of Data & AI",
-    image: "/rajindra5.png", // Add "/rajindra.jpg" to public folder later
-    bio: "Leads the technical implementation of intelligent systems. Focused on turning raw business data into actionable insights through machine learning, while deploying custom generative AI models to power conversational agents.",
-    socials: {
-      linkedin: "https://www.linkedin.com/in/rajindra-ratnayake-70ab1b193",
-      github: "https://github.com/rajicodez"
-    }
-  },
-  {
-    name: "Nipun Nirmal",
-    role: "Co-Founder & Head of Frontend Design",
-    image: "/nipun.jpg", // Add "/nipun.jpg" to public folder later
-    bio: "Bridges the gap between creative vision and code. Manages the complete user journey, crafting intuitive designs and implementing them with clean, modern frontend architecture to ensure a flawless user experience.",
-    socials: {
-      linkedin: "https://www.linkedin.com/in/nipun-nirmal-6892a4202",
-      github: "https://github.com/nipunnirmal21"
-    }
-  }
-];
 
 export default function Founders() {
   return (
@@ -51,14 +30,15 @@ export default function Founders() {
             Meet the <span className="text-blue-500">Engineers</span>
           </h1>
           <p className="text-xl text-gray-400 max-w-2xl mx-auto">
-            A specialized R&D team building the next generation of web intelligence. We combine deep technical expertise with commercial strategy to drive real business growth.
+            Kindforth is led by two Sri Lankan engineers who combine AI, data, product design, and modern software delivery to solve measurable business problems.
           </p>
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 max-w-4xl mx-auto">
           {founders.map((founder, index) => (
             <motion.div
-              key={index}
+              key={founder.slug}
+              id={founder.slug}
               // FIX 2: Changed animation from X (Horizontal) to Y (Vertical)
               // This prevents the card from starting "off-screen" to the side
               initial={{ opacity: 0, y: 50 }}
@@ -93,11 +73,30 @@ export default function Founders() {
                     {founder.bio}
                   </p>
 
+                  <div className="mb-8 grid gap-5 text-left">
+                    <div>
+                      <h4 className="text-xs font-mono uppercase tracking-widest text-blue-300">Leads</h4>
+                      <ul className="mt-3 space-y-2 text-sm text-gray-400">
+                        {founder.responsibilities.map((item) => <li key={item}>• {item}</li>)}
+                      </ul>
+                    </div>
+                    <div>
+                      <h4 className="text-xs font-mono uppercase tracking-widest text-purple-300">Expertise</h4>
+                      <div className="mt-3 flex flex-wrap gap-2">
+                        {founder.expertise.map((item) => <span key={item} className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-gray-300">{item}</span>)}
+                      </div>
+                    </div>
+                    <div>
+                      <h4 className="text-xs font-mono uppercase tracking-widest text-emerald-300">Selected delivery</h4>
+                      <p className="mt-3 text-sm text-gray-400">{founder.projects.join(" · ")}</p>
+                    </div>
+                  </div>
+
                   <div className="flex justify-center gap-4">
-                    <a aria-label={`${founder.name} on LinkedIn`} href={founder.socials.linkedin} target="_blank" rel="noopener noreferrer" className="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center text-gray-400 hover:text-white hover:bg-blue-600 transition-all border border-white/5 hover:border-blue-500">
+                    <a aria-label={`${founder.name} on LinkedIn`} href={founder.linkedin} target="_blank" rel="noopener noreferrer" className="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center text-gray-400 hover:text-white hover:bg-blue-600 transition-all border border-white/5 hover:border-blue-500">
                       <Linkedin aria-hidden="true" className="w-5 h-5" />
                     </a>
-                    <a aria-label={`${founder.name} on GitHub`} href={founder.socials.github} target="_blank" rel="noopener noreferrer" className="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center text-gray-400 hover:text-white hover:bg-gray-700 transition-all border border-white/5 hover:border-gray-500">
+                    <a aria-label={`${founder.name} on GitHub`} href={founder.github} target="_blank" rel="noopener noreferrer" className="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center text-gray-400 hover:text-white hover:bg-gray-700 transition-all border border-white/5 hover:border-gray-500">
                       <Github aria-hidden="true" className="w-5 h-5" />
                     </a>
                   </div>

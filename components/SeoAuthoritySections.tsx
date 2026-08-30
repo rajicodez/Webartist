@@ -1,0 +1,24 @@
+import Link from "next/link";
+import { ArrowRight, BarChart3, Bot, MapPin, SearchCheck, Wrench } from "lucide-react";
+
+const pillars = [
+  { icon: Wrench, title: "Technical foundations", text: "Crawl, indexation, canonicals, structured data, architecture, rendering, migrations, and performance." },
+  { icon: SearchCheck, title: "Content and authority", text: "Intent mapping, useful commercial pages, expert resources, internal links, digital PR, and relevant backlinks." },
+  { icon: MapPin, title: "Sri Lankan local relevance", text: "Policy-compliant profiles, consistent entities, genuine reviews, citations, local proof, and service-area visibility." },
+  { icon: Bot, title: "AEO and GEO", text: "Clear answers, named expertise, source-worthy evidence, AI crawler access, and generative-search measurement." },
+  { icon: BarChart3, title: "Conversion measurement", text: "Search Console, GA4, form, call, email, and WhatsApp events tied to qualified enquiries—not vanity traffic." },
+];
+
+export default function SeoAuthoritySections() {
+  return <>
+    <section className="border-y border-white/10 bg-blue-500/[.06] px-6 py-20"><div className="mx-auto max-w-6xl">
+      <p className="font-mono text-sm uppercase tracking-[.2em] text-blue-300">A direct answer</p>
+      <h2 className="mt-4 max-w-4xl text-4xl font-bold tracking-tight md:text-5xl">What does an SEO company in Sri Lanka actually do?</h2>
+      <p className="mt-7 max-w-4xl text-xl leading-relaxed text-gray-200">Kindforth helps Sri Lankan SMEs improve technical search quality, publish useful expert content, strengthen local and external authority, and convert organic visibility into measurable enquiries. The same evidence-led foundation supports Google Search, answer engines, and AI assistants.</p>
+      <p className="mt-5 max-w-4xl leading-relaxed text-gray-400">We implement the engineering as well as the strategy. Work is prioritized from your current data, competition, commercial value, and delivery capacity; no responsible provider can guarantee a specific number-one position.</p>
+    </div></section>
+    <section className="px-6 py-24"><div className="mx-auto max-w-7xl"><p className="font-mono text-sm uppercase tracking-[.2em] text-purple-300">The complete programme</p><h2 className="mt-4 text-4xl font-bold md:text-5xl">Search growth from discovery to qualified lead</h2><div className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3">{pillars.map(({ icon: Icon, title, text }) => <article key={title} className="rounded-3xl border border-white/10 bg-white/[.03] p-7"><Icon className="h-7 w-7 text-blue-400"/><h3 className="mt-6 text-xl font-bold">{title}</h3><p className="mt-3 leading-relaxed text-gray-400">{text}</p></article>)}</div></div></section>
+    <section className="border-y border-white/10 bg-white/[.025] px-6 py-24"><div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-2"><div><p className="font-mono text-sm uppercase tracking-[.2em] text-emerald-300">What to expect</p><h2 className="mt-4 text-4xl font-bold">Transparent progress, realistic timelines</h2><p className="mt-6 text-lg leading-relaxed text-gray-400">Technical corrections can be deployed quickly. Search engines still need time to recrawl, reassess, and compare the site with established competitors. Newer domains commonly need several months of consistent proof and authority building before competitive rankings stabilize.</p></div><ol className="grid gap-4">{[["Month 1","Baseline, indexing, intent mapping, measurement, and priority technical work."],["Months 2–3","Commercial-page improvements, expert content, local signals, case studies, and link acquisition."],["Ongoing","Measure qualified visibility, leads, rankings, citations, and content performance; improve what evidence supports."]].map(([title,text]) => <li key={title} className="rounded-2xl border border-white/10 bg-black p-6"><h3 className="font-bold text-blue-300">{title}</h3><p className="mt-2 text-gray-400">{text}</p></li>)}</ol></div></section>
+    <section className="px-6 py-24"><div className="mx-auto max-w-7xl"><h2 className="text-4xl font-bold">Evidence and practical guidance</h2><div className="mt-8 grid gap-5 md:grid-cols-3">{[["Founder guide","SEO, AEO and GEO for Sri Lankan SMEs","/insights/seo-aeo-geo-sri-lankan-smes"],["Live case study","Yellow Flag audience experience","/work/yellow-flag-podcast"],["Verified outcomes","Gomez Hospital booking platform","/work/gomez-hospital"]].map(([label,title,href]) => <Link key={href} href={href} className="group rounded-3xl border border-white/10 p-7 hover:border-blue-500/40"><p className="text-xs font-mono uppercase text-blue-300">{label}</p><h3 className="mt-4 text-xl font-bold">{title}</h3><span className="mt-6 inline-flex items-center gap-2 text-sm text-blue-300">Explore <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1"/></span></Link>)}</div></div></section>
+  </>;
+}

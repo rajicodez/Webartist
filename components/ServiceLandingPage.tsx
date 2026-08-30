@@ -5,6 +5,8 @@ import { serviceLinks } from "../lib/services";
 import { siteConfig } from "../lib/seo";
 import Footer from "./Footer";
 import Testimonials from "./Testimonials";
+import SeoAuthoritySections from "./SeoAuthoritySections";
+import TrackedLink from "./TrackedLink";
 
 const process = [
   { number: "01", title: "Discover", description: "Understand the business problem, users, constraints, data, and measurable definition of success." },
@@ -72,10 +74,10 @@ export default function ServiceLandingPage({ service }: { service: ServicePageDa
               <h1 className="max-w-5xl text-5xl font-bold tracking-tight md:text-7xl md:leading-[1.05]">{service.title}</h1>
               <p className="mt-8 max-w-3xl text-lg leading-relaxed text-gray-300 md:text-xl">{service.introduction}</p>
               <div className="mt-10 flex flex-col gap-4 sm:flex-row">
-                <Link href={`/contact?service=${service.key}`} className="mr-12 inline-flex items-center justify-center gap-2 rounded-full bg-blue-600 px-7 py-4 font-semibold transition-colors hover:bg-blue-500 sm:mr-0">
+                <TrackedLink eventName="primary_cta_click" eventData={{ placement: "service_hero", service: service.key }} href={`/contact?service=${service.key}`} className="mr-12 inline-flex items-center justify-center gap-2 rounded-full bg-blue-600 px-7 py-4 font-semibold transition-colors hover:bg-blue-500 sm:mr-0">
                   {service.cta}
                   <ArrowRight className="h-5 w-5" aria-hidden="true" />
-                </Link>
+                </TrackedLink>
                 <Link href="/work" className="mr-12 inline-flex items-center justify-center rounded-full border border-white/15 bg-white/5 px-7 py-4 font-semibold transition-colors hover:bg-white/10 sm:mr-0">
                   View our work
                 </Link>
@@ -114,6 +116,8 @@ export default function ServiceLandingPage({ service }: { service: ServicePageDa
           </div>
         </div>
       </section>
+
+      {service.key === "seo" && <SeoAuthoritySections />}
 
       <section className="px-6 py-24 md:py-32">
         <div className="mx-auto grid max-w-7xl gap-16 lg:grid-cols-2">

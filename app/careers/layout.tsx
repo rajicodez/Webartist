@@ -6,6 +6,7 @@ export const metadata = createMetadata({
   description:
     "Learn about future engineering and growth opportunities at Kindforth. There are currently no open positions.",
   path: "/careers",
+  noIndex: true,
 });
 
 export default function CareersLayout({ children }: { children: ReactNode }) {

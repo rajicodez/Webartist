@@ -5,6 +5,7 @@ import Footer from "../../components/Footer";
 import ContactForm from "../../components/ContactForm";
 import { siteConfig } from "../../lib/seo";
 import { serviceLinks } from "../../lib/services";
+import TrackedLink from "../../components/TrackedLink";
 
 export default async function ContactPage({ searchParams }: { searchParams: Promise<{ service?: string }> }) {
   const requestedService = (await searchParams).service ?? "";
@@ -30,14 +31,14 @@ export default async function ContactPage({ searchParams }: { searchParams: Prom
             </p>
 
             <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4 text-sm">
-              <a
+              <TrackedLink eventName="phone_click" eventData={{ placement: "contact_page" }}
                 href="tel:+94717802777"
                 className="inline-flex items-center gap-3 px-5 py-3 rounded-full bg-white/5 border border-white/10 text-gray-300 hover:text-white hover:border-blue-500/50 hover:bg-white/10 transition-all duration-300"
               >
                 <Phone className="w-4 h-4 text-blue-500" />
                 <span className="font-medium">+94 71 780 2777</span>
-              </a>
-              <a
+              </TrackedLink>
+              <TrackedLink eventName="whatsapp_click" eventData={{ placement: "contact_page" }}
                 href="https://wa.me/94717802777"
                 target="_blank"
                 rel="noreferrer"
@@ -45,14 +46,14 @@ export default async function ContactPage({ searchParams }: { searchParams: Prom
               >
                 <WhatsAppIcon className="w-4 h-4 text-emerald-500" />
                 <span className="font-medium">WhatsApp</span>
-              </a>
-              <a
+              </TrackedLink>
+              <TrackedLink eventName="email_click" eventData={{ placement: "contact_page" }}
                 href={`mailto:${siteConfig.email}`}
                 className="inline-flex items-center gap-3 px-5 py-3 rounded-full bg-white/5 border border-white/10 text-gray-300 hover:text-white hover:border-blue-500/50 hover:bg-white/10 transition-all duration-300"
               >
                 <Mail className="w-4 h-4 text-blue-500" />
                 <span className="font-medium">{siteConfig.email}</span>
-              </a>
+              </TrackedLink>
             </div>
           </div>
 

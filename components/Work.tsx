@@ -2,11 +2,14 @@
 import React, { useRef } from "react";
 import { motion, useScroll, useTransform, useMotionValue, useSpring } from "framer-motion";
 import Image from "next/image";
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 
 // 1. DATA: REAL RESULTS
 const projects = [
   {
     id: 1,
+    caseStudySlug: "gomez-hospital",
     title: "Gomez Hospital",
     category: "Healthcare Automation",
     description: "A complete digital nervous system for a private healthcare facility.",
@@ -23,6 +26,7 @@ const projects = [
   },
   {
     id: 2,
+    caseStudySlug: "yellow-flag-podcast",
     title: "Yellow Flag",
     category: "Audience Growth",
     description: "A home base for the podcast — episodes to watch, and games to stick around for.",
@@ -39,6 +43,7 @@ const projects = [
   },
   {
     id: 3,
+    caseStudySlug: null,
     title: "Call Me Taxi",
     category: "Mobility & Booking",
     description: "An always-on booking front end for a 24/7 taxi operation.",
@@ -55,6 +60,7 @@ const projects = [
   },
   {
     id: 4,
+    caseStudySlug: null,
     title: "Sathimath Viweka Senasuna",
     category: "Digital Zen & Systems",
     description: "A serene, bilingual digital sanctuary for the 'Sathimath Viweka Senasuna' meditation center.",
@@ -256,6 +262,12 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
             </span>
           ))}
         </div>
+
+        {project.caseStudySlug && (
+          <Link href={`/work/${project.caseStudySlug}`} className="inline-flex items-center gap-2 rounded-full border border-blue-500/30 bg-blue-500/10 px-5 py-3 font-semibold text-blue-200 transition hover:bg-blue-500/20">
+            Read the full case study <ArrowRight className="h-4 w-4" />
+          </Link>
+        )}
 
 
       </div>
