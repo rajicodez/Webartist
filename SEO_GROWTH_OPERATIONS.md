@@ -2,6 +2,33 @@
 
 This file covers the work that cannot be completed through the website repository. Run the checklist after deploying the accompanying code changes.
 
+## Completion checkpoint — 2 September 2026
+
+- GTM container `GTM-NFBHX3DG`, version 3, published 31 August: Google tag and shared GA4 event tag. Measurement ID: `G-VJ3LWB60T2`. Do not create a second property or duplicate tags.
+- Prior screenshots confirm the enquiry event reached GA4 DebugView and contact events were tested. Apps Script was reauthorized. These are test events, not qualified leads.
+- Contact API now requires the Apps Script JSON receipt `{ "result": "success", "row": 2 }` (integer row >= 2) before returning success. HTTP 200 alone is insufficient. This code change needs deployment, followed by one labelled test and confirmation of the matching spreadsheet row. Automated tests make no live submissions.
+- Still unconfirmed: key-event settings, custom definitions, saved comparisons, dashboard, fresh Search Console indexing/performance, and final production schema validation. Browser access to the owning Google account is required; none of those account changes were made in this checkpoint.
+- Retain separate metrics for enquiries and WhatsApp clicks: a WhatsApp click does not prove a conversation or qualified lead.
+
+### Remaining GA4 settings
+
+Mark only `generate_lead` and `whatsapp_click` as key events for this workflow. Inspect existing definitions before adding any. Do not manufacture a second event from `form_submit`; it is not proof of successful delivery.
+
+Register missing event-scoped custom dimensions using these exact event parameter names:
+
+| Dimension label | Event parameter | Scope |
+|---|---|---|
+| Enquiry form | `form_name` | Event |
+| Selected service | `service` | Event |
+| CTA placement | `placement` | Event |
+| Tracked landing path | `landing_page` | Event |
+| Detected traffic type | `source_type` | Event |
+| Referrer hostname | `referrer_host` | Event |
+
+Do not register names, email addresses, message text, or other personal form content as analytics dimensions. The custom landing path describes the site's `organic_landing` event; use GA4's built-in Landing page dimension for standard session acquisition reports.
+
+Create saved comparisons for Organic Search using Session default channel group, and identifiable AI traffic using Session source with the anchored regex `^(chatgpt\.com|www\.chatgpt\.com|perplexity\.ai|www\.perplexity\.ai|claude\.ai|www\.claude\.ai|gemini\.google\.com)$`. This captures identifiable sources, not every AI-influenced visit. Inspect actual source values before extending the expression.
+
 ## Deployment day
 
 1. Confirm the production deployment and open `/robots.txt`, `/sitemap.xml`, `/team`, `/services/seo`, `/insights`, both published case studies, and the published insight.
@@ -41,7 +68,7 @@ Connect Search Console and GA4 to Looker Studio. Show current month, previous mo
 
 ## Google Business Profile
 
-Create the profile only with a real operating address available to Google for verification. Configure it as a service-area business and hide the private address because customers are not served there.
+First confirm eligibility: Kindforth must receive customers in person at an eligible location or genuinely travel to customers. Online-only delivery does not qualify. A real address alone is not enough. If eligible as a service-area business, use a real operating address for verification and hide it if customers are not served there. Follow https://support.google.com/business/answer/3038177.
 
 - Primary category: `Software company` unless Google currently provides a closer category that represents Kindforth's core business.
 - Relevant secondary categories: `Internet marketing service`, `Website designer`, and any accurate AI/software category currently offered.

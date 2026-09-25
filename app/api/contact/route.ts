@@ -39,6 +39,10 @@ export async function POST(request: NextRequest) {
     return errorResponse("Invalid request body.", 400);
   }
 
+  if (!payload || typeof payload !== "object" || Array.isArray(payload)) {
+    return errorResponse("Invalid request body.", 400);
+  }
+
   const name = textValue(payload.name);
   const email = textValue(payload.email).toLowerCase();
   const company = textValue(payload.company);
@@ -57,7 +61,7 @@ export async function POST(request: NextRequest) {
     return errorResponse("The company name is too long.", 400);
   }
 
-  if (service && !(service in servicePages)) {
+  if (service && !Object.prototype.hasOwnProperty.call(servicePages, service)) {
     return errorResponse("Please select a valid service.", 400);
   }
 
@@ -90,6 +94,23 @@ export async function POST(request: NextRequest) {
       });
       return errorResponse(
         "We could not deliver your message. Please use WhatsApp, phone, or email instead.",
+        502,
+      );
+    }
+
+    // Apps Script can return HTTP 200 for script errors or authorization HTML.
+    // Only acknowledge a lead when the deployed script confirms a saved row.
+    const receipt: unknown = await upstreamResponse.json().catch(() => null);
+    if (
+      !receipt ||
+      typeof receipt !== "object" ||
+      !("result" in receipt) || receipt.result !== "success" ||
+      !("row" in receipt) || typeof receipt.row !== "number" ||
+      !Number.isInteger(receipt.row) || receipt.row < 2
+    ) {
+      console.error("Contact form upstream did not confirm a saved enquiry");
+      return errorResponse(
+        "We could not confirm delivery. Please contact us by WhatsApp, phone, or email before submitting again.",
         502,
       );
     }
