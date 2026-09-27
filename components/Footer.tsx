@@ -93,6 +93,7 @@ export default function Footer() {
           <div>
             <p className="mb-4 text-sm font-semibold uppercase tracking-wider text-gray-300">Company</p>
             <div className="flex flex-col gap-3">
+              <Link href="/kira" className="text-sm text-violet-300 transition-colors hover:text-white">Meet Kira</Link>
               <Link href="/about" className="text-sm text-gray-500 transition-colors hover:text-white">About</Link>
               <Link href="/team" className="text-sm text-gray-500 transition-colors hover:text-white">Team</Link>
               <Link href="/work" className="text-sm text-gray-500 transition-colors hover:text-white">Work</Link>

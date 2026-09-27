@@ -3,6 +3,7 @@ import { siteConfig } from "../lib/seo";
 import { publishedCaseStudies, publishedInsights } from "../lib/editorial";
 
 const pages = [
+  ["/kira", "2026-09-27", "monthly", .9],
   ["", "2026-08-30", "weekly", 1], ["/services", "2026-08-30", "monthly", .9],
   ["/services/ai-development", "2026-08-08", "monthly", .85], ["/services/business-automation", "2026-08-08", "monthly", .85],
   ["/services/custom-software-development", "2026-08-08", "monthly", .85], ["/services/web-application-development", "2026-08-08", "monthly", .85],
