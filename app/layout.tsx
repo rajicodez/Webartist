@@ -9,6 +9,7 @@ import { GoogleTagManager } from '@next/third-parties/google'
 import { organizationSchema, siteConfig } from "../lib/seo";
 import OrganicLandingTracker from "../components/OrganicLandingTracker";
 import { Suspense } from "react";
+import KiraWidget from "../components/kira/KiraWidget";
 
 const inter = Inter({ subsets: ["latin"], variable: '--font-inter' });
 const outfit = Outfit({ subsets: ["latin"], variable: '--font-outfit' });
@@ -60,6 +61,7 @@ export default function RootLayout({
         <Suspense fallback={null}><OrganicLandingTracker /></Suspense>
         {children}
         <FloatingWhatsAppButton />
+        <KiraWidget />
         <Analytics />
         <SpeedInsights />
       </body>

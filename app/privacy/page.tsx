@@ -44,6 +44,14 @@ export default function PrivacyPage() {
 
         <h2>Retention and security</h2>
         <p>
+          Kira, our AI avatar assistant, uses Napster to process microphone audio and typed messages
+          and provide generated voice, video, and chat responses. A connection starts only when you
+          choose Start conversation. You can mute your microphone or end the conversation at any time.
+          Conversation text stays in browser memory while the widget is open; Kindforth does not add
+          a separate transcript database or returning-visitor memory for Kira. Napster may process
+          and retain session information under its own terms. Avoid sharing sensitive information.
+        </p>
+        <p>
           We retain information only for as long as reasonably necessary for the purpose for which it was
           collected, dispute resolution, security, and legal compliance. We use reasonable technical and
           organizational safeguards, but no internet transmission or storage system is completely secure.

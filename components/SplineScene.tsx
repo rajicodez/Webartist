@@ -16,7 +16,7 @@ export default function SplineScene() {
         const spline = splineRef.current;
         if (!spline) return;
 
-        if (isVisibleRef.current && document.visibilityState === "visible") {
+        if (isVisibleRef.current && document.visibilityState === "visible" && document.documentElement.dataset.kiraOpen !== "true") {
             spline.play();
         } else {
             spline.stop();
@@ -39,10 +39,12 @@ export default function SplineScene() {
 
         observer.observe(container);
         document.addEventListener("visibilitychange", handleVisibilityChange);
+        window.addEventListener("kira-visibility", handleVisibilityChange);
 
         return () => {
             observer.disconnect();
             document.removeEventListener("visibilitychange", handleVisibilityChange);
+            window.removeEventListener("kira-visibility", handleVisibilityChange);
             splineRef.current?.stop();
         };
     }, [syncPlayback]);
