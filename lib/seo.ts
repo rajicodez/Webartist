@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 export const siteConfig = {
   name: "Kindforth",
   url: "https://www.kindforth.com",
-  email: "hello@kindforth.com",
+  email: "hellokindforth@gmail.com",
   phone: "+94717802777",
   displayPhone: "+94 71 780 2777",
   description:
