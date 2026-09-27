@@ -5,7 +5,8 @@ import { Send, CheckCircle, Loader2 } from "lucide-react";
 import Link from "next/link";
 import { serviceLinks } from "../lib/services";
 
-export default function ContactForm({ initialService = "" }: { initialService?: string }) {
+export default function ContactForm({ initialService = "", intent }: { initialService?: string; intent?: "kira-demo" }) {
+  const isKiraDemo = intent === "kira-demo";
   const [formState, setFormState] = useState({
     name: "",
     email: "",
@@ -35,7 +36,7 @@ export default function ContactForm({ initialService = "" }: { initialService?: 
       const response = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formState),
+        body: JSON.stringify({ ...formState, message: isKiraDemo ? `Kira demo request\n\n${formState.message}` : formState.message }),
       });
 
       const result = (await response.json().catch(() => null)) as
@@ -51,7 +52,7 @@ export default function ContactForm({ initialService = "" }: { initialService?: 
       const analyticsWindow = window as Window & { dataLayer?: Record<string, unknown>[] };
       analyticsWindow.dataLayer?.push({
         event: "generate_lead",
-        form_name: "project_enquiry",
+        form_name: isKiraDemo ? "kira_demo_request" : "project_enquiry",
         service: formState.service || "not_selected",
       });
 
@@ -82,9 +83,9 @@ export default function ContactForm({ initialService = "" }: { initialService?: 
         <div className="w-20 h-20 bg-green-500/20 rounded-full flex items-center justify-center mx-auto mb-6 text-green-500">
           <CheckCircle className="w-10 h-10" />
         </div>
-        <h3 className="text-3xl font-display font-bold text-white mb-4">Message Sent!</h3>
+        <h3 className="text-3xl font-display font-bold text-white mb-4">{isKiraDemo ? "Demo request received!" : "Message Sent!"}</h3>
         <p className="text-gray-400">
-          Thank you for reaching out. Our engineering team will analyze your request and get back to you within 24 hours.
+          {isKiraDemo ? "Thank you for your interest in Kira. Our team will get in touch to arrange your demo." : "Thank you for reaching out. Our engineering team will analyze your request and get back to you within 24 hours."}
         </p>
         <button
           onClick={() => setIsSuccess(false)}
@@ -149,7 +150,7 @@ export default function ContactForm({ initialService = "" }: { initialService?: 
           />
         </div>
 
-        <div>
+        <div hidden={isKiraDemo}>
           <label htmlFor="contact-service" className={labelClasses}>What can we help with?</label>
           <select
             id="contact-service"
@@ -167,14 +168,16 @@ export default function ContactForm({ initialService = "" }: { initialService?: 
 
         {/* Message Area */}
         <div>
-          <label htmlFor="contact-message" className={labelClasses}>Tell us about your project</label>
+          <label htmlFor="contact-message" className={labelClasses}>{isKiraDemo ? "What would you like Kira to help with?" : "Tell us about your project"}</label>
           <textarea
             id="contact-message"
             name="message"
             value={formState.message}
             onChange={handleChange}
             rows={5}
-            placeholder="I need a platform that..."
+            placeholder={isKiraDemo ? "Tell us about your business and the questions your customers ask…" : "I need a platform that..."}
+            minLength={10}
+            maxLength={isKiraDemo ? 4900 : 5000}
             className={inputClasses}
             required
           />
@@ -195,7 +198,7 @@ export default function ContactForm({ initialService = "" }: { initialService?: 
             </>
           ) : (
             <>
-              Send Message
+              {isKiraDemo ? "Request a demo" : "Send Message"}
               <Send className="w-5 h-5" />
             </>
           )}

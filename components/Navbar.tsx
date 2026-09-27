@@ -123,6 +123,7 @@ export default function Navbar() {
               </AnimatePresence>
             </div>
 
+            <Link href="/kira" onClick={closeMenus} aria-current={pathname === "/kira" ? "page" : undefined} className={`rounded-full px-4 py-2 text-sm font-medium transition-colors ${pathname === "/kira" ? "bg-white/10 text-white" : "text-violet-300 hover:text-white"}`}>Kira</Link>
             <Link href="/work" onClick={closeMenus} className={`rounded-full px-4 py-2 text-sm font-medium transition-colors ${pathname.startsWith("/work") ? "bg-white/10 text-white" : "text-gray-400 hover:text-white"}`}>
               Work
             </Link>
@@ -220,6 +221,7 @@ export default function Navbar() {
                   <Link key={service.href} href={service.href} onClick={closeMenus} className="py-2 text-base text-gray-300">{service.label}</Link>
                 ))}
               </div>
+              <Link href="/kira" onClick={closeMenus} aria-current={pathname === "/kira" ? "page" : undefined} className="border-b border-white/10 py-4 text-2xl font-bold text-violet-300">Kira</Link>
               <Link href="/work" onClick={closeMenus} className="border-b border-white/10 py-4 text-2xl font-bold text-white">Work</Link>
               <Link href="/insights" onClick={closeMenus} className="border-b border-white/10 py-4 text-2xl font-bold text-white">Insights</Link>
               <Link href="/faq" onClick={closeMenus} className="border-b border-white/10 py-4 text-2xl font-bold text-white">FAQ</Link>
